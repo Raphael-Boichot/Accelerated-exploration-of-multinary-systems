@@ -1,0 +1,32 @@
+
+# See : https://matplotlib.org/users/customizing.html
+
+axes.titlesize : 18
+axes.labelsize : 14
+axes.edgecolor      : dimgrey
+axes.labelcolor     : dimgrey
+axes.linewidth      : 1
+axes.grid           : False
+
+axes.prop_cycle    : cycler('color', ['steelblue', 'tomato', '2ca02c', 'd62728', '9467bd', '8c564b', 'e377c2', '7f7f7f', 'bcbd22', '17becf'])
+
+lines.linewidth     : 2
+lines.markersize    : 10
+
+xtick.color         : black
+xtick.labelsize     : 12
+ytick.color         : black
+ytick.labelsize     : 12
+
+axes.spines.left   : True
+axes.spines.bottom : True
+axes.spines.top    : False
+axes.spines.right  : False
+
+savefig.dpi         : 300      # figure dots per inch or 'figure'
+savefig.facecolor   : white    # figure facecolor when saving
+savefig.edgecolor   : white    # figure edgecolor when saving
+savefig.format      : svg
+savefig.bbox        : tight
+savefig.pad_inches  : 0.1
+savefig.transparent : True
