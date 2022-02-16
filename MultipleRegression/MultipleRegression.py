@@ -113,7 +113,7 @@ def fit_outputs(model_expression,k,nb_it,output,X,y):
             corr_matrix = np.corrcoef(y_test,y_pred)
             corr = corr_matrix[0,1]
             R2 = corr**2
-            R2_adj=1-((1-R2)*(len(y_test)-1))/(len(y_test)-1-1)
+            R2_adj=1-((1-R2)*(len(y_pred)-1))/(len(y_pred)-1-1)
             R2_adj_list.append(R2_adj)
 
             # Compute MAE
