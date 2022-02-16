@@ -75,7 +75,7 @@ def fit_outputs(model_expression,k,nb_it,output,X,y):
     :rtype: statsmodels.regression.linear_model.RegressionResultsWrapper
     :return MAE_list: list of MAE for every run of iterative k-fold crossvalidation, between expected vs predicted value on test set
     :rtype: list
-    :return R2_list: list of R2 for every run of iterative k-fold crossvalidation, between expected vs predicted value on test set
+    :return R2_adj_list: list of R2 adjusted for every run of iterative k-fold crossvalidation, between expected vs predicted value on test set
     :rtype: list
     :return: Y_pred : list of predicted values on test set
     :rtype: list
@@ -86,7 +86,7 @@ def fit_outputs(model_expression,k,nb_it,output,X,y):
     kf = KFold(n_splits=k, shuffle=True)
     Y_pred=[]
     Y_test=[]
-    R2_list=[]
+    R2_adj_list=[]
     MAE_list=[]
     for it in range (0,nb_it):
         for train_index, test_index in kf.split(X):
@@ -113,14 +113,15 @@ def fit_outputs(model_expression,k,nb_it,output,X,y):
             corr_matrix = np.corrcoef(y_test,y_pred)
             corr = corr_matrix[0,1]
             R2 = corr**2
-            R2_list.append(R2)
+            R2_adj=1-((1-R2)*(len(y_test)-1))/(len(y_test)-1-1)
+            R2_adj_list.append(R2_adj)
 
             # Compute MAE
             MAE=mean_absolute_error(y_test, y_pred)
             MAE_list.append(MAE)
             
 
-    return model, MAE_list,R2_list,Y_pred,Y_test
+    return model, MAE_list,R2_adj_list,Y_pred,Y_test
 
 
 

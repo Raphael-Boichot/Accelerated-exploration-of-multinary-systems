@@ -1,0 +1,600 @@
+
+
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pyterk package &#8212; Accelerated exploration of multinary systems 1.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/bizstyle.css" />
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="MultipleRegression module" href="MultipleRegression.html" />
+    <link rel="prev" title="ExperimentsPlannification" href="ExperimentsPlannification.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="mat-modindex.html" title="MATLAB Module Index"
+             >matlab index</a> |</li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="MultipleRegression.html" title="MultipleRegression module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="ExperimentsPlannification.html" title="ExperimentsPlannification"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Accelerated exploration of multinary systems 1.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">pyterk package</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="pyterk-package">
+<h1>pyterk package<a class="headerlink" href="#pyterk-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-pyterk">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pyterk" title="Permalink to this headline">¶</a></h2>
+<p><strong>PyTerK</strong> - A Python Iterated K-fold cross validation with shuffling</p>
+<p>By E Garel / JL Parouty - SIMaP 2021</p>
+<p>This package allows you to perform a <strong>statistical evaluation</strong> of different learning strategies (Keras/sklearn) by varying different (hyper)parameters.</p>
+<p>## Description :</p>
+<p>It is possible to combine the following (hyper)parameters :</p>
+<ul class="simple">
+<li><p>datasets</p></li>
+<li><p>models (with their characteristics…)</p></li>
+<li><p>batch size</p></li>
+<li><p>epochs</p></li>
+<li><p>iterations</p></li>
+<li><p>k fold</p></li>
+<li><p>seed (to control pseudo random generator)</p></li>
+</ul>
+<p>It is possible, for example, to combine 3 datasets, with 3 models and to perform for each combination, 5 iterations of a cross validation of KFold type, with k=10.
+In this case, the total number of models to test would be 3x3x5x10=450 training sessions…
+So, be careful, the number of model.fit can quickly be very important !</p>
+<p>The tasks will be run in <strong>parallel</strong> on the different CPUs/cores available.</p>
+<p>## Documentation and examples :</p>
+<p>Here is a basinc example, detailled in a notebook :</p>
+<p><a href="#id1"><span class="problematic" id="id2">``</span></a>`
+import pyterk.config       as config
+import pyterk.reporter     as reporter
+import pyterk.task_manager as task_manager</p>
+<p>settings = config.load(‘settings_example.yml’)</p>
+<p>task_manager.add_combinational_iterative_manyfold(settings, run_key= ‘Example-03.1’)
+task_manager.run()</p>
+<p>reporter.show_run_reports(settings)
+<a href="#id3"><span class="problematic" id="id4">``</span></a><a href="#id5"><span class="problematic" id="id6">`</span></a></p>
+<p>This will retrieve all settings from <cite>settings_example.yml</cite>, prepare the different tasks and execute them.
+The last call, intended to be used from a Jupyter lab notebook, displays a complete execution report.</p>
+<p>You can find <strong>3 full example notebooks</strong>, with a setting file :</p>
+<ul class="simple">
+<li><p>settings_example.yml</p></li>
+<li><p>01-Example-01.ipynb</p></li>
+<li><p>02-Example-02.ipynb</p></li>
+<li><p>03-Example-03.ipynb</p></li>
+</ul>
+<dl class="py data">
+<dt class="sig sig-object py" id="pyterk.VERSION">
+<span class="sig-prename descclassname"><span class="pre">pyterk.</span></span><span class="sig-name descname"><span class="pre">VERSION</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2.14</span></em><a class="headerlink" href="#pyterk.VERSION" title="Permalink to this definition">¶</a></dt>
+<dd><p>pyterk version</p>
+</dd></dl>
+
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-pyterk.config">
+<span id="pyterk-config-module"></span><h2>pyterk.config module<a class="headerlink" href="#module-pyterk.config" title="Permalink to this headline">¶</a></h2>
+<p>Configuration management.</p>
+<p>The settings files allow to specify datasets and models.</p>
+<p>## Utilisation:
+Loading a settings file :
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">settings</span> <span class="pre">=</span> <span class="pre">config.load('settings_example.yml')</span>
+<span class="pre">`</span></code>
+or:
+<a href="#id7"><span class="problematic" id="id8">``</span></a>`
+settings = config.load(‘settings_example.yml’,</p>
+<blockquote>
+<div><p>datasets_dir_env=’MY_DATASETS_DIR’)</p>
+</div></blockquote>
+<p><a href="#id9"><span class="problematic" id="id10">``</span></a><a href="#id11"><span class="problematic" id="id12">`</span></a></p>
+<p>where MY_DATASETS_DIR is an environment variable that will override <cite>datasets_dir</cite>
+directive in settings file.</p>
+<dl class="py data">
+<dt class="sig sig-object py" id="pyterk.config.datasets">
+<span class="sig-prename descclassname"><span class="pre">pyterk.config.</span></span><span class="sig-name descname"><span class="pre">datasets</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pyterk.config.datasets" title="Permalink to this definition">¶</a></dt>
+<dd><p>datasets profiles</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyterk.config.load">
+<span class="sig-prename descclassname"><span class="pre">pyterk.config.</span></span><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datasets_dir_env</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'PYTERK_DATASETS_DIR'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_dir_env</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'PYTERK_RUN_DIR'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyterk.config.load" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Load a setting file and dfined datasets.</dt><dd><p>If given, environment variable can be use to overide <cite>datasets_dir</cite> directive from setting file.
+Usefull for portability between several sites.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<em>string</em>) – Filename of the yaml setting file</p></li>
+<li><p><strong>datasets_dir_env</strong> (<em>string</em>) – Name of the overiding environment variable</p></li>
+<li><p><strong>verbose</strong> (<em>int</em>) – verbose mode for loaded datasets (0).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A dict from setting file, completed by datasets and more.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="pyterk.config.models">
+<span class="sig-prename descclassname"><span class="pre">pyterk.config.</span></span><span class="sig-name descname"><span class="pre">models</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pyterk.config.models" title="Permalink to this definition">¶</a></dt>
+<dd><p>models profiles</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="pyterk.config.run_dir">
+<span class="sig-prename descclassname"><span class="pre">pyterk.config.</span></span><span class="sig-name descname"><span class="pre">run_dir</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pyterk.config.run_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>run_dir, the place to put all output directories</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="pyterk.config.runs">
+<span class="sig-prename descclassname"><span class="pre">pyterk.config.</span></span><span class="sig-name descname"><span class="pre">runs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pyterk.config.runs" title="Permalink to this definition">¶</a></dt>
+<dd><p>dict of runs section</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="pyterk.config.settings">
+<span class="sig-prename descclassname"><span class="pre">pyterk.config.</span></span><span class="sig-name descname"><span class="pre">settings</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pyterk.config.settings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dict of settings</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyterk.models">
+<span id="pyterk-models-module"></span><h2>pyterk.models module<a class="headerlink" href="#module-pyterk.models" title="Permalink to this headline">¶</a></h2>
+<p>This module is for internal use only - You do not have to interact with ;-).</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyterk.models.get_model">
+<span class="sig-prename descclassname"><span class="pre">pyterk.models.</span></span><span class="sig-name descname"><span class="pre">get_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">profile</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyterk.models.get_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a model from a model profile.
+The profile contains the module and function name of the model, and the arguments.
+The model will be retrieved by calling the function with the arguments.
+:param profile: a model profile
+:type profile: dict</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>keras model as defined in the profile.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>model (keras model)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyterk.reporter">
+<span id="pyterk-reporter-module"></span><h2>pyterk.reporter module<a class="headerlink" href="#module-pyterk.reporter" title="Permalink to this headline">¶</a></h2>
+<p>Module to generate execution reports.</p>
+<p>During the run of the tasks, the bestmodel and results are saved in h5 and json files:</p>
+<ul class="simple">
+<li><p><cite>about.json</cite> : information and description of the task</p></li>
+<li><p><cite>history.json</cite> : history from model.fit()</p></li>
+<li><p><cite>evaluation.json</cite> : evaluation from model.evaluate()</p></li>
+<li><p><cite>bestmodel.h5</cite> : best model</p></li>
+</ul>
+<p>### Example :</p>
+<p><a href="#id13"><span class="problematic" id="id14">``</span></a>`
+reporter.show_run_reports(settings,</p>
+<blockquote>
+<div><p>args   = [‘dataset_id’,’model_id’,’batch_size’],
+evaluation = [2])</p>
+</div></blockquote>
+<p><a href="#id15"><span class="problematic" id="id16">``</span></a><a href="#id17"><span class="problematic" id="id18">`</span></a></p>
+<p>This module will retrieve information from json files and generate a report.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyterk.reporter.plot_confusion">
+<span class="sig-prename descclassname"><span class="pre">pyterk.reporter.</span></span><span class="sig-name descname"><span class="pre">plot_confusion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">run_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predict_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'softmax'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pred'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(5,</span> <span class="pre">5)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">savefig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mplstyle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pyterk'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyterk.reporter.plot_confusion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot a confusion matrix</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>iterations_dir</strong> – a directory with iterations subdirs (iter-000, iter-001, …)</p></li>
+<li><p><strong>predict_type</strong> – sigmoid, softmax or classes</p></li>
+<li><p><strong>normalize</strong> – true, pred, all or None (pred)</p></li>
+<li><p><strong>figsize</strong> – figure size</p></li>
+<li><p><strong>savefig</strong> – save fig (True) or not (False)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Just plot the matrix and print report and hamming loss</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyterk.reporter.plot_distribution">
+<span class="sig-prename descclassname"><span class="pre">pyterk.reporter.</span></span><span class="sig-name descname"><span class="pre">plot_distribution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">run_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(10,</span> <span class="pre">8)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">savefig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mplstyle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pyterk'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyterk.reporter.plot_distribution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot distribution of a given metric from an evaluation.json saved file.
+For a kfold or an iterative kfold, all evaluation data are concatened in an evaluation.json file in main run_dir.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>run_dir</strong> (<em>string</em>) – directory path of json evaluation file</p></li>
+<li><p><strong>metricid</strong> (<em>int</em>) – number of metric to plot. Example : 2</p></li>
+<li><p><strong>min</strong> (<em>int</em>) – min value</p></li>
+<li><p><strong>max</strong> (<em>int</em>) – max value</p></li>
+<li><p><strong>bins</strong> (<em>int</em>) – number of bins</p></li>
+<li><p><strong>figsize</strong> (<em>tuple</em>) – figure size, default is (10,8)</p></li>
+<li><p><strong>savefig</strong> (<em>boolean</em>) – if True, figure will be save in run_dir.</p></li>
+<li><p><strong>mplstyle</strong> (<em>string</em>) – name of matplotlib style. default is ‘pyterk’, but all matplotlib are ok (default, bmh, …)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Nothing, but display a beautifull distribution plot !</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyterk.reporter.plot_history">
+<span class="sig-prename descclassname"><span class="pre">pyterk.reporter.</span></span><span class="sig-name descname"><span class="pre">plot_history</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">run_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'val_mae'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(10,</span> <span class="pre">8)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">savefig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mplstyle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pyterk'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyterk.reporter.plot_history" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot history evolution from history.json saved file.
+For a kfold or an iterative kfold, all history data are concatened in history.json file in main run_dir.
+This will plot a curve for each one in a common plot.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>run_dir</strong> (<em>string</em>) – directory path of json history file</p></li>
+<li><p><strong>metric</strong> (<em>string</em>) – metric name to plot. Example : ‘val_mae’</p></li>
+<li><p><strong>figsize</strong> (<em>tuple</em>) – figure size, default is (10,8)</p></li>
+<li><p><strong>savefig</strong> (<em>boolean</em>) – if True, figure will be save in run_dir.</p></li>
+<li><p><strong>mplstyle</strong> (<em>string</em>) – name of matplotlib style. default is ‘pyterk’, but all matplotlib are ok (default, bmh, …)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Nothing, but display a beautifull plot !</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyterk.reporter.plot_kfold_correlation">
+<span class="sig-prename descclassname"><span class="pre">pyterk.reporter.</span></span><span class="sig-name descname"><span class="pre">plot_kfold_correlation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">run_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(8,</span> <span class="pre">6)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axes_min</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axes_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yy_deltamax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">marker</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'o'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">markersize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">savefig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mplstyle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pyterk'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyterk.reporter.plot_kfold_correlation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot a correlation for a (y_test, y_pred) saved json file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>run_file</strong> – a manyfold directory where kfold subdirectories are</p></li>
+<li><p><strong>channel</strong> – composant of y to plot</p></li>
+<li><p><strong>figsize</strong> (<em>tuple</em>) – figure size, default is (10,8)</p></li>
+<li><p><strong>axes_min</strong> – min value for x and y axe. ‘auto’ or float</p></li>
+<li><p><strong>axes_max</strong> – max value for x and y axe. ‘auto’ or float</p></li>
+<li><p><strong>mplstyle</strong> (<em>string</em>) – name of matplotlib style. default is ‘pyterk’, but all matplotlib are ok (default, bmh, …)</p></li>
+<li><p><strong>marker</strong> – marker, default is ‘.’</p></li>
+<li><p><strong>markersize</strong> – marker size</p></li>
+<li><p><strong>alpha</strong> – marker alpha</p></li>
+<li><p><strong>color</strong> – plot color or ‘auto’</p></li>
+<li><p><strong>savefig</strong> – if True, save fig in run_dir</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>-)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Nothing, but display a beautifull correlation plot</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyterk.reporter.show_report">
+<span class="sig-prename descclassname"><span class="pre">pyterk.reporter.</span></span><span class="sig-name descname"><span class="pre">show_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">run_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sections</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['title',</span> <span class="pre">'context',</span> <span class="pre">'args',</span> <span class="pre">'settings',</span> <span class="pre">'evaluation',</span> <span class="pre">'monitoring',</span> <span class="pre">'history',</span> <span class="pre">'distribution',</span> <span class="pre">'correlation']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['function',</span> <span class="pre">'version',</span> <span class="pre">'date',</span> <span class="pre">'description',</span> <span class="pre">'seed']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['run_dir',</span> <span class="pre">'dataset_id',</span> <span class="pre">'model_id',</span> <span class="pre">'n_iter',</span> <span class="pre">'k_fold',</span> <span class="pre">'epochs',</span> <span class="pre">'batch_size']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['file',</span> <span class="pre">'version',</span> <span class="pre">'description',</span> <span class="pre">'datasets_dir',</span> <span class="pre">'run_dir']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">evaluation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['all']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">monitoring</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['duration',</span> <span class="pre">'used_data']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">history</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[{'metric':</span> <span class="pre">'val_mae',</span> <span class="pre">'min':</span> <span class="pre">None,</span> <span class="pre">'max':</span> <span class="pre">None,</span> <span class="pre">'figsize':</span> <span class="pre">(8,</span> <span class="pre">6),</span> <span class="pre">'savefig':</span> <span class="pre">True,</span> <span class="pre">'mplstyle':</span> <span class="pre">'pyterk'}]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distribution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[{'metric_id':</span> <span class="pre">2,</span> <span class="pre">'bins':</span> <span class="pre">4,</span> <span class="pre">'min':</span> <span class="pre">None,</span> <span class="pre">'max':</span> <span class="pre">None,</span> <span class="pre">'figsize':</span> <span class="pre">(8,</span> <span class="pre">6),</span> <span class="pre">'savefig':</span> <span class="pre">True,</span> <span class="pre">'mplstyle':</span> <span class="pre">'pyterk'}]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">correlation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[{'axes_min':</span> <span class="pre">'auto',</span> <span class="pre">'axes_max':</span> <span class="pre">'auto',</span> <span class="pre">'figsize':</span> <span class="pre">(8,</span> <span class="pre">6),</span> <span class="pre">'marker':</span> <span class="pre">'.',</span> <span class="pre">'markersize':</span> <span class="pre">8,</span> <span class="pre">'alpha':</span> <span class="pre">0.7,</span> <span class="pre">'color':</span> <span class="pre">'auto',</span> <span class="pre">'savefig':</span> <span class="pre">True,</span> <span class="pre">'mplstyle':</span> <span class="pre">'pyterk'}]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">confusion</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[{'normalize':</span> <span class="pre">'pred',</span> <span class="pre">'predict_type':</span> <span class="pre">'softmax',</span> <span class="pre">'figsize':</span> <span class="pre">(5,</span> <span class="pre">5),</span> <span class="pre">'savefig':</span> <span class="pre">True,</span> <span class="pre">'mplstyle':</span> <span class="pre">'pyterk'}]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyterk.reporter.show_report" title="Permalink to this definition">¶</a></dt>
+<dd><p>Builds and displays a report from the json data of a given run_dir.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>run_dir</strong> (<em>string</em>) – directory path of json report file</p></li>
+<li><p><strong>sections</strong> (<em>list</em>) – list of sections to include in the report</p></li>
+<li><p><strong>context</strong> (<em>list</em>) – informations to include in context section</p></li>
+<li><p><strong>args</strong> (<em>list</em>) – informations to include in args section</p></li>
+<li><p><strong>settings</strong> (<em>list</em>) – informations to include in settings section</p></li>
+<li><p><strong>evaluation</strong> (<em>list</em>) – #metrics to include in evaluation section. ‘all’ mean all. Example : [0,1,2]</p></li>
+<li><p><strong>history</strong> (<em>dict</em>) – parameters for history plot - see <cite>plot_history</cite></p></li>
+<li><p><strong>distribution</strong> (<em>dict</em>) – parameters for metrics distribution plot</p></li>
+<li><p><strong>correlation</strong> (<em>dict</em>) – parameters for correlation plot</p></li>
+<li><p><strong>confusion</strong> (<em>dict</em>) – parameters for confusion matrix (need yytest files)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyterk.reporter.show_run_reports">
+<span class="sig-prename descclassname"><span class="pre">pyterk.reporter.</span></span><span class="sig-name descname"><span class="pre">show_run_reports</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">run_config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_filter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.*'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sections</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['title',</span> <span class="pre">'context',</span> <span class="pre">'args',</span> <span class="pre">'settings',</span> <span class="pre">'evaluation',</span> <span class="pre">'monitoring',</span> <span class="pre">'history',</span> <span class="pre">'distribution',</span> <span class="pre">'correlation',</span> <span class="pre">'confusion']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['function',</span> <span class="pre">'version',</span> <span class="pre">'date',</span> <span class="pre">'description',</span> <span class="pre">'seed']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['run_dir',</span> <span class="pre">'dataset_id',</span> <span class="pre">'model_id',</span> <span class="pre">'n_iter',</span> <span class="pre">'k_fold',</span> <span class="pre">'epochs',</span> <span class="pre">'batch_size']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['file',</span> <span class="pre">'version',</span> <span class="pre">'description',</span> <span class="pre">'datasets_dir',</span> <span class="pre">'run_dir']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">evaluation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['all']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">monitoring</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['duration',</span> <span class="pre">'used_data']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">history</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[{'metric':</span> <span class="pre">'val_mae',</span> <span class="pre">'min':</span> <span class="pre">None,</span> <span class="pre">'max':</span> <span class="pre">None,</span> <span class="pre">'figsize':</span> <span class="pre">(8,</span> <span class="pre">6),</span> <span class="pre">'savefig':</span> <span class="pre">True,</span> <span class="pre">'mplstyle':</span> <span class="pre">'pyterk'}]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distribution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[{'metric_id':</span> <span class="pre">2,</span> <span class="pre">'bins':</span> <span class="pre">4,</span> <span class="pre">'min':</span> <span class="pre">None,</span> <span class="pre">'max':</span> <span class="pre">None,</span> <span class="pre">'figsize':</span> <span class="pre">(8,</span> <span class="pre">6),</span> <span class="pre">'savefig':</span> <span class="pre">True,</span> <span class="pre">'mplstyle':</span> <span class="pre">'pyterk'}]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">correlation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[{'axes_min':</span> <span class="pre">'auto',</span> <span class="pre">'axes_max':</span> <span class="pre">'auto',</span> <span class="pre">'figsize':</span> <span class="pre">(8,</span> <span class="pre">6),</span> <span class="pre">'marker':</span> <span class="pre">'.',</span> <span class="pre">'markersize':</span> <span class="pre">8,</span> <span class="pre">'alpha':</span> <span class="pre">0.7,</span> <span class="pre">'color':</span> <span class="pre">'auto',</span> <span class="pre">'savefig':</span> <span class="pre">True,</span> <span class="pre">'mplstyle':</span> <span class="pre">'pyterk'}]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">confusion</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[{'normalize':</span> <span class="pre">'pred',</span> <span class="pre">'predict_type':</span> <span class="pre">'softmax',</span> <span class="pre">'figsize':</span> <span class="pre">(5,</span> <span class="pre">5),</span> <span class="pre">'savefig':</span> <span class="pre">True,</span> <span class="pre">'mplstyle':</span> <span class="pre">'pyterk'}]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyterk.reporter.show_run_reports" title="Permalink to this definition">¶</a></dt>
+<dd><p>Displays a full report in two parts, short and long, for all runs defined in the settings.
+Very simple to use…</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>run_config</strong> (<em>dict</em>) – settings, issued from config.load()</p></li>
+<li><p><strong>run_filter</strong> (<em>regx</em>) – regex to filter run entries from yml settings file (.*)</p></li>
+<li><p><strong>sections</strong> (<em>list</em>) – list of sections to include in the report</p></li>
+<li><p><strong>context</strong> (<em>list</em>) – informations to include in context section</p></li>
+<li><p><strong>args</strong> (<em>list</em>) – informations to include in args section</p></li>
+<li><p><strong>settings</strong> (<em>list</em>) – informations to include in settings section</p></li>
+<li><p><strong>evaluation</strong> (<em>list</em>) – #metrics to include in evaluation section. ‘all’ mean all. Example : [0,1,2]</p></li>
+<li><p><strong>history</strong> (<em>dict</em>) – parameters for history plot - see <cite>plot_history</cite></p></li>
+<li><p><strong>distribution</strong> (<em>dict</em>) – parameters for metrics distribution plot</p></li>
+<li><p><strong>correlation</strong> (<em>dict</em>) – parameters for correlation plot</p></li>
+<li><p><strong>confusion</strong> (<em>dict</em>) – parameters for confusion matrix (need yytest files)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Nothing, but display a short and long report, with index.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyterk.task_manager">
+<span id="pyterk-task-manager-module"></span><h2>pyterk.task_manager module<a class="headerlink" href="#module-pyterk.task_manager" title="Permalink to this headline">¶</a></h2>
+<p>Allows to generate tasks and to execute them in a distributed way.</p>
+<p>See example notebook : <cite>03-Example-03.ipynb</cite></p>
+<p>Example :
+<a href="#id19"><span class="problematic" id="id20">``</span></a>`
+task_manager.add_combinational_iterative_manyfold(settings = settings,</p>
+<blockquote>
+<div><p>run_key= ‘Example-03.3’)</p>
+</div></blockquote>
+<p><a href="#id21"><span class="problematic" id="id22">``</span></a><a href="#id23"><span class="problematic" id="id24">`</span></a></p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyterk.task_manager.add_combinational_iterative_manyfold">
+<span class="sig-prename descclassname"><span class="pre">pyterk.task_manager.</span></span><span class="sig-name descname"><span class="pre">add_combinational_iterative_manyfold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyterk.task_manager.add_combinational_iterative_manyfold" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add tasks for a combinational iterative manyfold - <cite>see 03-Example-03</cite>.ipynb
+Generates all the tasks of the combinatorial described in the run section of the settings file.
+:param settings: settings
+:type settings: dict
+:param run_key: name of the config run section
+:type run_key: string
+:param verbose: verbosity of generated tasks
+:type verbose: int</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Nothings. Task are added to the pending taks queue.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyterk.task_manager.add_iterative_manyfold">
+<span class="sig-prename descclassname"><span class="pre">pyterk.task_manager.</span></span><span class="sig-name descname"><span class="pre">add_iterative_manyfold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_fold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epochs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_xxtest</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_yytest</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyterk.task_manager.add_iterative_manyfold" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add tasks for an iterative manyfold - see <cite>02-Example-02.ipynb</cite>
+Generate n_ter*k_fold tasks, each iteration will generate a subdirectory in run_dir.
+:param settings: settings
+:type settings: dict
+:param run_dir: run directoty to output k results (json files and best model)
+:type run_dir: string
+:param dataset_id: datasets id in settings file
+:type dataset_id: string
+:param model_id: model id in settings file
+:type model_id: string
+:param n_iter: number of iteration
+:type n_iter: int
+:param k_fold: number of fold
+:type k_fold: int
+:param epochs: number of epochs
+:type epochs: int
+:param batch_size: size of batch
+:type batch_size: int
+:param description: description of the action
+:type description: string
+:param save_xxtest: save x_test as json file, or not
+:type save_xxtest: Boolean
+:param save_yytest: save y_test and y_pred  as json file, or not
+:type save_yytest: Boolean
+:param verbose: verbosity of generated tasks
+:type verbose: int</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Nothings. Task are added to the pending taks queue.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyterk.task_manager.add_manyfold">
+<span class="sig-prename descclassname"><span class="pre">pyterk.task_manager.</span></span><span class="sig-name descname"><span class="pre">add_manyfold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_fold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epochs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_xxtest</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_yytest</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyterk.task_manager.add_manyfold" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add tasks for a manyfold - see <cite>01-Example-01.ipynb</cite>
+Generate k_fold tasks, each task will generate one subdirectory in run_dir.
+:param settings: settings
+:type settings: dict
+:param run_dir: run directoty to output k results (json files and best model)
+:type run_dir: string
+:param dataset_id: datasets id in settings file
+:type dataset_id: string
+:param model_id: model id in settings file
+:type model_id: string
+:param k_fold: number of fold
+:type k_fold: int
+:param epochs: number of epochs
+:type epochs: int
+:param batch_size: size of batch
+:type batch_size: int
+:param description: description of the action
+:type description: string
+:param save_xxtest: save x_test as json file, or not
+:type save_xxtest: Boolean
+:param save_yytest: save y_test and y_pred  as json file, or not
+:type save_yytest: Boolean
+:param verbose: verbosity of generated tasks
+:type verbose: int</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Nothings. Task are added to the pending taks queue.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyterk.task_manager.reset">
+<span class="sig-prename descclassname"><span class="pre">pyterk.task_manager.</span></span><span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyterk.task_manager.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset pending tasks. Suppress all of them !</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyterk.task_manager.run">
+<span class="sig-prename descclassname"><span class="pre">pyterk.task_manager.</span></span><span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">processes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxtasksperchild</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyterk.task_manager.run" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyterk.task_manager.seed">
+<span class="sig-prename descclassname"><span class="pre">pyterk.task_manager.</span></span><span class="sig-name descname"><span class="pre">seed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyterk.task_manager.seed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Init random generators with given seed</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyterk.task_manager.show_tasks_size">
+<span class="sig-prename descclassname"><span class="pre">pyterk.task_manager.</span></span><span class="sig-name descname"><span class="pre">show_tasks_size</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyterk.task_manager.show_tasks_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print pending tasks size</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyterk.worker">
+<span id="pyterk-worker-module"></span><h2>pyterk.worker module<a class="headerlink" href="#module-pyterk.worker" title="Permalink to this headline">¶</a></h2>
+<p>This module is for internal use only - You do not have to interact with ;-).</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyterk.worker.get_model_family">
+<span class="sig-prename descclassname"><span class="pre">pyterk.worker.</span></span><span class="sig-name descname"><span class="pre">get_model_family</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyterk.worker.get_model_family" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should return the model family : ‘tensorflow’, ‘keras’ or ‘sklearn’</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyterk.worker.init">
+<span class="sig-prename descclassname"><span class="pre">pyterk.worker.</span></span><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyterk.worker.init" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyterk.worker.model_fit">
+<span class="sig-prename descclassname"><span class="pre">pyterk.worker.</span></span><span class="sig-name descname"><span class="pre">model_fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">run_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epochs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_xxtest</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_yytest</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyterk.worker.model_fit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyterk.worker.model_fit_sklearn">
+<span class="sig-prename descclassname"><span class="pre">pyterk.worker.</span></span><span class="sig-name descname"><span class="pre">model_fit_sklearn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_train</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_test</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_test</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_xxtest</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_yytest</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyterk.worker.model_fit_sklearn" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyterk.worker.model_fit_tensorflow">
+<span class="sig-prename descclassname"><span class="pre">pyterk.worker.</span></span><span class="sig-name descname"><span class="pre">model_fit_tensorflow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_train</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_test</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_test</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epochs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_xxtest</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_yytest</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyterk.worker.model_fit_tensorflow" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">pyterk package</a><ul>
+<li><a class="reference internal" href="#module-pyterk">Module contents</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-pyterk.config">pyterk.config module</a></li>
+<li><a class="reference internal" href="#module-pyterk.models">pyterk.models module</a></li>
+<li><a class="reference internal" href="#module-pyterk.reporter">pyterk.reporter module</a></li>
+<li><a class="reference internal" href="#module-pyterk.task_manager">pyterk.task_manager module</a></li>
+<li><a class="reference internal" href="#module-pyterk.worker">pyterk.worker module</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="ExperimentsPlannification.html"
+                          title="previous chapter">ExperimentsPlannification</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="MultipleRegression.html"
+                          title="next chapter">MultipleRegression module</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/pyterk.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="mat-modindex.html" title="MATLAB Module Index"
+             >matlab index</a> |</li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="MultipleRegression.html" title="MultipleRegression module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="ExperimentsPlannification.html" title="ExperimentsPlannification"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Accelerated exploration of multinary systems 1.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">pyterk package</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2022, Elise Garel, Jean-Luc Parouty.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+    </div>
+  </body>
+</html>

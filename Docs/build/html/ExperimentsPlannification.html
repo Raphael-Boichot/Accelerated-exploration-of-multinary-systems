@@ -1,0 +1,537 @@
+
+
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ExperimentsPlannification &#8212; Accelerated exploration of multinary systems 1.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/bizstyle.css" />
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="pyterk package" href="pyterk.html" />
+    <link rel="prev" title="Welcome to Accelerated exploration of multinary systems’s documentation!" href="index.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="mat-modindex.html" title="MATLAB Module Index"
+             >matlab index</a> |</li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pyterk.html" title="pyterk package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to Accelerated exploration of multinary systems’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Accelerated exploration of multinary systems 1.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">ExperimentsPlannification</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="experimentsplannification">
+<h1>ExperimentsPlannification<a class="headerlink" href="#experimentsplannification" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<span class="target" id="module-modules"></span><dl class="mat function">
+<dt class="sig sig-object mat" id="modules.check_do_not_align">
+<span class="sig-prename descclassname"><span class="pre">modules.</span></span><span class="sig-name descname"><span class="pre">check_do_not_align</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">name_alignments</span></em>, <em class="sig-param"><span class="pre">index</span></em>, <em class="sig-param"><span class="pre">do_not_align</span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.check_do_not_align" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check user condition to not align certain mixtures in the same gradient</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name_alignments</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">array(str)</span></code></span>) – name of points through which the gradients passes</p></li>
+<li><p><strong>index</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">int</span></code></span>) – index of alignments in the list of all alignments</p></li>
+<li><p><strong>do_not_align</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">cell(list(str))</span></code></span>) – list of mixtures that must not be aligned</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>indicator: “ok” if alignement respects the user condition; else return “not ok”.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-modules"></span><dl class="mat function">
+<dt class="sig sig-object mat" id="modules.check_not_repeat">
+<span class="sig-prename descclassname"><span class="pre">modules.</span></span><span class="sig-name descname"><span class="pre">check_not_repeat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">name_alignments</span></em>, <em class="sig-param"><span class="pre">index</span></em>, <em class="sig-param"><span class="pre">name_alignement_opt</span></em>, <em class="sig-param"><span class="pre">not_repeat</span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.check_not_repeat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check user condition to not repeat certain mixtures in gradients set</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name_alignments</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">array(str)</span></code></span>) – name of points through which the gradients passes</p></li>
+<li><p><strong>index</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">int</span></code></span>) – index of alignments in the list of all alignments</p></li>
+<li><p><strong>name_alignement_opt</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">array(str)</span></code></span>) – gradients set that are already selected.</p></li>
+<li><p><strong>not_repeat</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">array(str)</span></code></span>) – mixtures to no repeat in the gradients set</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>indicator: “ok” if alignement respects the user condition; else return “not ok”.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-modules"></span><dl class="mat function">
+<dt class="sig sig-object mat" id="modules.check_repeat_only">
+<span class="sig-prename descclassname"><span class="pre">modules.</span></span><span class="sig-name descname"><span class="pre">check_repeat_only</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">name_alignments</span></em>, <em class="sig-param"><span class="pre">index</span></em>, <em class="sig-param"><span class="pre">name_alignement_opt</span></em>, <em class="sig-param"><span class="pre">repeat_only</span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.check_repeat_only" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check user condition to not repeat certain mixtures in gradients set</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name_alignments</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">array(str)</span></code></span>) – name of points through which the gradients passes</p></li>
+<li><p><strong>index</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">int</span></code></span>) – index of alignments in the list of all alignments</p></li>
+<li><p><strong>name_alignement_opt</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">array(str)</span></code></span>) – gradients set that are allready selected.</p></li>
+<li><p><strong>repeat_only</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">array(str,int)</span></code></span>) – name of mixtures that must be repeated a limited number of time and this limited number of time</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>indicator: “ok” if alignement respects the user condition; else return “not ok”.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-modules"></span><dl class="mat function">
+<dt class="sig sig-object mat" id="modules.compute_alignments">
+<span class="sig-prename descclassname"><span class="pre">modules.</span></span><span class="sig-name descname"><span class="pre">compute_alignments</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">mixture</span></em>, <em class="sig-param"><span class="pre">name_mixture</span></em>, <em class="sig-param"><span class="pre">nb_type_mixture</span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.compute_alignments" title="Permalink to this definition">¶</a></dt>
+<dd><p>For a reference mixture, the function calculates the vector coefficient between this reference mixture and all the other mixtures with same or higher order. Then it looks for  equals vector coefficients for segments with a common point to determine which two other mixture points are aligned with the reference mixture</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mixture</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">cell{array}</span></code></span>) – coordinates of mixtures, cell index being the mixture order <em>eg:mixtures{2} contains the binaries coordinates</em></p></li>
+<li><p><strong>name_mixture</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">cell{str}</span></code></span>) – name of mixture, cell index being the mixture order</p></li>
+<li><p><strong>nb_type_mixture</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">int</span></code></span>) – number of type/order of mixtures to explore</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>alignments : coordinates of the mixtures through which the gradient pass (3x3 columns)</p></li>
+<li><p>name_alignments: mixture names through which the gradient pass</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array(float),array(str)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-modules"></span><dl class="mat function">
+<dt class="sig sig-object mat" id="modules.compute_planes">
+<span class="sig-prename descclassname"><span class="pre">modules.</span></span><span class="sig-name descname"><span class="pre">compute_planes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">name_alignment</span></em>, <em class="sig-param"><span class="pre">alignments</span></em>, <em class="sig-param"><span class="pre">nb_type_mixture</span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.compute_planes" title="Permalink to this definition">¶</a></dt>
+<dd><p>From the gradients, planes are defines in the composition space made by 3 gradients with common points, encompassing 7 points of the mixtrure design. This means that the plane is centered on one of the point of the mixture design</p>
+<blockquote>
+<div><p><em>eg: Nb-NbTi-Ti, Ti-TiZr-Zr and Nb-NbZr-Zr are forming a plane in a
+compositional space center on the ternary NbTiZr wich is a point of the
+mixture design: the plane is valid</em></p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name_alignment</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">array(str)</span></code></span>) – points through which the gradient go</p></li>
+<li><p><strong>alignments</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">array(float)</span></code></span>) – coordinates of the points through which the gradient go (3x3 columns)</p></li>
+<li><p><strong>nb_type_mixture</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">int</span></code></span>) – number of type/order of mixtures to explore</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>plane_points: mixture names encompassed by the planes</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>plane_coord: coordinates of the mixtures encompassed by the planes (7x3 columns)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-modules"></span><dl class="mat function">
+<dt class="sig sig-object mat" id="modules.coordinates_name_centroid_points">
+<span class="sig-prename descclassname"><span class="pre">modules.</span></span><span class="sig-name descname"><span class="pre">coordinates_name_centroid_points</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">nb_elements</span></em>, <em class="sig-param"><span class="pre">name_elements</span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.coordinates_name_centroid_points" title="Permalink to this definition">¶</a></dt>
+<dd><p>From the number and the name of the system elements, the function
+calculates the coordinates of the pure elements (standard uniform
+distribution in space) and of the equiolar mixtures of the Simplex
+Centroide mixture Design (all binaries, ternairies…).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>nb_elements</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">int</span></code></span>) – number of components</p>
+</dd>
+<dt class="field-even">Name_element list(str)</dt>
+<dd class="field-even"><p>namer of components</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>mixture: cell coordinates of all equimolar mixture</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>cell</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>name_mixture: containing the names of the equimolar mixtures.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>cell</p>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-modules"></span><dl class="mat function">
+<dt class="sig sig-object mat" id="modules.count_occur">
+<span class="sig-prename descclassname"><span class="pre">modules.</span></span><span class="sig-name descname"><span class="pre">count_occur</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">element</span></em>, <em class="sig-param"><span class="pre">list</span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.count_occur" title="Permalink to this definition">¶</a></dt>
+<dd><p>Count the numer of occurence of an element in a list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>element</strong> – counted number or string</p></li>
+<li><p><strong>list</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">list</span></code></span>) – list in which the element is counted</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>count: number of repetition of the element in list</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-modules"></span><dl class="mat function">
+<dt class="sig sig-object mat" id="modules.fix_nb_repetition">
+<span class="sig-prename descclassname"><span class="pre">modules.</span></span><span class="sig-name descname"><span class="pre">fix_nb_repetition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">repeat_list</span></em>, <em class="sig-param"><span class="pre">fig</span></em>, <em class="sig-param"><span class="pre">position</span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.fix_nb_repetition" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>This function is a callbacks of push buttons associated to listboxes</dt><dd><p>When the buttons are pushed, the function identifies which mixture should be repeated
+Then it display in the interface the names of the mixtures that should be
+repeated and an edit box in which the user can enter the number of repetitions.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>repeat_list</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">UIcontrol</span></code></span>) – contains the mixture that should be repeated</p></li>
+<li><p><strong>fig</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">figure</span></code></span>) – working interface / window</p></li>
+<li><p><strong>position</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">list(float)</span></code></span>) – position features of repeated list</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>nb_repet: edit boxes in which the user will enter the number of repetition of each mixture</p>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-modules"></span><dl class="mat function">
+<dt class="sig sig-object mat" id="modules.get_elements">
+<span class="sig-prename descclassname"><span class="pre">modules.</span></span><span class="sig-name descname"><span class="pre">get_elements</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">elements</span></em>, <em class="sig-param"><span class="pre">fig1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.get_elements" title="Permalink to this definition">¶</a></dt>
+<dd><p>Acquire the components name entered by the user</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>elements</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">UIcontrol</span></code></span>) – edit boxes in which the user has entered the elements names</p></li>
+<li><p><strong>fig1</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">figure</span></code></span>) – interface window</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>name_elements: name of elements</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list(str)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-modules"></span><dl class="mat function">
+<dt class="sig sig-object mat" id="modules.gradients_set">
+<span class="sig-prename descclassname"><span class="pre">modules.</span></span><span class="sig-name descname"><span class="pre">gradients_set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">name_mixture</span></em>, <em class="sig-param"><span class="pre">mixture</span></em>, <em class="sig-param"><span class="pre">alignments</span></em>, <em class="sig-param"><span class="pre">name_alignement</span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.gradients_set" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Selection of a gradients set that pass at least once through each point</dt><dd><p>of the mixture design and that respect user condition inputs</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name_mixture</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">cell(str)</span></code></span>) – name of mixture, cell index being the mixture order</p></li>
+<li><p><strong>mixture</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">cell(float)</span></code></span>) – coordinates of mixtures, cell index being the mixture order <em>eg:mixtures{2} contains the binaries coordinates</em></p></li>
+</ul>
+</dd>
+</dl>
+<p>:param cell(float) alignments:coordinates of the points through which the gradient pass (3x3 columns)
+:param cell(str) name_alignement: points through which the gradient pass
+:return array(str) name_alignement_opt: name of mixture trhough whch the set of gradients pass
+:return array(float) alignement_opt: coordinates of mixture trhough whch the set of gradients pass</p>
+</dd></dl>
+
+<span class="target" id="module-modules"></span><dl class="mat function">
+<dt class="sig sig-object mat" id="modules.index_alignments">
+<span class="sig-prename descclassname"><span class="pre">modules.</span></span><span class="sig-name descname"><span class="pre">index_alignments</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">cell_coeff_dir</span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.index_alignments" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Called in <a href="#id1"><span class="problematic" id="id2">`compute_alignments`_</span></a>: we get cell structure with vector coefficient between one reference mixture and all the mixtures with the same or higher orders .</dt><dd><p>This function compares all the coefficients one by one to find equal ones</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>cell_coeff_dir</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">cell</span></code></span>) – contains director coefficient of vectors between one reference mixtures and all the others with same or higher order.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>cell indice_cell, indice_list: indices of the cell and list where two coefficients are equals. Allow to identify pair of equal coefficient to identify aligned points.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-modules"></span><dl class="mat function">
+<dt class="sig sig-object mat" id="modules.kill_program">
+<span class="sig-prename descclassname"><span class="pre">modules.</span></span><span class="sig-name descname"><span class="pre">kill_program</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.kill_program" title="Permalink to this definition">¶</a></dt>
+<dd><p>Kill the programis the user pushed STOP button</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>display the message “kill” to indicate state</p>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-modules"></span><dl class="mat function">
+<dt class="sig sig-object mat" id="modules.lineIntersect3D">
+<span class="sig-prename descclassname"><span class="pre">modules.</span></span><span class="sig-name descname"><span class="pre">lineIntersect3D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">PA</span></em>, <em class="sig-param"><span class="pre">PB</span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.lineIntersect3D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find intersection point of lines in 3D space, in the least squares sense.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>PA</strong> – Nx3-matrix containing starting point of N lines</p></li>
+<li><p><strong>PB</strong> – Nx3-matrix containing end point of N lines</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>P_Intersect: Best intersection point of the N lines, in least squares sense.</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>distances: Distances from intersection point to the input lines</p>
+</dd>
+</dl>
+<p>Anders Eikenes (2022). Intersection point of lines in 3D space
+(<a class="reference external" href="https://www.mathworks.com/matlabcentral/fileexchange/37192-intersection-point-of-lines-in-3d-space">https://www.mathworks.com/matlabcentral/fileexchange/37192-intersection-point-of-lines-in-3d-space</a>), MATLAB Central File Exchange. Retrieved February 10, 2022.</p>
+</dd></dl>
+
+<span class="target" id="module-modules"></span><dl class="mat function">
+<dt class="sig sig-object mat" id="modules.nb_repetitions">
+<span class="sig-prename descclassname"><span class="pre">modules.</span></span><span class="sig-name descname"><span class="pre">nb_repetitions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.nb_repetitions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<span class="target" id="module-modules"></span><dl class="mat function">
+<dt class="sig sig-object mat" id="modules.listing_targets">
+<span class="sig-prename descclassname"><span class="pre">modules.</span></span><span class="sig-name descname"><span class="pre">listing_targets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">name_alignement_opt</span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.listing_targets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lists the targets to use from the selected optimized set of gradients</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name_alignement_opt</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">array(str)</span></code></span>) – name of mixtures through which pass the gradients</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list(str) list_target: list the target compositions to use to deposit these gradients</p>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-modules"></span><dl class="mat function">
+<dt class="sig sig-object mat" id="modules.listing_targets_3cath">
+<span class="sig-prename descclassname"><span class="pre">modules.</span></span><span class="sig-name descname"><span class="pre">listing_targets_3cath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">name_planes_opt</span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.listing_targets_3cath" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Lists the targets to use from the selected optimized set of planar</dt><dd><p>gradients</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name_planes_opt</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">array(str)</span></code></span>) – name of mixtures encompassed by planar gradients</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list(str) list_target: list the target compositions to use to deposit these gradients</p>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-modules"></span><dl class="mat function">
+<dt class="sig sig-object mat" id="modules.plot_compo_space_gradients">
+<span class="sig-prename descclassname"><span class="pre">modules.</span></span><span class="sig-name descname"><span class="pre">plot_compo_space_gradients</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">nb_elements</span></em>, <em class="sig-param"><span class="pre">mixture</span></em>, <em class="sig-param"><span class="pre">name_mixture</span></em>, <em class="sig-param"><span class="pre">name_elements</span></em>, <em class="sig-param"><span class="pre">gradients</span></em>, <em class="sig-param"><span class="pre">gradients_color</span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.plot_compo_space_gradients" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot the composition space with all the simplexe centroid points and linear gradients</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nb_elements</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">int</span></code></span>) – number of components</p></li>
+<li><p><strong>mixture</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">cell(float)</span></code></span>) – mixture points coordinates</p></li>
+<li><p><strong>name_mixture</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">cell(str)</span></code></span>) – mixture names</p></li>
+</ul>
+</dd>
+</dl>
+<p>:param list(str) name_elements:name of the components
+:param array(str) gradients : coordinates of the gradients points
+:param str/list(float) gradients_color: color of the gradients for plot
+:return: fig: plot the compositions space dans gradients</p>
+</dd></dl>
+
+<span class="target" id="module-modules"></span><dl class="mat function">
+<dt class="sig sig-object mat" id="modules.plot_compo_space_planes">
+<span class="sig-prename descclassname"><span class="pre">modules.</span></span><span class="sig-name descname"><span class="pre">plot_compo_space_planes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">nb_elements</span></em>, <em class="sig-param"><span class="pre">mixture</span></em>, <em class="sig-param"><span class="pre">name_mixture</span></em>, <em class="sig-param"><span class="pre">name_elements</span></em>, <em class="sig-param"><span class="pre">plane_coord</span></em>, <em class="sig-param"><span class="pre">plane_color</span></em>, <em class="sig-param"><span class="pre">fignumber)%position</span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.plot_compo_space_planes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot the composition space with all the simplexe centroid points and planar gradients</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nb_elements</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">int</span></code></span>) – number of components</p></li>
+<li><p><strong>mixture</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">cell(float)</span></code></span>) – mixture points coordinates</p></li>
+<li><p><strong>name_mixture</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">cell(str)</span></code></span>) – mixture names</p></li>
+</ul>
+</dd>
+</dl>
+<p>:param list(str) name_elements:name of the components
+:param array(str) plane_coord : coordinates of the planes points
+:param str/list(float) plane_color: color of the plane for plot
+:return: fig: plot the compositions space dans gradients</p>
+</dd></dl>
+
+<span class="target" id="module-modules"></span><dl class="mat function">
+<dt class="sig sig-object mat" id="modules.parameters_file">
+<span class="sig-prename descclassname"><span class="pre">modules.</span></span><span class="sig-name descname"><span class="pre">parameters_file</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.parameters_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write the users inputs and chosen parameters for one run of the interface in text file.</p>
+</dd></dl>
+
+<span class="target" id="module-modules"></span><dl class="mat function">
+<dt class="sig sig-object mat" id="modules.planes_set">
+<span class="sig-prename descclassname"><span class="pre">modules.</span></span><span class="sig-name descname"><span class="pre">planes_set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">name_mixture</span></em>, <em class="sig-param"><span class="pre">mixture</span></em>, <em class="sig-param"><span class="pre">planes</span></em>, <em class="sig-param"><span class="pre">name_planes</span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.planes_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Selection of a planes set that encompass at least once  each point of the mixture design and that respect user condition inputs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name_mixture</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">cell(str)</span></code></span>) – name of mixture, cell index being the mixture order</p></li>
+<li><p><strong>mixture</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">cell(float)</span></code></span>) – coordinates of mixtures, cell index being the mixture order <em>eg:mixtures{2} contains the binaries coordinates</em></p></li>
+</ul>
+</dd>
+</dl>
+<p>:param cell(float) plane:coordinates of the points through which the planes pass (3x3 columns)
+:param cell(str) name_planes: points through which the planes pass
+:return: array(str) name_planes_opt: name of mixture trhough whch the set of planes pass
+:return: array(float) planes_opt: coordinates of mixture trhough whch the set of planes pass</p>
+</dd></dl>
+
+<span class="target" id="module-modules"></span><dl class="mat function">
+<dt class="sig sig-object mat" id="modules.price_calculation">
+<span class="sig-prename descclassname"><span class="pre">modules.</span></span><span class="sig-name descname"><span class="pre">price_calculation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">prices_list</span></em>, <em class="sig-param"><span class="pre">target_list</span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.price_calculation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the price of a set of experiment</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>prices_list</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">list(str,float)</span></code></span>) – list of possible targets and associated price</p></li>
+<li><p><strong>targets</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">list(str)</span></code></span>) – list of targets associated to one set of linear gradients or planar gradients</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>price: total price of the targets required for a set of linear gradients or planar gradients</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-modules"></span><dl class="mat function">
+<dt class="sig sig-object mat" id="modules.vector_coeff">
+<span class="sig-prename descclassname"><span class="pre">modules.</span></span><span class="sig-name descname"><span class="pre">vector_coeff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">A</span></em>, <em class="sig-param"><span class="pre">B</span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.vector_coeff" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute normed vector coefficients between two points.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>A,B</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">list(float)</span></code></span>) – coordinates of two points</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>coordinates of the normed vector corresponding to (AB) line</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="index.html"
+                          title="previous chapter">Welcome to Accelerated exploration of multinary systems’s documentation!</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="pyterk.html"
+                          title="next chapter">pyterk package</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/ExperimentsPlannification.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="mat-modindex.html" title="MATLAB Module Index"
+             >matlab index</a> |</li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pyterk.html" title="pyterk package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to Accelerated exploration of multinary systems’s documentation!"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Accelerated exploration of multinary systems 1.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">ExperimentsPlannification</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2022, Elise Garel, Jean-Luc Parouty.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+    </div>
+  </body>
+</html>
