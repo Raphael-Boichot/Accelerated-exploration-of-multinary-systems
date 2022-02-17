@@ -34,7 +34,7 @@ state="run";
 
 fig_stop_button=figure;
 set(fig_stop_button, 'Position', get(fig_stop_button,'Position').*[1 1 0 0] + [-100 0 100 80]);
-stop_button = uicontrol ( fig_stop_button , 'style' , ' push' , 'position', [35 35 60 30] , 'string' , 'STOP ', 'callback','state=kill_program') ;
+stop_button = uicontrol ( fig_stop_button , 'style' , ' pushbutton' , 'position', [35 35 60 30] , 'string' , 'STOP ', 'callback','state=kill_program') ;
 
 
 %% Enter elements and number of cathodes#
