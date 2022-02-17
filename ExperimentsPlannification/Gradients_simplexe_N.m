@@ -19,8 +19,8 @@ global impose_plane_name
 global impose_plane_index
 global state
 global f_plane_set
-global nb_tirage
-global nb_tirages_tot
+global nb_draw
+global nb_draws_tot
 global f_gradient_set
 global path
 global subfolder 
@@ -30,30 +30,32 @@ global mixture_list
 state="run";
 
 
-%%STOP button  
+%% STOP button  
 
 fig_stop_button=figure;
 set(fig_stop_button, 'Position', get(fig_stop_button,'Position').*[1 1 0 0] + [-100 0 100 80]);
 stop_button = uicontrol ( fig_stop_button , 'style' , ' pushbutton' , 'position', [35 35 60 30] , 'string' , 'STOP ', 'callback','state=kill_program') ;
 
 
-%% Enter elements and number of cathodes#
+%% GUI for user to input the elements and number of cathodes 
 
 fig1 = figure ;
 set(fig1, 'Position', get(fig1,'Position').*[1 1 0 0] + [0 -250 150 350]);
-%fig1.Position(3:4) = [200 400];
-uicontrol ( fig1 , 'style' , ' text' , 'position', [35 300 100 30] , 'string' , 'Number of cathodes ' )
+
+uicontrol ( fig1 , 'style' , ' text' , 'position', [35 300 100 30] , 'string' , 'Number of cathodes ' );
 for nc=2:3
-    nb_cathodes(nc-1) = uicontrol ( fig1 , 'style' , ' checkbox' , 'position', [3+30*nc,290,50,20] , 'Max' , 1 , 'string' , num2str(nc ))
+    nb_cathodes(nc-1) = uicontrol ( fig1 , 'style' , ' checkbox' , 'position', [3+30*nc,290,50,20] , 'Max' , 1 , 'string' , num2str(nc ));
 end
-uicontrol ( fig1 , 'style' , ' text' , 'position', [55 250 60 30] , 'string' , 'Elements ' )
+uicontrol ( fig1 , 'style' , ' text' , 'position', [55 250 60 30] , 'string' , 'Elements ' );
 for i=1:7
-   elements(i) = uicontrol ( fig1 , 'style' , ' edit' , 'position', [60,250-i*20,50,20] , 'Max' , 1 , 'string' , '' )
+   elements(i) = uicontrol ( fig1 , 'style' , ' edit' , 'position', [60,250-i*20,50,20] , 'Max' , 1 , 'string' , '' );
 end
 valid_elements_button=uicontrol ( fig1 , 'style' , 'push' , 'position' , [30 50 100 30 ] ,'string' , 'Elements validation','callback','name_elements=get_elements(elements, fig1)');
 
 uiwait(fig1);
 
+%% Get the elements and number of cathodes
+% If the user did not chose the number of cathode, error message is printed
 
 
 nb_elements=size(name_elements,2);
@@ -64,17 +66,16 @@ elseif nb_cath_box{2}==[1]
     nb_cath=3;
 else 
     fig_5 = figure ;
-    set( fig_5 ,  'position' , get(fig1,'Position').*[1 1 0 0] + [0 -50 400 75])
+    set( fig_5 ,  'position' , get(fig1,'Position').*[1 1 0 0] + [0 -50 400 75]);
     uicontrol ( fig_5 , 'style' , ' text' , 'position', [30 30 300 30] , 'FontSize', 16,'string' , 'No cathode !' );
     return
 end
 
 nb_type_mixture=nb_elements;
 
+%% Compute coordinates of the Simplexe Centroid Mixture points and generate the names of the mixtures.
+
 [mixture,name_mixture] = coordinates_name_centroid_points(nb_elements,name_elements);
-
-
-
 
 
 mixture_name_list=[]; 
@@ -87,15 +88,20 @@ for i=1:nb_elements
     mixture_list=[mixture_list;mixture{i}]; % list of all mixture points coordinates of simplexe centroid design
 end
 
+
+%% Compute alignments / 1D gradients 
 [alignments,name_alignement]=compute_alignments(mixture,name_mixture, nb_elements);
 
+
+%% For 2 cathodes
+
 fig2 = figure ;
-set( fig2 , 'position' , get(fig1,'Position').*[1 1 0 0] + [0 -250 350 700])
+set( fig2 , 'position' , get(fig1,'Position').*[1 1 0 0] + [0 -250 350 700]);
+
 if nb_cath==2
     uicontrol ( fig2 , 'style' , ' text' , 'position', [60 660 240 30] , 'string' , 'Optimize price and number of experiments' );
     optimize_price_box= uicontrol ( fig2 , 'style' , ' checkbox' , 'position', [40,675,15,15] ) ;
    
-    
     for i=1:size(name_alignement)
         list_alignement(i)=[name_alignement(i,1)+"-"+name_alignement(i,2)+"-"+name_alignement(i,3)];
     end
@@ -123,7 +129,9 @@ if nb_cath==2
     valid_condition_button=uicontrol ( fig2 , 'style' , 'push' , 'position' , [100,40,50,20] ,'string' , 'Validation','callback','uiresume(fig2)');
     
     uiwait(fig2);
-    %%
+    
+%% If user has ticked "Optimize price and number of experiments": GUI for input prices of possible targets 
+
     if get(optimize_price_box,'Value')==1
         fig_price = figure ;
         nb_edit_per_line=0;
@@ -150,8 +158,7 @@ if nb_cath==2
       prices_list=[mixture_name_list(1:end-1),get(prices,'string')]
     end
    
-  
-
+%% Get user condition of selection
   
     index_list_impose=get(list_align_impose,'Value');
     index_not_repeat=get(not_repeat_list,'Value');
@@ -223,20 +230,23 @@ if nb_cath==2
     end
     
   
-    
-    nb_tirage=0;
+%% Compute 1D gradients set 
+
+    nb_draw=0;
     f_gradient_set=waitbar(0,"Compute gradient set: try number "+num2str(0));
 
     if get(optimize_price_box,'Value')==0
-        nb_tirages_tot=1;
+        nb_draws_tot=1;
     else
-        nb_tirages_tot=500;
+        nb_draws_tot=500;
     end
     
     [name_alignement_opt,alignement_opt] = gradients_set(name_mixture, mixture,alignments,name_alignement);
     list_target = listing_targets(name_alignement_opt);
     nb_alignments_best=size(name_alignement_opt,1)-1;
-    
+
+%% If user has ticked "Optimize price and number of experiments": we draw nb_draws set of gradients to keep the one with the lowest price / lowest number of gradients
+
     if get(optimize_price_box,'Value')==1
         
         exp_opt=struct;
@@ -257,7 +267,7 @@ if nb_cath==2
         price_opt.price=price;
         price_opt.nb_alignments_best=nb_alignments_best;
     
-        for i=1:nb_tirages_tot-1
+        for i=1:nb_draws_tot-1
            
             [name_alignement_opt_try,alignement_opt_try] = gradients_set(name_mixture, mixture,alignments,name_alignement);
             list_target_try = listing_targets(name_alignement_opt_try);
@@ -277,9 +287,12 @@ if nb_cath==2
                 price_opt.price=price_try;
                 price_opt.nb_alignments_best=nb_alignments_try;
             end
-             nb_tirage=i;
+             nb_draw=i;
         end
- 
+
+        
+%% Representation of the set of gradients 
+
         fig_representation_exp=plot_compo_space_gradients(nb_elements,mixture, name_mixture,name_elements, exp_opt.alignement_opt, 'b',3)% , [ 800 , 500 , 550 , 500 ])
         title('Optimize number of experiments')
         fig_representation_price=plot_compo_space_gradients(nb_elements,mixture, name_mixture,name_elements, price_opt.alignement_opt, 'b',4)% , [ 800 , 500 , 550 , 500 ])
@@ -310,6 +323,9 @@ if nb_cath==2
     end
    
 end
+
+
+%% For 3 cathodes :
 
 if nb_cath==3
     [name_plane,plane] =compute_planes(name_alignement,alignments,nb_type_mixture);
@@ -432,13 +448,13 @@ if nb_cath==3
     
  
    
-    nb_tirage=0;
+    nb_draw=0;
     f_plane_set=waitbar(0,"Compute planes set: try number "+num2str(0));
 
     if get(optimize_price_box,'Value')==0
-        nb_tirages_tot=1;
+        nb_draws_tot=1;
     else
-        nb_tirages_tot=500;
+        nb_draws_tot=500;
     end
     [name_plane_opt,plane_opt] = planes_set(name_mixture, mixture,plane,name_plane);
     list_target = listing_targets_3cath(name_plane_opt);
@@ -462,7 +478,7 @@ if nb_cath==3
         price_opt.price=price;
         price_opt.nb_planes_best=nb_planes_best;
 
-        for i=1: nb_tirages_tot-1;
+        for i=1: nb_draws_tot-1;
            [name_plane_opt_try,plane_opt_try] = planes_set(name_mixture, mixture,plane,name_plane);
             list_target_try = listing_targets_3cath(name_plane_opt_try);
             price_try=price_calculation(prices_list,list_target_try(2:end))
@@ -481,7 +497,7 @@ if nb_cath==3
                 price_opt.price=price_try;
                 price_opt.nb_planes_best=nb_planes_try;
             end
-            nb_tirage=i
+            nb_draw=i
         end
         
         fig_representation_exp=plot_compo_space_planes(nb_elements,mixture, name_mixture,name_elements,exp_opt.plane_opt, 'r',3 );%, [ 800 , 500 , 550 , 500 ])
@@ -529,7 +545,8 @@ button_save=uicontrol ( fig_sortie , 'style' , ' push' , 'position', [20 10 40 2
 
 uiwait(fig_sortie)
 
-%%
+%% Save result 
+
 path=get(save,'String');
 
 parameters_file()

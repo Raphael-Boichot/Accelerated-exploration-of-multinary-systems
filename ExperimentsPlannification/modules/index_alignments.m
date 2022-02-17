@@ -1,6 +1,7 @@
 function [indice_cell,indice_list] = index_alignments(cell_coeff_dir)
-% Called in `compute_alignments`_: we get cell structure with vector coefficient between one reference mixture and all the mixtures with the same or higher orders .
+% Called in `compute_alignments` : we get cell structure with vector coefficient between one reference mixture and all the mixtures with the same or higher orders .
 % This function compares all the coefficients one by one to find equal ones
+%
 %:param cell cell_coeff_dir: contains director coefficient of vectors between one reference mixtures and all the others with same or higher order.  
 %:return: cell indice_cell, indice_list: indices of the cell and list where two coefficients are equals. Allow to identify pair of equal coefficient to identify aligned points.  
 

@@ -1,0 +1,83 @@
+# ------------------------------------------------------------------
+#                  ____        _            _
+#                 |  _ \ _   _| |_ ___ _ __| | __
+#                 | |_) | | | | __/ _ \ '__| |/ /
+#                 |  __/| |_| | ||  __/ |  |   <
+#                 |_|    \__, |\__\___|_|  |_|\_\
+#                        |___/                        Settings file
+# ------------------------------------------------------------------
+# Python Iterator for Kfold and co. - pjluc 2021
+#
+# This is a sample configuration
+# 
+# Note : Afin d'être portable, le paramètre datasets_dir peut être
+#        forcé via une variable d'environnement.
+
+global:
+    description: Best classification models of NN, RF, SVM with all datasets
+    settings v.: 1.0
+    seed: 123
+    datasets_dir: ./
+    run_dir: ./campaign09c
+
+datasets:
+    
+    compo_CI_class:
+        filename: Data_averaged.csv
+        columns_x: ['Zr_at','Nb_at','Mo_at','Ti_at','Cr_at']
+        columns_y: ['Phase class (0: amorphous)']
+        
+    compo_DRX_class:
+        filename: Database_XRD.csv
+        columns_x: ['Zr_at','Nb_at','Mo_at','Ti_at','Cr_at']
+        columns_y: ['XRD (0: amorphous)']
+        
+        
+models:
+# Classification
+    # SVM class EBSD and XRD
+    sklearn-SVC-rbf-100:
+        module: sklearn.svm
+        class: SVC
+        args: { 'kernel':'rbf', 'C':100}
+
+    # RF class EBSD 
+    sklearn-rfc-150-5:
+        module: sklearn.ensemble
+        class: RandomForestClassifier
+        args: { 'n_estimators':150 ,  'criterion':'entropy', 'min_samples_split':5}
+
+    #RF class XRD
+    sklearn-rfc-100-5:
+        module: sklearn.ensemble
+        class: RandomForestClassifier
+        args: { 'n_estimators':100 ,  'criterion':'entropy', 'min_samples_split':5}
+
+
+
+
+runs:
+
+    Class_EBSD:
+        description: Comparison of architecture on EBSD class
+        datasets : [ 'compo_CI_class']
+        models: [ 'sklearn-SVC-rbf-100','sklearn-rfc-150-5']
+        n_iters: [ 30 ]
+        k_folds: [ 5 ]
+        epochs: [ 200 ]
+        batch_sizes: [ 8 ]
+        seed: 123
+        save_yytest: True 
+        predict_type: classes
+   
+    Class_XRD:
+        description: Comparison of architecture on XRD class
+        datasets: [ 'compo_DRX_class']
+        models: [ 'sklearn-SVC-rbf-100','sklearn-rfc-100-5']
+        n_iters: [ 30 ]
+        k_folds: [ 5 ]
+        epochs: [ 200 ]
+        batch_sizes: [ 8 ]
+        seed: 123
+        save_yytest: True 
+        predict_type: classes

@@ -18,8 +18,8 @@ global repeat_only
 global repeat_at_least
 global mixture_name_list 
 global state
-global nb_tirages_tot
-global nb_tirage
+global nb_draws_tot
+global nb_draw
 global f_gradient_set 
 
 alignement_opt=[];
@@ -150,7 +150,7 @@ while sum(ismember(mixture_name_list ,name_alignement_opt))<nb_mixture % check t
                                 name_alignement_opt=[name_alignement_opt; name_alignement(index,:)]    ;                           
                                 already_in_al_opt=1;
                                 sum(ismember(mixture_name_list ,name_alignement_opt))
-                                waitbar(nb_tirage/nb_tirages_tot + sum(ismember(mixture_name_list ,name_alignement_opt))/(nb_mixture*nb_tirages_tot),f_gradient_set,"Compute gradient set: set number "+num2str(nb_tirage)+", try number "+num2str(nb_overtime+1)); 
+                                waitbar(nb_draw/nb_draws_tot + sum(ismember(mixture_name_list ,name_alignement_opt))/(nb_mixture*nb_draws_tot),f_gradient_set,"Compute gradient set: set number "+num2str(nb_draw)+", try number "+num2str(nb_overtime+1)); 
                                 pause(0.01)
                             end
                         end

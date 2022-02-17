@@ -8,17 +8,15 @@
 # ------------------------------------------------------------------
 # Python Iterator for Kfold and co. - E Garel / JL Parouty 2021
 
-"""
-Allows to generate tasks and to execute them in a distributed way.  
+""" Allows to generate tasks and to execute them in a distributed way.  
 
 See example notebook : `03-Example-03.ipynb`
 
-
 Example :
-```
-task_manager.add_combinational_iterative_manyfold(settings = settings, 
-                                                  run_key= 'Example-03.3')
-```
+::
+    task_manager.add_combinational_iterative_manyfold(settings = settings, 
+                                                       run_key = 'Example-03.3')
+
 """
 
 
@@ -85,9 +83,11 @@ def seed(seed=None):
 def _get_about(fname, params):
     """
     Return an about dict with 3 sections (context,args and monitoring)
+
     Args:
         fname (string): function name that generate the about
         params (dict): aguments of the function
+
     Returns:
         about dict, that will be save later, after all tasks are done.
     """
@@ -134,6 +134,7 @@ def add_manyfold(settings=None, run_dir=None,
     """
     Add tasks for a manyfold - see `01-Example-01.ipynb`  
     Generate k_fold tasks, each task will generate one subdirectory in run_dir.
+
     Args:
         settings (dict): settings
         run_dir (string): run directoty to output k results (json files and best model)
@@ -146,6 +147,7 @@ def add_manyfold(settings=None, run_dir=None,
         save_xxtest (Boolean): save x_test as json file, or not
         save_yytest (Boolean): save y_test and y_pred  as json file, or not
         verbose (int): verbosity of generated tasks
+
     Returns:
         Nothings. Task are added to the pending taks queue.
     """
@@ -201,6 +203,7 @@ def add_iterative_manyfold(settings=None, run_dir=None,
     """
     Add tasks for an iterative manyfold - see `02-Example-02.ipynb`  
     Generate n_ter*k_fold tasks, each iteration will generate a subdirectory in run_dir.
+
     Args:
         settings (dict): settings
         run_dir (string): run directoty to output k results (json files and best model)
@@ -214,6 +217,7 @@ def add_iterative_manyfold(settings=None, run_dir=None,
         save_xxtest (Boolean): save x_test as json file, or not
         save_yytest (Boolean): save y_test and y_pred  as json file, or not
         verbose (int): verbosity of generated tasks
+
     Returns:
         Nothings. Task are added to the pending taks queue.
     """
@@ -264,10 +268,12 @@ def add_combinational_iterative_manyfold(settings=None, run_key=None, verbose=1)
     """
     Add tasks for a combinational iterative manyfold - `see 03-Example-03`.ipynb  
     Generates all the tasks of the combinatorial described in the run section of the settings file.
+
     Args:
         settings (dict): settings
         run_key (string): name of the config run section
         verbose (int): verbosity of generated tasks
+        
     Returns:
         Nothings. Task are added to the pending taks queue.
     """

@@ -1,7 +1,6 @@
 pyterk package
 ==============
 
-
 Module contents
 ---------------
 
@@ -9,9 +8,10 @@ Module contents
    :members:
    :undoc-members:
    :show-inheritance:
-
+   
 Submodules
 ----------
+
 pyterk.config module
 --------------------
 

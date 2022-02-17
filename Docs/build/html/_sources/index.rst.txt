@@ -11,7 +11,7 @@ Welcome to Accelerated exploration of multinary systems's documentation!
    :caption: Contents:
 
    ExperimentsPlannification
-   pyterk
+   PyTerK
    MultipleRegression
    
 

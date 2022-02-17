@@ -1,5 +1,5 @@
-Fichier git
-===========
+accelerated-exploration-of-multinary
+====================================
 
 .. toctree::
    :maxdepth: 4

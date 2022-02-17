@@ -5,7 +5,9 @@ By E Garel / JL Parouty - SIMaP 2021
 
 This package allows you to perform a **statistical evaluation** of different learning strategies (Keras/sklearn) by varying different (hyper)parameters.
 
-## Description :
+##############
+Description :
+##############
 
 It is possible to combine the following (hyper)parameters :
 
@@ -23,22 +25,24 @@ So, be careful, the number of model.fit can quickly be very important !
 
 The tasks will be run in **parallel** on the different CPUs/cores available.
 
-## Documentation and examples :
+##############################
+Documentation and examples :
+##############################
 
-Here is a basinc example, detailled in a notebook :
+Here is a basic example, detailled in a notebook :
+::
 
-```
-import pyterk.config       as config
-import pyterk.reporter     as reporter
-import pyterk.task_manager as task_manager
+    import pyterk.config       as config
+    import pyterk.reporter     as reporter
+    import pyterk.task_manager as task_manager
 
-settings = config.load('settings_example.yml')
+    settings = config.load('settings_example.yml')
 
-task_manager.add_combinational_iterative_manyfold(settings, run_key= 'Example-03.1')
-task_manager.run()
+    task_manager.add_combinational_iterative_manyfold(settings, run_key= 'Example-03.1')
+    task_manager.run()
 
-reporter.show_run_reports(settings)
-```
+    reporter.show_run_reports(settings)
+
 
 This will retrieve all settings from `settings_example.yml`, prepare the different tasks and execute them.
 The last call, intended to be used from a Jupyter lab notebook, displays a complete execution report.

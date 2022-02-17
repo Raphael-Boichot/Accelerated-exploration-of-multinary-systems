@@ -1,0 +1,1296 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Gradients_simplexe_N</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-02-17"><meta name="DC.source" content="Gradients_simplexe_N.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#2">Global variables defintion</a></li><li><a href="#3">STOP button</a></li><li><a href="#4">GUI for user to input the elements and number of cathodes</a></li><li><a href="#5">Get the elements and number of cathodes</a></li><li><a href="#6">Compute coordinates of the Simplexe Centroid Mixture points and create the mixtures'names.</a></li><li><a href="#7">Compute alignments / 1D gradients</a></li><li><a href="#8">For 2 cathodes</a></li><li><a href="#10">If user has ticked "Optimize price and number of experiments": GUI for input prices of possible targets</a></li><li><a href="#11">Get user condition of selection</a></li><li><a href="#12">Compute 1D gradients set</a></li><li><a href="#13">If user has ticked "Optimize price and number of experiments": we draw nb_draws set of gradients to keep the one with the lowest price / lowest number of gradients</a></li><li><a href="#15">Representation of the set of gradients</a></li><li><a href="#18">For 3 cathodes :</a></li><li><a href="#19">Save result</a></li></ul></div><pre class="codeinput">clear;
+close <span class="string">all</span>;
+clc
+
+addpath(<span class="string">'./modules'</span>)
+</pre><h2 id="2">Global variables defintion</h2><pre class="codeinput"><span class="keyword">global</span> nb_cath
+<span class="keyword">global</span> name_elements
+<span class="keyword">global</span> do_not_align
+<span class="keyword">global</span> optimize_price_box
+<span class="keyword">global</span> impose_alignments_name
+<span class="keyword">global</span> impose_alignments_index
+<span class="keyword">global</span> not_repeat
+<span class="keyword">global</span> repeat_only
+<span class="keyword">global</span> repeat_at_least
+<span class="keyword">global</span> impose_plane_name
+<span class="keyword">global</span> impose_plane_index
+<span class="keyword">global</span> state
+<span class="keyword">global</span> f_plane_set
+<span class="keyword">global</span> nb_draw
+<span class="keyword">global</span> nb_draws_tot
+<span class="keyword">global</span> f_gradient_set
+<span class="keyword">global</span> path
+<span class="keyword">global</span> subfolder
+<span class="keyword">global</span> mixture_name_list
+<span class="keyword">global</span> mixture_list
+
+state=<span class="string">"run"</span>;
+</pre><h2 id="3">STOP button</h2><pre class="codeinput">fig_stop_button=figure;
+set(fig_stop_button, <span class="string">'Position'</span>, get(fig_stop_button,<span class="string">'Position'</span>).*[1 1 0 0] + [-100 0 100 80]);
+stop_button = uicontrol ( fig_stop_button , <span class="string">'style'</span> , <span class="string">' pushbutton'</span> , <span class="string">'position'</span>, [35 35 60 30] , <span class="string">'string'</span> , <span class="string">'STOP '</span>, <span class="string">'callback'</span>,<span class="string">'state=kill_program'</span>) ;
+</pre><img vspace="5" hspace="5" src="Gradients_simplexe_N_01.png" alt=""> <h2 id="4">GUI for user to input the elements and number of cathodes</h2><pre class="codeinput">fig1 = figure ;
+set(fig1, <span class="string">'Position'</span>, get(fig1,<span class="string">'Position'</span>).*[1 1 0 0] + [0 -250 150 350]);
+<span class="comment">%fig1.Position(3:4) = [200 400];</span>
+uicontrol ( fig1 , <span class="string">'style'</span> , <span class="string">' text'</span> , <span class="string">'position'</span>, [35 300 100 30] , <span class="string">'string'</span> , <span class="string">'Number of cathodes '</span> );
+<span class="keyword">for</span> nc=2:3
+    nb_cathodes(nc-1) = uicontrol ( fig1 , <span class="string">'style'</span> , <span class="string">' checkbox'</span> , <span class="string">'position'</span>, [3+30*nc,290,50,20] , <span class="string">'Max'</span> , 1 , <span class="string">'string'</span> , num2str(nc ));
+<span class="keyword">end</span>
+uicontrol ( fig1 , <span class="string">'style'</span> , <span class="string">' text'</span> , <span class="string">'position'</span>, [55 250 60 30] , <span class="string">'string'</span> , <span class="string">'Elements '</span> );
+<span class="keyword">for</span> i=1:7
+   elements(i) = uicontrol ( fig1 , <span class="string">'style'</span> , <span class="string">' edit'</span> , <span class="string">'position'</span>, [60,250-i*20,50,20] , <span class="string">'Max'</span> , 1 , <span class="string">'string'</span> , <span class="string">''</span> );
+<span class="keyword">end</span>
+valid_elements_button=uicontrol ( fig1 , <span class="string">'style'</span> , <span class="string">'push'</span> , <span class="string">'position'</span> , [30 50 100 30 ] ,<span class="string">'string'</span> , <span class="string">'Elements validation'</span>,<span class="string">'callback'</span>,<span class="string">'name_elements=get_elements(elements, fig1)'</span>);
+
+uiwait(fig1);
+</pre><pre class="codeoutput">
+name_elements =
+
+     []
+
+
+name_elements = 
+
+  1&times;5 string array
+
+    "A"    "B"    "C"    "D"    "E"
+
+</pre><img vspace="5" hspace="5" src="Gradients_simplexe_N_02.png" alt=""> <h2 id="5">Get the elements and number of cathodes</h2><pre class="codeinput">nb_elements=size(name_elements,2);
+nb_cath_box=get(nb_cathodes,<span class="string">'Value'</span>);
+<span class="keyword">if</span> nb_cath_box{1}==[1]
+    nb_cath=2;
+<span class="keyword">elseif</span> nb_cath_box{2}==[1]
+    nb_cath=3;
+<span class="keyword">else</span>
+    fig_5 = figure ;
+    set( fig_5 ,  <span class="string">'position'</span> , get(fig1,<span class="string">'Position'</span>).*[1 1 0 0] + [0 -50 400 75]);
+    uicontrol ( fig_5 , <span class="string">'style'</span> , <span class="string">' text'</span> , <span class="string">'position'</span>, [30 30 300 30] , <span class="string">'FontSize'</span>, 16,<span class="string">'string'</span> , <span class="string">'No cathode !'</span> );
+    <span class="keyword">return</span>
+<span class="keyword">end</span>
+
+nb_type_mixture=nb_elements;
+</pre><h2 id="6">Compute coordinates of the Simplexe Centroid Mixture points and create the mixtures'names.</h2><pre class="codeinput">[mixture,name_mixture] = coordinates_name_centroid_points(nb_elements,name_elements);
+
+
+mixture_name_list=[];
+<span class="keyword">for</span> i=1:nb_elements
+    mixture_name_list=[mixture_name_list;name_mixture{i}]; <span class="comment">% list of all mixture name of simplexe centroid design</span>
+<span class="keyword">end</span>
+
+mixture_list=[];
+<span class="keyword">for</span> i=1:nb_elements
+    mixture_list=[mixture_list;mixture{i}]; <span class="comment">% list of all mixture points coordinates of simplexe centroid design</span>
+<span class="keyword">end</span>
+</pre><h2 id="7">Compute alignments / 1D gradients</h2><pre class="codeinput">[alignments,name_alignement]=compute_alignments(mixture,name_mixture, nb_elements);
+</pre><img vspace="5" hspace="5" src="Gradients_simplexe_N_03.png" alt=""> <h2 id="8">For 2 cathodes</h2><pre class="codeinput">fig2 = figure ;
+set( fig2 , <span class="string">'position'</span> , get(fig1,<span class="string">'Position'</span>).*[1 1 0 0] + [0 -250 350 700]);
+
+<span class="keyword">if</span> nb_cath==2
+</pre><pre class="codeinput">    uicontrol ( fig2 , <span class="string">'style'</span> , <span class="string">' text'</span> , <span class="string">'position'</span>, [60 660 240 30] , <span class="string">'string'</span> , <span class="string">'Optimize price and number of experiments'</span> );
+    optimize_price_box= uicontrol ( fig2 , <span class="string">'style'</span> , <span class="string">' checkbox'</span> , <span class="string">'position'</span>, [40,675,15,15] ) ;
+
+    <span class="keyword">for</span> i=1:size(name_alignement)
+        list_alignement(i)=[name_alignement(i,1)+<span class="string">"-"</span>+name_alignement(i,2)+<span class="string">"-"</span>+name_alignement(i,3)];
+    <span class="keyword">end</span>
+    uicontrol ( fig2 , <span class="string">'style'</span> , <span class="string">' text'</span> , <span class="string">'position'</span>, [50 630 100 30] , <span class="string">'string'</span> , <span class="string">'Impose alignments: '</span> );
+    list_align_impose=uicontrol ( fig2 , <span class="string">'style'</span> , <span class="string">'listbox'</span> , <span class="string">'position'</span>, [50 540 200 100] , <span class="string">'Max'</span>,size(name_alignement,1), <span class="string">'string'</span> , [<span class="string">' '</span>,list_alignement]);
+
+    uicontrol ( fig2 , <span class="string">'style'</span> , <span class="string">' text'</span> , <span class="string">'position'</span>, [25 500 100 30] , <span class="string">'string'</span> , <span class="string">'Not repeat: '</span> );
+    not_repeat_list=uicontrol ( fig2 , <span class="string">'style'</span> , <span class="string">'listbox'</span> , <span class="string">'position'</span>, [50 410 200 100] , <span class="string">'Max'</span>,size(mixture_name_list,1), <span class="string">'string'</span> , [<span class="string">' '</span>;mixture_name_list]) ;
+
+    uicontrol ( fig2 , <span class="string">'style'</span> , <span class="string">' text'</span> , <span class="string">'position'</span>, [35 370 100 30] , <span class="string">'string'</span> , <span class="string">'Repeat only:  '</span> );
+    repeat_only_list=uicontrol ( fig2 , <span class="string">'style'</span> , <span class="string">'listbox'</span> , <span class="string">'position'</span>, [50 280 70 100] , <span class="string">'Max'</span>,size(mixture_name_list,1), <span class="string">'string'</span> , [<span class="string">' '</span>;mixture_name_list]);
+    number_repet_only=[];
+    fix_repetition_only_button=uicontrol ( fig2 , <span class="string">'style'</span> , <span class="string">'push'</span> , <span class="string">'position'</span> , [120 300 100 50 ] ,<span class="string">'string'</span> , <span class="string">'&lt;html&gt;Maximum number &lt;br&gt;of repetitions &gt;'</span>,<span class="string">'callback'</span>,<span class="string">'nb_repeat_only=fix_nb_repetition(repeat_only_list,fig2,[240 380 50 20 ])'</span>);
+
+
+    uicontrol ( fig2 , <span class="string">'style'</span> , <span class="string">' text'</span> , <span class="string">'position'</span>, [40 240 100 30] , <span class="string">'string'</span> , <span class="string">'Repeat at least:  '</span> )
+    repeat_at_least_list=uicontrol ( fig2 , <span class="string">'style'</span> , <span class="string">'listbox'</span> , <span class="string">'position'</span>, [50 150 70 100] , <span class="string">'Max'</span>,size(mixture_name_list,1), <span class="string">'string'</span> , [<span class="string">' '</span>;mixture_name_list]);
+    number_repeat_at_least=[];
+    fix_repetition_at_least_button=uicontrol ( fig2 , <span class="string">'style'</span> , <span class="string">'push'</span> , <span class="string">'position'</span> , [120 175 100 50 ] ,<span class="string">'string'</span> , <span class="string">'&lt;html&gt;Minimum number &lt;br&gt;of repetitions &gt;'</span>,<span class="string">'callback'</span>,<span class="string">'nb_repeat_at_least=fix_nb_repetition(repeat_at_least_list,fig2,[240 260 50 20 ])'</span>);
+
+    uicontrol ( fig2 , <span class="string">'style'</span> , <span class="string">' text'</span> , <span class="string">'position'</span>, [30 90 200 30] , <span class="string">'string'</span> , <span class="string">'Do not align mixture of order: '</span> );
+    <span class="keyword">for</span> da=1:nb_elements
+        do_not_align_boxes(da)= uicontrol ( fig2 , <span class="string">'style'</span> , <span class="string">' checkbox'</span> , <span class="string">'position'</span>, [50+da*30,75,50,20] , <span class="string">'string'</span> , num2str(da) );
+    <span class="keyword">end</span>
+    valid_condition_button=uicontrol ( fig2 , <span class="string">'style'</span> , <span class="string">'push'</span> , <span class="string">'position'</span> , [100,40,50,20] ,<span class="string">'string'</span> , <span class="string">'Validation'</span>,<span class="string">'callback'</span>,<span class="string">'uiresume(fig2)'</span>);
+
+    uiwait(fig2);
+</pre><pre class="codeoutput">
+nb_repeat_only = 
+
+  1&times;5 UIControl array:
+
+    UIControl    UIControl    UIControl    UIControl    UIControl
+
+
+nb_repeat_at_least = 
+
+  UIControl with properties:
+
+              Style: 'edit'
+             String: ''
+    BackgroundColor: [0.9400 0.9400 0.9400]
+           Callback: ''
+              Value: 0
+           Position: [290 240 50 20]
+              Units: 'pixels'
+
+  Use GET to show all properties
+
+</pre><img vspace="5" hspace="5" src="Gradients_simplexe_N_04.png" alt=""> <h2 id="10">If user has ticked "Optimize price and number of experiments": GUI for input prices of possible targets</h2><pre class="codeinput">    <span class="keyword">if</span> get(optimize_price_box,<span class="string">'Value'</span>)==1
+        fig_price = figure ;
+        nb_edit_per_line=0;
+        div=10;
+        <span class="keyword">while</span> nb_edit_per_line==0
+            <span class="keyword">if</span> mod((size(mixture_name_list,1)-1),div)==0
+                nb_edit_per_line=div;
+            <span class="keyword">else</span>
+                div=div-1;
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+        windows_height=(size(mixture_name_list,1)-1)/(nb_edit_per_line)*20+100;
+        set( fig_price , <span class="string">'position'</span> , get(fig1,<span class="string">'Position'</span>).*[1 1 0 0] + [0 0  nb_edit_per_line*150 windows_height])
+        uicontrol ( fig_price , <span class="string">'style'</span> , <span class="string">' text'</span> , <span class="string">'position'</span>, [20 windows_height-20 100 20] , <span class="string">'string'</span> , <span class="string">'Target prices'</span> )
+        <span class="keyword">for</span> i=0:(size(mixture_name_list,1)-1)/(nb_edit_per_line)-1
+            <span class="keyword">for</span> j=1:nb_edit_per_line
+             uicontrol ( fig_price , <span class="string">'style'</span> , <span class="string">' text'</span> , <span class="string">'position'</span>, [20+(j-1)*130 windows_height-50-20*i 100 30] , <span class="string">'string'</span> , mixture_name_list(i*nb_edit_per_line+j) )
+             prices(i*nb_edit_per_line+j) = uicontrol ( fig_price , <span class="string">'style'</span> , <span class="string">' edit'</span> , <span class="string">'position'</span>, [100+(j-1)*130,windows_height-40-i*20,50,20] , <span class="string">'Max'</span> , 1 , <span class="string">'string'</span> , <span class="string">'0'</span> )
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+      fix_repetition_at_least_button=uicontrol ( fig_price , <span class="string">'style'</span> , <span class="string">'push'</span> , <span class="string">'position'</span> , [120 20 50 20 ] ,<span class="string">'string'</span> , <span class="string">'OK'</span>,<span class="string">'callback'</span>,<span class="string">'uiresume(fig_price)'</span>);
+      uiwait(fig_price)
+
+      prices_list=[mixture_name_list(1:end-1),get(prices,<span class="string">'string'</span>)]
+    <span class="keyword">end</span>
+</pre><h2 id="11">Get user condition of selection</h2><pre class="codeinput">    index_list_impose=get(list_align_impose,<span class="string">'Value'</span>);
+    index_not_repeat=get(not_repeat_list,<span class="string">'Value'</span>);
+    index_repeat_only=get(repeat_only_list,<span class="string">'Value'</span>);
+    <span class="keyword">if</span> sum(index_repeat_only)&gt;1
+        str_nb_repeat_only= get(nb_repeat_only,<span class="string">'string'</span>);
+        <span class="keyword">if</span> length(index_repeat_only)==1
+            number_repet_only=str2num(str_nb_repeat_only);
+        <span class="keyword">else</span>
+            <span class="keyword">for</span> i=1:length(index_repeat_only)
+                number_repet_only(i)=str2num(str_nb_repeat_only{i});
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+
+    index_repeat_at_least=get(repeat_at_least_list,<span class="string">'Value'</span>);
+    <span class="keyword">if</span> sum(index_repeat_at_least)&gt;1
+        str_nb_repeat_at_least=get(nb_repeat_at_least,<span class="string">'string'</span>);
+        <span class="keyword">if</span> length(index_repeat_at_least)==1
+            number_repeat_at_least=str2num(str_nb_repeat_at_least);
+        <span class="keyword">else</span>
+
+            <span class="keyword">for</span> i=1:length(index_repeat_at_least)
+                number_repeat_at_least(i)=str2num(str_nb_repeat_at_least{i});
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+
+    <span class="keyword">end</span>
+
+    do_not_align_result=get(do_not_align_boxes,<span class="string">'Value'</span>);
+
+
+
+    impose_alignments_name =[];
+    impose_alignments_index=index_list_impose-1; <span class="comment">% due to blank space left at the begining of the listbox</span>
+    <span class="keyword">for</span> i=1:length(index_list_impose)
+        <span class="keyword">if</span> index_list_impose&gt;1
+            impose_alignments_name=[impose_alignments_name;name_alignement(index_list_impose(i)-1,:)];
+        <span class="keyword">end</span>
+     <span class="keyword">end</span>
+
+
+    not_repeat=[];
+    <span class="keyword">for</span> i=1:length(index_not_repeat)
+        <span class="keyword">if</span> index_not_repeat(i)&gt;1
+            not_repeat=[not_repeat;mixture_name_list(index_not_repeat(i)-1)];
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+
+    repeat_only=[];
+    <span class="keyword">for</span> i=1:length(index_repeat_only)
+        <span class="keyword">if</span> index_repeat_only(i)&gt;1
+            repeat_only=[repeat_only;mixture_name_list(index_repeat_only(i)-1),number_repet_only(i)];
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+
+    do_not_align={};
+    <span class="keyword">for</span> i=1:length(do_not_align_result)
+        <span class="keyword">if</span> do_not_align_result{i}==1
+            do_not_align{end+1}=(name_mixture{i})';
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+
+    repeat_at_least=[];
+    <span class="keyword">for</span> i=1:length(index_repeat_at_least)
+        <span class="keyword">if</span> index_repeat_at_least(i)&gt;1
+            repeat_at_least=[repeat_at_least;mixture_name_list(index_repeat_at_least(i)-1),number_repeat_at_least(i)];
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+</pre><h2 id="12">Compute 1D gradients set</h2><pre class="codeinput">    nb_draw=0;
+    f_gradient_set=waitbar(0,<span class="string">"Compute gradient set: try number "</span>+num2str(0));
+
+    <span class="keyword">if</span> get(optimize_price_box,<span class="string">'Value'</span>)==0
+        nb_draws_tot=1;
+    <span class="keyword">else</span>
+        nb_draws_tot=500;
+    <span class="keyword">end</span>
+
+    [name_alignement_opt,alignement_opt] = gradients_set(name_mixture, mixture,alignments,name_alignement);
+    list_target = listing_targets(name_alignement_opt);
+    nb_alignments_best=size(name_alignement_opt,1)-1;
+</pre><pre class="codeoutput">
+ans =
+
+    13
+
+
+ans =
+
+    15
+
+
+ans =
+
+    16
+
+
+ans =
+
+    19
+
+
+ans =
+
+    21
+
+
+ans =
+
+    22
+
+
+ans =
+
+    23
+
+
+ans =
+
+    26
+
+
+ans =
+
+    28
+
+
+ans =
+
+    29
+
+
+ans =
+
+    30
+
+
+ans =
+
+    31
+
+
+ans =
+
+    31
+
+</pre><img vspace="5" hspace="5" src="Gradients_simplexe_N_05.png" alt=""> <h2 id="13">If user has ticked "Optimize price and number of experiments": we draw nb_draws set of gradients to keep the one with the lowest price / lowest number of gradients</h2><pre class="codeinput">    <span class="keyword">if</span> get(optimize_price_box,<span class="string">'Value'</span>)==1
+</pre><pre class="codeinput">        exp_opt=struct;
+        price_opt=struct;
+
+
+        price=price_calculation(prices_list,list_target(2:end));
+
+        exp_opt.alignement_opt=alignement_opt;
+        exp_opt.name_alignement_opt=name_alignement_opt;
+        exp_opt.list_target=list_target;
+        exp_opt.price=price;
+        exp_opt.nb_alignments_best=nb_alignments_best;
+
+        price_opt.alignement_opt=alignement_opt;
+        price_opt.name_alignement_opt=name_alignement_opt;
+        price_opt.list_target=list_target;
+        price_opt.price=price;
+        price_opt.nb_alignments_best=nb_alignments_best;
+
+        <span class="keyword">for</span> i=1:nb_draws_tot-1
+
+            [name_alignement_opt_try,alignement_opt_try] = gradients_set(name_mixture, mixture,alignments,name_alignement);
+            list_target_try = listing_targets(name_alignement_opt_try);
+            price_try=price_calculation(prices_list,list_target_try(2:end));
+            nb_alignments_try=size(name_alignement_opt_try,1)-1;
+            <span class="keyword">if</span> nb_alignments_try&lt;exp_opt.nb_alignments_best
+                 exp_opt.alignement_opt=alignement_opt_try;
+                 exp_opt.name_alignement_opt=name_alignement_opt_try;
+                 exp_opt.list_target=list_target_try;
+                 exp_opt.price=price_try;
+                 exp_opt.nb_alignments_best=nb_alignments_try;
+            <span class="keyword">end</span>
+            <span class="keyword">if</span> price_try&lt;price_opt.price
+                price_opt.alignement_opt=alignement_opt_try;
+                price_opt.name_alignement_opt=name_alignement_opt_try;
+                price_opt.list_target=list_target_try;
+                price_opt.price=price_try;
+                price_opt.nb_alignments_best=nb_alignments_try;
+            <span class="keyword">end</span>
+             nb_draw=i;
+        <span class="keyword">end</span>
+</pre><h2 id="15">Representation of the set of gradients</h2><pre class="codeinput">        fig_representation_exp=plot_compo_space_gradients(nb_elements,mixture, name_mixture,name_elements, exp_opt.alignement_opt, <span class="string">'b'</span>,3)<span class="comment">% , [ 800 , 500 , 550 , 500 ])</span>
+        title(<span class="string">'Optimize number of experiments'</span>)
+        fig_representation_price=plot_compo_space_gradients(nb_elements,mixture, name_mixture,name_elements, price_opt.alignement_opt, <span class="string">'b'</span>,4)<span class="comment">% , [ 800 , 500 , 550 , 500 ])</span>
+        title(<span class="string">'Optimize price'</span>)
+        fig_5=figure;
+        height_fig5= size(price_opt.list_target,1)*30
+        set( fig_5 , <span class="string">'position'</span> , [ 800 , 300 ,400 , height_fig5 ])
+        uicontrol ( fig_5 , <span class="string">'style'</span> , <span class="string">' text'</span> , <span class="string">'position'</span>, [10 height_fig5-40 200  30] , <span class="string">'string'</span> , <span class="string">'List of targets: optimize price'</span> )
+        uicontrol ( fig_5 , <span class="string">'style'</span> , <span class="string">' text'</span> , <span class="string">'position'</span>, [200 height_fig5-40 200  30] , <span class="string">'string'</span> , <span class="string">'List of targets: optimize experiments'</span> )
+        <span class="keyword">for</span> i=1:size(price_opt.list_target,1)
+            uicontrol ( fig_5 , <span class="string">'style'</span> , <span class="string">' text'</span> , <span class="string">'position'</span>, [20 height_fig5-40-20*i 200  30] , <span class="string">'string'</span> , price_opt.list_target(i))
+        <span class="keyword">end</span>
+        <span class="keyword">for</span> i=1:size(exp_opt.list_target,1)
+            uicontrol ( fig_5 , <span class="string">'style'</span> , <span class="string">' text'</span> , <span class="string">'position'</span>, [200 height_fig5-40-20*i 200  30] , <span class="string">'string'</span> , exp_opt.list_target(i))
+        <span class="keyword">end</span>
+</pre><pre class="codeinput">    <span class="keyword">else</span>
+        fig_representation=plot_compo_space_gradients(nb_elements,mixture, name_mixture,name_elements, alignement_opt, <span class="string">'b'</span>,3)<span class="comment">% , [ 800 , 500 , 550 , 500 ])</span>
+        title(<span class="string">'Set of experiments'</span>)
+        fig5=figure;
+        height_fig5= size(list_target,1)*20
+        set( fig5 , <span class="string">'position'</span> , [ 800 , 300 ,200 , height_fig5 ])
+        uicontrol ( fig5 , <span class="string">'style'</span> , <span class="string">' text'</span> , <span class="string">'position'</span>, [10 height_fig5-40 200  30] , <span class="string">'string'</span> , <span class="string">'List of targets'</span> )
+        <span class="keyword">for</span> i=1:size(list_target,1)
+            uicontrol ( fig5 , <span class="string">'style'</span> , <span class="string">' text'</span> , <span class="string">'position'</span>, [20 height_fig5-40-20*i 200  30] , <span class="string">'string'</span> ,list_target(i))
+        <span class="keyword">end</span>
+
+    <span class="keyword">end</span>
+</pre><pre class="codeoutput error">Error using plot_compo_space_gradients
+Too many input arguments.
+
+Error in Gradients_simplexe_N (line 311)
+        fig_representation=plot_compo_space_gradients(nb_elements,mixture, name_mixture,name_elements, alignement_opt, 'b',3)% , [ 800 , 500 , 550 , 500 ])
+</pre><pre class="codeinput"><span class="keyword">end</span>
+</pre><h2 id="18">For 3 cathodes :</h2><pre class="codeinput"><span class="keyword">if</span> nb_cath==3
+    [name_plane,plane] =compute_planes(name_alignement,alignments,nb_type_mixture);
+
+
+    <span class="keyword">for</span> i=1:size(name_plane)
+        list_plane(i)=[name_plane(i,1)+<span class="string">"-"</span>+name_plane(i,2)+<span class="string">"-"</span>+name_plane(i,3)+<span class="string">"-"</span>+name_plane(i,4)+<span class="string">"-"</span>+name_plane(i,5)+<span class="string">"-"</span>+name_plane(i,6)+<span class="string">"-"</span>+name_plane(i,7)];
+    <span class="keyword">end</span>
+
+    uicontrol ( fig2 , <span class="string">'style'</span> , <span class="string">' text'</span> , <span class="string">'position'</span>, [60 660 240 30] , <span class="string">'string'</span> , <span class="string">'Optimize price and number of experiments'</span> );
+    optimize_price_box= uicontrol ( fig2 , <span class="string">'style'</span> , <span class="string">' checkbox'</span> , <span class="string">'position'</span>, [40,675,15,15] ) ;
+
+    uicontrol ( fig2 , <span class="string">'style'</span> , <span class="string">' text'</span> , <span class="string">'position'</span>, [50 630 100 30] , <span class="string">'string'</span> , <span class="string">'Impose planes: '</span> );
+    list_plane_impose=uicontrol ( fig2 , <span class="string">'style'</span> , <span class="string">'listbox'</span> , <span class="string">'position'</span>, [50 540 200 100] , <span class="string">'Max'</span>,size(name_plane,1), <span class="string">'string'</span> , [<span class="string">' '</span>,list_plane]);
+
+
+    uicontrol ( fig2 , <span class="string">'style'</span> , <span class="string">' text'</span> , <span class="string">'position'</span>, [50 500 100 30] , <span class="string">'string'</span> , <span class="string">'Not repeat: '</span> );
+    not_repeat_list=uicontrol ( fig2 , <span class="string">'style'</span> , <span class="string">'listbox'</span> , <span class="string">'position'</span>, [50 410 200 100] , <span class="string">'Max'</span>,size(mixture_name_list,1), <span class="string">'string'</span> , [<span class="string">' '</span>;mixture_name_list]);
+
+
+    uicontrol ( fig2 , <span class="string">'style'</span> , <span class="string">' text'</span> , <span class="string">'position'</span>, [50 370 100 30] , <span class="string">'string'</span> , <span class="string">'Repeat only:  '</span> );
+    repeat_only_list=uicontrol ( fig2 , <span class="string">'style'</span> , <span class="string">'listbox'</span> , <span class="string">'position'</span>, [50 280 70 100] , <span class="string">'Max'</span>,size(mixture_name_list,1), <span class="string">'string'</span> , [<span class="string">' '</span>;mixture_name_list]);
+    number_repet_only=[];
+    fix_repetition_only_button=uicontrol ( fig2 , <span class="string">'style'</span> , <span class="string">'push'</span> , <span class="string">'position'</span> , [120 300 100 50 ] ,<span class="string">'string'</span> , <span class="string">'&lt;html&gt;Maximum number &lt;br&gt;of repetitions &gt;'</span>,<span class="string">'callback'</span>,<span class="string">'nb_repet_only=fix_nb_repetition(repeat_only_list,fig2,[240 380 50 20 ])'</span>);
+
+     uicontrol ( fig2 , <span class="string">'style'</span> , <span class="string">' text'</span> , <span class="string">'position'</span>, [40 240 100 30] , <span class="string">'string'</span> , <span class="string">'Repeat at least:  '</span> )
+    repeat_at_least_list=uicontrol ( fig2 , <span class="string">'style'</span> , <span class="string">'listbox'</span> , <span class="string">'position'</span>, [50 150 70 100] , <span class="string">'Max'</span>,size(mixture_name_list,1), <span class="string">'string'</span> , [<span class="string">' '</span>;mixture_name_list]);
+    number_repeat_at_least=[];
+    fix_repetition_at_least_button=uicontrol ( fig2 , <span class="string">'style'</span> , <span class="string">'push'</span> , <span class="string">'position'</span> , [120 175 100 50 ] ,<span class="string">'string'</span> , <span class="string">'&lt;html&gt;Minimum number &lt;br&gt;of repetitions &gt;'</span>,<span class="string">'callback'</span>,<span class="string">'nb_repet_at_least=fix_nb_repetition(repeat_at_least_list,fig2,[240 260 50 20 ])'</span>);
+
+
+    valid_condition_button=uicontrol ( fig2 , <span class="string">'style'</span> , <span class="string">'push'</span> , <span class="string">'position'</span> , [150,100,50,20] ,<span class="string">'string'</span> , <span class="string">'Validation'</span>,<span class="string">'callback'</span>,<span class="string">'uiresume(fig2)'</span>);
+
+    uiwait(fig2);
+
+    <span class="keyword">if</span> get(optimize_price_box,<span class="string">'Value'</span>)==1
+        fig_price = figure ;
+        nb_edit_per_line=0;
+        div=10;
+        <span class="keyword">while</span> nb_edit_per_line==0
+            <span class="keyword">if</span> mod((size(mixture_name_list,1)-1),div)==0
+                nb_edit_per_line=div;
+            <span class="keyword">else</span>
+                div=div-1;
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+        windows_height=(size(mixture_name_list,1)-1)/(nb_edit_per_line)*20+100;
+        set( fig_price , <span class="string">'position'</span> , get(fig1,<span class="string">'Position'</span>).*[1 1 0 0] + [0 0  nb_edit_per_line*150 windows_height])
+        uicontrol ( fig_price , <span class="string">'style'</span> , <span class="string">' text'</span> , <span class="string">'position'</span>, [20 windows_height-20 100 20] , <span class="string">'string'</span> , <span class="string">'Target prices'</span> )
+        <span class="keyword">for</span> i=0:(size(mixture_name_list,1)-1)/(nb_edit_per_line)-1<span class="comment">%:size(mixture_name_list,1)-1</span>
+            <span class="keyword">for</span> j=1:nb_edit_per_line
+             uicontrol ( fig_price , <span class="string">'style'</span> , <span class="string">' text'</span> , <span class="string">'position'</span>, [20+(j-1)*130 windows_height-50-20*i 100 30] , <span class="string">'string'</span> , mixture_name_list(i*nb_edit_per_line+j) )
+             prices(i*nb_edit_per_line+j) = uicontrol ( fig_price , <span class="string">'style'</span> , <span class="string">' edit'</span> , <span class="string">'position'</span>, [100+(j-1)*130,windows_height-40-i*20,50,20] , <span class="string">'Max'</span> , 1 , <span class="string">'string'</span> , <span class="string">'0'</span> )
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+
+    fix_repetition_at_least_button=uicontrol ( fig_price , <span class="string">'style'</span> , <span class="string">'push'</span> , <span class="string">'position'</span> , [120 20 50 20 ] ,<span class="string">'string'</span> , <span class="string">'OK'</span>,<span class="string">'callback'</span>,<span class="string">'uiresume(fig_price)'</span>);
+    uiwait(fig_price)
+
+    prices_list=[mixture_name_list(1:end-1),get(prices,<span class="string">'string'</span>)]
+
+    <span class="keyword">end</span>
+
+    index_list_impose=get(list_plane_impose,<span class="string">'Value'</span>);
+    index_not_repeat=get(not_repeat_list,<span class="string">'Value'</span>);
+    index_repeat_only=get(repeat_only_list,<span class="string">'Value'</span>);
+    <span class="keyword">if</span> sum(index_repeat_only)&gt;1
+        str_nb_repeat_only= get(nb_repet_only,<span class="string">'string'</span>);
+        <span class="keyword">if</span> length(index_repeat_only)==1
+            number_repet_only=str2num(str_nb_repeat_only);
+        <span class="keyword">else</span>
+
+            <span class="keyword">for</span> i=1:length(index_repeat_only)
+                number_repet_only(i)=str2num(str_nb_repeat_only{i});
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+
+    index_repeat_at_least=get(repeat_at_least_list,<span class="string">'Value'</span>);
+    <span class="keyword">if</span> sum(index_repeat_at_least)&gt;1
+        str_nb_repet_at_least=get(nb_repet_at_least,<span class="string">'string'</span>);
+        <span class="keyword">if</span> length(index_repeat_at_least)==1
+            number_repeat_at_least=str2num(str_nb_repet_at_least);
+        <span class="keyword">else</span>
+            <span class="keyword">for</span> i=1:length(index_repeat_at_least)
+                number_repeat_at_least(i)=str2num(str_nb_repet_at_least{i});
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+
+    impose_plane_name =[];
+    impose_plane_index=index_list_impose-1;
+    <span class="keyword">for</span> i=1:length(index_list_impose)
+        <span class="keyword">if</span> index_list_impose&gt;1
+            impose_plane_name=[impose_plane_name;name_plane(index_list_impose(i)-1,:)];
+        <span class="keyword">end</span>
+     <span class="keyword">end</span>
+
+
+    not_repeat=[];
+    <span class="keyword">for</span> i=1:length(index_not_repeat)
+        <span class="keyword">if</span> index_not_repeat(i)&gt;1
+            not_repeat=[not_repeat;mixture_name_list(index_not_repeat(i)-1)];
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+
+    repeat_only=[];
+    <span class="keyword">for</span> i=1:length(index_repeat_only)
+        <span class="keyword">if</span> index_repeat_only(i)&gt;1
+            repeat_only=[repeat_only;mixture_name_list(index_repeat_only(i)-1),number_repet_only(i)];
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+
+     repeat_at_least=[];
+    <span class="keyword">for</span> i=1:length(index_repeat_at_least)
+        <span class="keyword">if</span> index_repeat_at_least(i)&gt;1
+            repeat_at_least=[repeat_at_least;mixture_name_list(index_repeat_at_least(i)-1),number_repeat_at_least(i)];
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+
+
+
+    nb_draw=0;
+    f_plane_set=waitbar(0,<span class="string">"Compute planes set: try number "</span>+num2str(0));
+
+    <span class="keyword">if</span> get(optimize_price_box,<span class="string">'Value'</span>)==0
+        nb_draws_tot=1;
+    <span class="keyword">else</span>
+        nb_draws_tot=500;
+    <span class="keyword">end</span>
+    [name_plane_opt,plane_opt] = planes_set(name_mixture, mixture,plane,name_plane);
+    list_target = listing_targets_3cath(name_plane_opt);
+     nb_planes_best=size(name_plane_opt,1)-1;
+
+    <span class="keyword">if</span> get(optimize_price_box,<span class="string">'Value'</span>)==1
+
+        exp_opt=struct;
+        price_opt=struct;
+        price=price_calculation(prices_list,list_target(2:end));
+
+        exp_opt.plane_opt=plane_opt;
+        exp_opt.name_plane_opt=name_plane_opt;
+        exp_opt.list_target=list_target;
+        exp_opt.price=price;
+        exp_opt.nb_planes_best=nb_planes_best;
+
+        price_opt.plane_opt=plane_opt;
+        price_opt.name_plane_opt=name_plane_opt;
+        price_opt.list_target=list_target;
+        price_opt.price=price;
+        price_opt.nb_planes_best=nb_planes_best;
+
+        <span class="keyword">for</span> i=1: nb_draws_tot-1;
+           [name_plane_opt_try,plane_opt_try] = planes_set(name_mixture, mixture,plane,name_plane);
+            list_target_try = listing_targets_3cath(name_plane_opt_try);
+            price_try=price_calculation(prices_list,list_target_try(2:end))
+            nb_planes_try=size(name_plane_opt_try,1)-1
+            <span class="keyword">if</span> nb_planes_try&lt;exp_opt.nb_planes_best
+                 exp_opt.plane_opt=plane_opt_try;
+                 exp_opt.name_plane_opt=name_plane_opt_try;
+                 exp_opt.list_target=list_target_try;
+                 exp_opt.price=price_try;
+                 exp_opt.nb_planes_best=nb_planes_try;
+            <span class="keyword">end</span>
+            <span class="keyword">if</span> price_try&lt;price_opt.price
+                price_opt.plane_opt=plane_opt_try;
+                price_opt.name_plane_opt=name_plane_opt_try;
+                price_opt.list_target=list_target_try;
+                price_opt.price=price_try;
+                price_opt.nb_planes_best=nb_planes_try;
+            <span class="keyword">end</span>
+            nb_draw=i
+        <span class="keyword">end</span>
+
+        fig_representation_exp=plot_compo_space_planes(nb_elements,mixture, name_mixture,name_elements,exp_opt.plane_opt, <span class="string">'r'</span>,3 );<span class="comment">%, [ 800 , 500 , 550 , 500 ])</span>
+        title(<span class="string">'Optimize number of experiments'</span>)
+        fig_representation_price=plot_compo_space_planes(nb_elements,mixture, name_mixture,name_elements,price_opt.plane_opt, <span class="string">'r'</span>,4 );<span class="comment">%, [ 800 , 500 , 550 , 500 ])</span>
+        title(<span class="string">'Optimize price'</span>)
+
+        fig_5=figure;
+        height_fig5= size(price_opt.list_target,1)*30
+        set( fig_5 , <span class="string">'position'</span> , [ 800 , 300 ,400 , height_fig5 ])
+        uicontrol ( fig_5 , <span class="string">'style'</span> , <span class="string">' text'</span> , <span class="string">'position'</span>, [10 height_fig5-40 200  30] , <span class="string">'string'</span> , <span class="string">'List of targets: optimize price'</span>  )
+        uicontrol ( fig_5 , <span class="string">'style'</span> , <span class="string">' text'</span> , <span class="string">'position'</span>, [200 height_fig5-40 200  30] , <span class="string">'string'</span> , <span class="string">'List of targets: optimize experiments'</span> )
+
+        <span class="keyword">for</span> i=1:size(price_opt.list_target,1)
+            uicontrol ( fig_5 , <span class="string">'style'</span> , <span class="string">' text'</span> , <span class="string">'position'</span>, [20 height_fig5-40-20*i 200  30] , <span class="string">'string'</span> , price_opt.list_target(i))
+        <span class="keyword">end</span>
+        <span class="keyword">for</span> i=1:size(exp_opt.list_target,1)
+            uicontrol ( fig_5 , <span class="string">'style'</span> , <span class="string">' text'</span> , <span class="string">'position'</span>, [200 height_fig5-40-20*i 200  30] , <span class="string">'string'</span> , exp_opt.list_target(i))
+        <span class="keyword">end</span>
+
+    <span class="keyword">else</span>
+        fig_representation=plot_compo_space_planes(nb_elements,mixture, name_mixture,name_elements,plane_opt, <span class="string">'r'</span>,3 )
+        title(<span class="string">'Set of planes'</span>)
+
+
+        fig5=figure;
+        height_fig5= size(list_target,1)*20
+        set( fig5 , <span class="string">'position'</span> , [ 800 , 300 ,200 , height_fig5 ])
+        uicontrol ( fig5 , <span class="string">'style'</span> , <span class="string">' text'</span> , <span class="string">'position'</span>, [10 height_fig5-40 200  30] , <span class="string">'string'</span> , <span class="string">'List of targets'</span>  )
+
+        <span class="keyword">for</span> i=1:size(list_target,1)
+            uicontrol ( fig5 , <span class="string">'style'</span> , <span class="string">' text'</span> , <span class="string">'position'</span>, [20 height_fig5-40-20*i 200  30] , <span class="string">'string'</span> ,list_target(i))
+        <span class="keyword">end</span>
+
+    <span class="keyword">end</span>
+
+
+<span class="keyword">end</span>
+
+fig_sortie=figure;
+set(fig_sortie, <span class="string">'Position'</span>, get(fig_sortie,<span class="string">'Position'</span>).*[1 1 0 0] + [0 0 600 100]);
+uicontrol ( fig_sortie , <span class="string">'style'</span> , <span class="string">' text'</span> , <span class="string">'position'</span>, [20 70 100 30] , <span class="string">'string'</span> , <span class="string">'Save path '</span> )
+save=uicontrol ( fig_sortie , <span class="string">'style'</span> , <span class="string">' edit'</span> , <span class="string">'position'</span>, [20 40 500 30] , <span class="string">'string'</span> , <span class="string">''</span> )
+button_save=uicontrol ( fig_sortie , <span class="string">'style'</span> , <span class="string">' push'</span> , <span class="string">'position'</span>, [20 10 40 20] , <span class="string">'string'</span> , <span class="string">'Save '</span> , <span class="string">'callback'</span>,<span class="string">'uiresume(fig_sortie)'</span>)
+
+uiwait(fig_sortie)
+</pre><h2 id="19">Save result</h2><pre class="codeinput">path=get(save,<span class="string">'String'</span>);
+
+parameters_file()
+
+<span class="keyword">if</span> get(optimize_price_box,<span class="string">'Value'</span>)==1
+    writematrix([<span class="string">"List of targets"</span>;exp_opt.list_target],path+subfolder+<span class="string">"/Target_list_optimize_nb_experiments.csv"</span>)
+    writematrix([<span class="string">"List of targets"</span>;exp_opt.list_target],path+subfolder+<span class="string">"/Target_list_optimize_price_experiments.csv"</span>)
+     writematrix([<span class="string">"List of possible targets"</span>,<span class="string">"Price"</span>;prices_list],path+subfolder+<span class="string">"/Target price list.csv"</span>)
+
+    savefig(fig_representation_exp,path+subfolder+<span class="string">"/Representation_experiments_optimize_nb_experiments.fig"</span>)
+    savefig(fig_representation_price,path+subfolder+<span class="string">"/Representation_experiments_optimize_price_experiments.fig"</span>)
+    <span class="keyword">if</span> nb_cath==2
+        writematrix([<span class="string">"Target 1"</span>,<span class="string">"gradient center"</span>,<span class="string">"Target 2"</span>; price_opt.name_alignement_opt(2:end,:)], path+subfolder+<span class="string">"/Experimental_gradients_optimize_price_experiments.csv"</span>)
+        writematrix([<span class="string">"Target 1"</span>,<span class="string">"gradient center"</span>,<span class="string">"Target 2"</span>;exp_opt.name_alignement_opt(2:end,:)], path+subfolder+<span class="string">"/Experimental_gradients_optimize_nb_experiments.csv"</span>)
+    <span class="keyword">end</span>
+
+    <span class="keyword">if</span> nb_cath==3
+        writematrix([<span class="string">"Target 1"</span>,<span class="string">"gradient center"</span>,<span class="string">"Target 2"</span>,<span class="string">"gradient center"</span>,<span class="string">"Target 3"</span>,<span class="string">"gradient center"</span>,<span class="string">"plane center"</span>;price_opt.name_plane_opt(2:end,:)], path+subfolder+<span class="string">"/Experimental_plane_optimize_price_experiments.csv"</span>)
+        writematrix(exp_opt.name_plane_opt(2:end,:), path+subfolder+<span class="string">"/Experimental_plane_optimize_nb_experiments.csv"</span>)
+
+    <span class="keyword">end</span>
+
+<span class="keyword">else</span>
+    writematrix([<span class="string">"List of targets"</span>;list_target(2:end,:)],path+subfolder+<span class="string">"/Target_list.csv"</span>)
+    savefig(fig_representation,path+subfolder+<span class="string">"/Representation_experiments.fig"</span>)
+    <span class="keyword">if</span> nb_cath==2
+        writematrix([<span class="string">"Target 1"</span>,<span class="string">"gradient center"</span>,<span class="string">"Target 2"</span>;name_alignement_opt(2:end,:)], path+subfolder+<span class="string">"/Experimental_gradients.csv"</span>)
+    <span class="keyword">end</span>
+
+    <span class="keyword">if</span> nb_cath==3
+        writematrix([<span class="string">"Target 1"</span>,<span class="string">"gradient center"</span>,<span class="string">"Target 2"</span>,<span class="string">"gradient center"</span>,<span class="string">"Target 3"</span>,<span class="string">"gradient center"</span>,<span class="string">"plane center"</span>;name_plane_opt(2:end,:)], path+subfolder+<span class="string">"/Experimental_plane.csv"</span>)
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+
+fig_success=figure;
+set( fig_success ,  <span class="string">'position'</span> , get(fig_success,<span class="string">'Position'</span>).*[1 1 0 0] + [0 -50 500 75])
+    uicontrol ( fig_success , <span class="string">'style'</span> , <span class="string">' text'</span> , <span class="string">'position'</span>, [30 30 400 30] , <span class="string">'FontSize'</span>, 16,<span class="string">'string'</span> , <span class="string">'Try was saved successfully'</span> );
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+clear;
+close all;
+clc
+
+addpath('./modules')
+    
+%% Global variables defintion
+
+global nb_cath
+global name_elements
+global do_not_align
+global optimize_price_box
+global impose_alignments_name
+global impose_alignments_index
+global not_repeat
+global repeat_only 
+global repeat_at_least
+global impose_plane_name
+global impose_plane_index
+global state
+global f_plane_set
+global nb_draw
+global nb_draws_tot
+global f_gradient_set
+global path
+global subfolder 
+global mixture_name_list
+global mixture_list
+
+state="run";
+
+
+%% STOP button  
+
+fig_stop_button=figure;
+set(fig_stop_button, 'Position', get(fig_stop_button,'Position').*[1 1 0 0] + [-100 0 100 80]);
+stop_button = uicontrol ( fig_stop_button , 'style' , ' pushbutton' , 'position', [35 35 60 30] , 'string' , 'STOP ', 'callback','state=kill_program') ;
+
+
+%% GUI for user to input the elements and number of cathodes 
+
+fig1 = figure ;
+set(fig1, 'Position', get(fig1,'Position').*[1 1 0 0] + [0 -250 150 350]);
+%fig1.Position(3:4) = [200 400];
+uicontrol ( fig1 , 'style' , ' text' , 'position', [35 300 100 30] , 'string' , 'Number of cathodes ' );
+for nc=2:3
+    nb_cathodes(nc-1) = uicontrol ( fig1 , 'style' , ' checkbox' , 'position', [3+30*nc,290,50,20] , 'Max' , 1 , 'string' , num2str(nc ));
+end
+uicontrol ( fig1 , 'style' , ' text' , 'position', [55 250 60 30] , 'string' , 'Elements ' );
+for i=1:7
+   elements(i) = uicontrol ( fig1 , 'style' , ' edit' , 'position', [60,250-i*20,50,20] , 'Max' , 1 , 'string' , '' );
+end
+valid_elements_button=uicontrol ( fig1 , 'style' , 'push' , 'position' , [30 50 100 30 ] ,'string' , 'Elements validation','callback','name_elements=get_elements(elements, fig1)');
+
+uiwait(fig1);
+
+%% Get the elements and number of cathodes
+
+nb_elements=size(name_elements,2);
+nb_cath_box=get(nb_cathodes,'Value');
+if nb_cath_box{1}==[1]
+    nb_cath=2;
+elseif nb_cath_box{2}==[1]
+    nb_cath=3;
+else 
+    fig_5 = figure ;
+    set( fig_5 ,  'position' , get(fig1,'Position').*[1 1 0 0] + [0 -50 400 75]);
+    uicontrol ( fig_5 , 'style' , ' text' , 'position', [30 30 300 30] , 'FontSize', 16,'string' , 'No cathode !' );
+    return
+end
+
+nb_type_mixture=nb_elements;
+
+%% Compute coordinates of the Simplexe Centroid Mixture points and create the mixtures'names.
+
+[mixture,name_mixture] = coordinates_name_centroid_points(nb_elements,name_elements);
+
+
+mixture_name_list=[]; 
+for i=1:nb_elements
+    mixture_name_list=[mixture_name_list;name_mixture{i}]; % list of all mixture name of simplexe centroid design
+end
+
+mixture_list=[]; 
+for i=1:nb_elements
+    mixture_list=[mixture_list;mixture{i}]; % list of all mixture points coordinates of simplexe centroid design
+end
+
+
+%% Compute alignments / 1D gradients 
+[alignments,name_alignement]=compute_alignments(mixture,name_mixture, nb_elements);
+
+
+%% For 2 cathodes
+
+fig2 = figure ;
+set( fig2 , 'position' , get(fig1,'Position').*[1 1 0 0] + [0 -250 350 700]);
+
+if nb_cath==2
+    uicontrol ( fig2 , 'style' , ' text' , 'position', [60 660 240 30] , 'string' , 'Optimize price and number of experiments' );
+    optimize_price_box= uicontrol ( fig2 , 'style' , ' checkbox' , 'position', [40,675,15,15] ) ;
+   
+    for i=1:size(name_alignement)
+        list_alignement(i)=[name_alignement(i,1)+"-"+name_alignement(i,2)+"-"+name_alignement(i,3)];
+    end
+    uicontrol ( fig2 , 'style' , ' text' , 'position', [50 630 100 30] , 'string' , 'Impose alignments: ' );
+    list_align_impose=uicontrol ( fig2 , 'style' , 'listbox' , 'position', [50 540 200 100] , 'Max',size(name_alignement,1), 'string' , [' ',list_alignement]);
+   
+    uicontrol ( fig2 , 'style' , ' text' , 'position', [25 500 100 30] , 'string' , 'Not repeat: ' );
+    not_repeat_list=uicontrol ( fig2 , 'style' , 'listbox' , 'position', [50 410 200 100] , 'Max',size(mixture_name_list,1), 'string' , [' ';mixture_name_list]) ;
+    
+    uicontrol ( fig2 , 'style' , ' text' , 'position', [35 370 100 30] , 'string' , 'Repeat only:  ' );
+    repeat_only_list=uicontrol ( fig2 , 'style' , 'listbox' , 'position', [50 280 70 100] , 'Max',size(mixture_name_list,1), 'string' , [' ';mixture_name_list]);
+    number_repet_only=[];
+    fix_repetition_only_button=uicontrol ( fig2 , 'style' , 'push' , 'position' , [120 300 100 50 ] ,'string' , '<html>Maximum number <br>of repetitions >','callback','nb_repeat_only=fix_nb_repetition(repeat_only_list,fig2,[240 380 50 20 ])');
+    
+     
+    uicontrol ( fig2 , 'style' , ' text' , 'position', [40 240 100 30] , 'string' , 'Repeat at least:  ' )
+    repeat_at_least_list=uicontrol ( fig2 , 'style' , 'listbox' , 'position', [50 150 70 100] , 'Max',size(mixture_name_list,1), 'string' , [' ';mixture_name_list]);
+    number_repeat_at_least=[];
+    fix_repetition_at_least_button=uicontrol ( fig2 , 'style' , 'push' , 'position' , [120 175 100 50 ] ,'string' , '<html>Minimum number <br>of repetitions >','callback','nb_repeat_at_least=fix_nb_repetition(repeat_at_least_list,fig2,[240 260 50 20 ])');
+
+    uicontrol ( fig2 , 'style' , ' text' , 'position', [30 90 200 30] , 'string' , 'Do not align mixture of order: ' );
+    for da=1:nb_elements
+        do_not_align_boxes(da)= uicontrol ( fig2 , 'style' , ' checkbox' , 'position', [50+da*30,75,50,20] , 'string' , num2str(da) );
+    end
+    valid_condition_button=uicontrol ( fig2 , 'style' , 'push' , 'position' , [100,40,50,20] ,'string' , 'Validation','callback','uiresume(fig2)');
+    
+    uiwait(fig2);
+    
+%% If user has ticked "Optimize price and number of experiments": GUI for input prices of possible targets 
+
+    if get(optimize_price_box,'Value')==1
+        fig_price = figure ;
+        nb_edit_per_line=0;
+        div=10;
+        while nb_edit_per_line==0
+            if mod((size(mixture_name_list,1)-1),div)==0
+                nb_edit_per_line=div;
+            else
+                div=div-1;
+            end
+        end
+        windows_height=(size(mixture_name_list,1)-1)/(nb_edit_per_line)*20+100;
+        set( fig_price , 'position' , get(fig1,'Position').*[1 1 0 0] + [0 0  nb_edit_per_line*150 windows_height])
+        uicontrol ( fig_price , 'style' , ' text' , 'position', [20 windows_height-20 100 20] , 'string' , 'Target prices' )
+        for i=0:(size(mixture_name_list,1)-1)/(nb_edit_per_line)-1
+            for j=1:nb_edit_per_line
+             uicontrol ( fig_price , 'style' , ' text' , 'position', [20+(j-1)*130 windows_height-50-20*i 100 30] , 'string' , mixture_name_list(i*nb_edit_per_line+j) )
+             prices(i*nb_edit_per_line+j) = uicontrol ( fig_price , 'style' , ' edit' , 'position', [100+(j-1)*130,windows_height-40-i*20,50,20] , 'Max' , 1 , 'string' , '0' )
+            end
+        end
+      fix_repetition_at_least_button=uicontrol ( fig_price , 'style' , 'push' , 'position' , [120 20 50 20 ] ,'string' , 'OK','callback','uiresume(fig_price)');
+      uiwait(fig_price)    
+      
+      prices_list=[mixture_name_list(1:end-1),get(prices,'string')]
+    end
+   
+%% Get user condition of selection
+  
+    index_list_impose=get(list_align_impose,'Value');
+    index_not_repeat=get(not_repeat_list,'Value');
+    index_repeat_only=get(repeat_only_list,'Value');
+    if sum(index_repeat_only)>1
+        str_nb_repeat_only= get(nb_repeat_only,'string');
+        if length(index_repeat_only)==1
+            number_repet_only=str2num(str_nb_repeat_only);
+        else
+            for i=1:length(index_repeat_only)
+                number_repet_only(i)=str2num(str_nb_repeat_only{i});
+            end
+        end
+    end
+ 
+    index_repeat_at_least=get(repeat_at_least_list,'Value');
+    if sum(index_repeat_at_least)>1
+        str_nb_repeat_at_least=get(nb_repeat_at_least,'string');
+        if length(index_repeat_at_least)==1
+            number_repeat_at_least=str2num(str_nb_repeat_at_least);
+        else
+            
+            for i=1:length(index_repeat_at_least)
+                number_repeat_at_least(i)=str2num(str_nb_repeat_at_least{i});
+            end
+        end
+        
+    end
+    
+    do_not_align_result=get(do_not_align_boxes,'Value');
+    
+    
+    
+    impose_alignments_name =[];
+    impose_alignments_index=index_list_impose-1; % due to blank space left at the begining of the listbox
+    for i=1:length(index_list_impose)
+        if index_list_impose>1
+            impose_alignments_name=[impose_alignments_name;name_alignement(index_list_impose(i)-1,:)];
+        end
+     end
+    
+    
+    not_repeat=[];
+    for i=1:length(index_not_repeat)
+        if index_not_repeat(i)>1
+            not_repeat=[not_repeat;mixture_name_list(index_not_repeat(i)-1)];
+        end
+    end
+    
+    repeat_only=[];
+    for i=1:length(index_repeat_only)
+        if index_repeat_only(i)>1
+            repeat_only=[repeat_only;mixture_name_list(index_repeat_only(i)-1),number_repet_only(i)];
+        end
+    end
+    
+    do_not_align={};
+    for i=1:length(do_not_align_result)
+        if do_not_align_result{i}==1
+            do_not_align{end+1}=(name_mixture{i})';
+        end 
+    end 
+    
+    repeat_at_least=[];
+    for i=1:length(index_repeat_at_least)
+        if index_repeat_at_least(i)>1
+            repeat_at_least=[repeat_at_least;mixture_name_list(index_repeat_at_least(i)-1),number_repeat_at_least(i)];
+        end
+    end
+    
+  
+%% Compute 1D gradients set 
+
+    nb_draw=0;
+    f_gradient_set=waitbar(0,"Compute gradient set: try number "+num2str(0));
+
+    if get(optimize_price_box,'Value')==0
+        nb_draws_tot=1;
+    else
+        nb_draws_tot=500;
+    end
+    
+    [name_alignement_opt,alignement_opt] = gradients_set(name_mixture, mixture,alignments,name_alignement);
+    list_target = listing_targets(name_alignement_opt);
+    nb_alignments_best=size(name_alignement_opt,1)-1;
+
+%% If user has ticked "Optimize price and number of experiments": we draw nb_draws set of gradients to keep the one with the lowest price / lowest number of gradients
+
+    if get(optimize_price_box,'Value')==1
+        
+        exp_opt=struct;
+        price_opt=struct;
+    
+   
+        price=price_calculation(prices_list,list_target(2:end));
+   
+        exp_opt.alignement_opt=alignement_opt;
+        exp_opt.name_alignement_opt=name_alignement_opt;
+        exp_opt.list_target=list_target;
+        exp_opt.price=price;
+        exp_opt.nb_alignments_best=nb_alignments_best;
+
+        price_opt.alignement_opt=alignement_opt;
+        price_opt.name_alignement_opt=name_alignement_opt;
+        price_opt.list_target=list_target;
+        price_opt.price=price;
+        price_opt.nb_alignments_best=nb_alignments_best;
+    
+        for i=1:nb_draws_tot-1
+           
+            [name_alignement_opt_try,alignement_opt_try] = gradients_set(name_mixture, mixture,alignments,name_alignement);
+            list_target_try = listing_targets(name_alignement_opt_try);
+            price_try=price_calculation(prices_list,list_target_try(2:end));
+            nb_alignments_try=size(name_alignement_opt_try,1)-1;
+            if nb_alignments_try<exp_opt.nb_alignments_best
+                 exp_opt.alignement_opt=alignement_opt_try;
+                 exp_opt.name_alignement_opt=name_alignement_opt_try;
+                 exp_opt.list_target=list_target_try;
+                 exp_opt.price=price_try;
+                 exp_opt.nb_alignments_best=nb_alignments_try;
+            end
+            if price_try<price_opt.price
+                price_opt.alignement_opt=alignement_opt_try;
+                price_opt.name_alignement_opt=name_alignement_opt_try;
+                price_opt.list_target=list_target_try;
+                price_opt.price=price_try;
+                price_opt.nb_alignments_best=nb_alignments_try;
+            end
+             nb_draw=i;
+        end
+
+        
+%% Representation of the set of gradients 
+
+        fig_representation_exp=plot_compo_space_gradients(nb_elements,mixture, name_mixture,name_elements, exp_opt.alignement_opt, 'b',3)% , [ 800 , 500 , 550 , 500 ])
+        title('Optimize number of experiments')
+        fig_representation_price=plot_compo_space_gradients(nb_elements,mixture, name_mixture,name_elements, price_opt.alignement_opt, 'b',4)% , [ 800 , 500 , 550 , 500 ])
+        title('Optimize price')
+        fig_5=figure;
+        height_fig5= size(price_opt.list_target,1)*30
+        set( fig_5 , 'position' , [ 800 , 300 ,400 , height_fig5 ])
+        uicontrol ( fig_5 , 'style' , ' text' , 'position', [10 height_fig5-40 200  30] , 'string' , 'List of targets: optimize price' )
+        uicontrol ( fig_5 , 'style' , ' text' , 'position', [200 height_fig5-40 200  30] , 'string' , 'List of targets: optimize experiments' )
+        for i=1:size(price_opt.list_target,1)
+            uicontrol ( fig_5 , 'style' , ' text' , 'position', [20 height_fig5-40-20*i 200  30] , 'string' , price_opt.list_target(i))
+        end
+        for i=1:size(exp_opt.list_target,1)
+            uicontrol ( fig_5 , 'style' , ' text' , 'position', [200 height_fig5-40-20*i 200  30] , 'string' , exp_opt.list_target(i))
+        end
+    
+    else
+        fig_representation=plot_compo_space_gradients(nb_elements,mixture, name_mixture,name_elements, alignement_opt, 'b',3)% , [ 800 , 500 , 550 , 500 ])
+        title('Set of experiments')
+        fig5=figure;
+        height_fig5= size(list_target,1)*20
+        set( fig5 , 'position' , [ 800 , 300 ,200 , height_fig5 ])
+        uicontrol ( fig5 , 'style' , ' text' , 'position', [10 height_fig5-40 200  30] , 'string' , 'List of targets' )
+        for i=1:size(list_target,1)
+            uicontrol ( fig5 , 'style' , ' text' , 'position', [20 height_fig5-40-20*i 200  30] , 'string' ,list_target(i))         
+        end
+         
+    end
+   
+end
+
+
+%% For 3 cathodes :
+
+if nb_cath==3
+    [name_plane,plane] =compute_planes(name_alignement,alignments,nb_type_mixture);
+    
+    
+    for i=1:size(name_plane)
+        list_plane(i)=[name_plane(i,1)+"-"+name_plane(i,2)+"-"+name_plane(i,3)+"-"+name_plane(i,4)+"-"+name_plane(i,5)+"-"+name_plane(i,6)+"-"+name_plane(i,7)];
+    end
+   
+    uicontrol ( fig2 , 'style' , ' text' , 'position', [60 660 240 30] , 'string' , 'Optimize price and number of experiments' );
+    optimize_price_box= uicontrol ( fig2 , 'style' , ' checkbox' , 'position', [40,675,15,15] ) ;
+    
+    uicontrol ( fig2 , 'style' , ' text' , 'position', [50 630 100 30] , 'string' , 'Impose planes: ' );
+    list_plane_impose=uicontrol ( fig2 , 'style' , 'listbox' , 'position', [50 540 200 100] , 'Max',size(name_plane,1), 'string' , [' ',list_plane]);
+    
+    
+    uicontrol ( fig2 , 'style' , ' text' , 'position', [50 500 100 30] , 'string' , 'Not repeat: ' );
+    not_repeat_list=uicontrol ( fig2 , 'style' , 'listbox' , 'position', [50 410 200 100] , 'Max',size(mixture_name_list,1), 'string' , [' ';mixture_name_list]); 
+    
+    
+    uicontrol ( fig2 , 'style' , ' text' , 'position', [50 370 100 30] , 'string' , 'Repeat only:  ' );
+    repeat_only_list=uicontrol ( fig2 , 'style' , 'listbox' , 'position', [50 280 70 100] , 'Max',size(mixture_name_list,1), 'string' , [' ';mixture_name_list]);
+    number_repet_only=[];
+    fix_repetition_only_button=uicontrol ( fig2 , 'style' , 'push' , 'position' , [120 300 100 50 ] ,'string' , '<html>Maximum number <br>of repetitions >','callback','nb_repet_only=fix_nb_repetition(repeat_only_list,fig2,[240 380 50 20 ])');
+    
+     uicontrol ( fig2 , 'style' , ' text' , 'position', [40 240 100 30] , 'string' , 'Repeat at least:  ' )
+    repeat_at_least_list=uicontrol ( fig2 , 'style' , 'listbox' , 'position', [50 150 70 100] , 'Max',size(mixture_name_list,1), 'string' , [' ';mixture_name_list]);
+    number_repeat_at_least=[];
+    fix_repetition_at_least_button=uicontrol ( fig2 , 'style' , 'push' , 'position' , [120 175 100 50 ] ,'string' , '<html>Minimum number <br>of repetitions >','callback','nb_repet_at_least=fix_nb_repetition(repeat_at_least_list,fig2,[240 260 50 20 ])');
+
+    
+    valid_condition_button=uicontrol ( fig2 , 'style' , 'push' , 'position' , [150,100,50,20] ,'string' , 'Validation','callback','uiresume(fig2)');
+    
+    uiwait(fig2);
+    
+    if get(optimize_price_box,'Value')==1
+        fig_price = figure ;
+        nb_edit_per_line=0;
+        div=10;
+        while nb_edit_per_line==0
+            if mod((size(mixture_name_list,1)-1),div)==0
+                nb_edit_per_line=div;
+            else
+                div=div-1;
+            end
+        end
+        windows_height=(size(mixture_name_list,1)-1)/(nb_edit_per_line)*20+100;
+        set( fig_price , 'position' , get(fig1,'Position').*[1 1 0 0] + [0 0  nb_edit_per_line*150 windows_height])
+        uicontrol ( fig_price , 'style' , ' text' , 'position', [20 windows_height-20 100 20] , 'string' , 'Target prices' )
+        for i=0:(size(mixture_name_list,1)-1)/(nb_edit_per_line)-1%:size(mixture_name_list,1)-1
+            for j=1:nb_edit_per_line
+             uicontrol ( fig_price , 'style' , ' text' , 'position', [20+(j-1)*130 windows_height-50-20*i 100 30] , 'string' , mixture_name_list(i*nb_edit_per_line+j) )
+             prices(i*nb_edit_per_line+j) = uicontrol ( fig_price , 'style' , ' edit' , 'position', [100+(j-1)*130,windows_height-40-i*20,50,20] , 'Max' , 1 , 'string' , '0' )
+            end
+        end
+        
+    fix_repetition_at_least_button=uicontrol ( fig_price , 'style' , 'push' , 'position' , [120 20 50 20 ] ,'string' , 'OK','callback','uiresume(fig_price)');
+    uiwait(fig_price)
+
+    prices_list=[mixture_name_list(1:end-1),get(prices,'string')]
+  
+    end 
+   
+    index_list_impose=get(list_plane_impose,'Value');
+    index_not_repeat=get(not_repeat_list,'Value');
+    index_repeat_only=get(repeat_only_list,'Value');
+    if sum(index_repeat_only)>1
+        str_nb_repeat_only= get(nb_repet_only,'string');
+        if length(index_repeat_only)==1
+            number_repet_only=str2num(str_nb_repeat_only);
+        else
+            
+            for i=1:length(index_repeat_only)
+                number_repet_only(i)=str2num(str_nb_repeat_only{i});
+            end
+        end
+    end
+ 
+    index_repeat_at_least=get(repeat_at_least_list,'Value');
+    if sum(index_repeat_at_least)>1
+        str_nb_repet_at_least=get(nb_repet_at_least,'string');
+        if length(index_repeat_at_least)==1
+            number_repeat_at_least=str2num(str_nb_repet_at_least);
+        else
+            for i=1:length(index_repeat_at_least)
+                number_repeat_at_least(i)=str2num(str_nb_repet_at_least{i});
+            end
+        end
+    end
+    
+    impose_plane_name =[];
+    impose_plane_index=index_list_impose-1;
+    for i=1:length(index_list_impose)
+        if index_list_impose>1
+            impose_plane_name=[impose_plane_name;name_plane(index_list_impose(i)-1,:)];
+        end
+     end
+    
+    
+    not_repeat=[];
+    for i=1:length(index_not_repeat)
+        if index_not_repeat(i)>1
+            not_repeat=[not_repeat;mixture_name_list(index_not_repeat(i)-1)];
+        end
+    end
+    
+    repeat_only=[];
+    for i=1:length(index_repeat_only)
+        if index_repeat_only(i)>1
+            repeat_only=[repeat_only;mixture_name_list(index_repeat_only(i)-1),number_repet_only(i)];
+        end
+    end
+    
+     repeat_at_least=[];
+    for i=1:length(index_repeat_at_least)
+        if index_repeat_at_least(i)>1
+            repeat_at_least=[repeat_at_least;mixture_name_list(index_repeat_at_least(i)-1),number_repeat_at_least(i)];
+        end
+    end
+    
+ 
+   
+    nb_draw=0;
+    f_plane_set=waitbar(0,"Compute planes set: try number "+num2str(0));
+
+    if get(optimize_price_box,'Value')==0
+        nb_draws_tot=1;
+    else
+        nb_draws_tot=500;
+    end
+    [name_plane_opt,plane_opt] = planes_set(name_mixture, mixture,plane,name_plane);
+    list_target = listing_targets_3cath(name_plane_opt);
+     nb_planes_best=size(name_plane_opt,1)-1;
+    
+    if get(optimize_price_box,'Value')==1
+        
+        exp_opt=struct;
+        price_opt=struct;
+        price=price_calculation(prices_list,list_target(2:end));
+
+        exp_opt.plane_opt=plane_opt;
+        exp_opt.name_plane_opt=name_plane_opt;
+        exp_opt.list_target=list_target;
+        exp_opt.price=price;
+        exp_opt.nb_planes_best=nb_planes_best;
+
+        price_opt.plane_opt=plane_opt;
+        price_opt.name_plane_opt=name_plane_opt;
+        price_opt.list_target=list_target;
+        price_opt.price=price;
+        price_opt.nb_planes_best=nb_planes_best;
+
+        for i=1: nb_draws_tot-1;
+           [name_plane_opt_try,plane_opt_try] = planes_set(name_mixture, mixture,plane,name_plane);
+            list_target_try = listing_targets_3cath(name_plane_opt_try);
+            price_try=price_calculation(prices_list,list_target_try(2:end))
+            nb_planes_try=size(name_plane_opt_try,1)-1
+            if nb_planes_try<exp_opt.nb_planes_best
+                 exp_opt.plane_opt=plane_opt_try;
+                 exp_opt.name_plane_opt=name_plane_opt_try;
+                 exp_opt.list_target=list_target_try;
+                 exp_opt.price=price_try;
+                 exp_opt.nb_planes_best=nb_planes_try;
+            end
+            if price_try<price_opt.price
+                price_opt.plane_opt=plane_opt_try;
+                price_opt.name_plane_opt=name_plane_opt_try;
+                price_opt.list_target=list_target_try;
+                price_opt.price=price_try;
+                price_opt.nb_planes_best=nb_planes_try;
+            end
+            nb_draw=i
+        end
+        
+        fig_representation_exp=plot_compo_space_planes(nb_elements,mixture, name_mixture,name_elements,exp_opt.plane_opt, 'r',3 );%, [ 800 , 500 , 550 , 500 ])
+        title('Optimize number of experiments')
+        fig_representation_price=plot_compo_space_planes(nb_elements,mixture, name_mixture,name_elements,price_opt.plane_opt, 'r',4 );%, [ 800 , 500 , 550 , 500 ])
+        title('Optimize price')
+        
+        fig_5=figure;
+        height_fig5= size(price_opt.list_target,1)*30
+        set( fig_5 , 'position' , [ 800 , 300 ,400 , height_fig5 ])
+        uicontrol ( fig_5 , 'style' , ' text' , 'position', [10 height_fig5-40 200  30] , 'string' , 'List of targets: optimize price'  )
+        uicontrol ( fig_5 , 'style' , ' text' , 'position', [200 height_fig5-40 200  30] , 'string' , 'List of targets: optimize experiments' )
+        
+        for i=1:size(price_opt.list_target,1)
+            uicontrol ( fig_5 , 'style' , ' text' , 'position', [20 height_fig5-40-20*i 200  30] , 'string' , price_opt.list_target(i))
+        end
+        for i=1:size(exp_opt.list_target,1)
+            uicontrol ( fig_5 , 'style' , ' text' , 'position', [200 height_fig5-40-20*i 200  30] , 'string' , exp_opt.list_target(i))
+        end
+        
+    else
+        fig_representation=plot_compo_space_planes(nb_elements,mixture, name_mixture,name_elements,plane_opt, 'r',3 )
+        title('Set of planes')
+     
+        
+        fig5=figure;
+        height_fig5= size(list_target,1)*20
+        set( fig5 , 'position' , [ 800 , 300 ,200 , height_fig5 ])
+        uicontrol ( fig5 , 'style' , ' text' , 'position', [10 height_fig5-40 200  30] , 'string' , 'List of targets'  )
+ 
+        for i=1:size(list_target,1)
+            uicontrol ( fig5 , 'style' , ' text' , 'position', [20 height_fig5-40-20*i 200  30] , 'string' ,list_target(i))
+        end
+       
+    end
+    
+    
+end
+    
+fig_sortie=figure;
+set(fig_sortie, 'Position', get(fig_sortie,'Position').*[1 1 0 0] + [0 0 600 100]);
+uicontrol ( fig_sortie , 'style' , ' text' , 'position', [20 70 100 30] , 'string' , 'Save path ' )
+save=uicontrol ( fig_sortie , 'style' , ' edit' , 'position', [20 40 500 30] , 'string' , '' )  
+button_save=uicontrol ( fig_sortie , 'style' , ' push' , 'position', [20 10 40 20] , 'string' , 'Save ' , 'callback','uiresume(fig_sortie)')
+
+uiwait(fig_sortie)
+
+%% Save result 
+
+path=get(save,'String');
+
+parameters_file()
+
+if get(optimize_price_box,'Value')==1
+    writematrix(["List of targets";exp_opt.list_target],path+subfolder+"/Target_list_optimize_nb_experiments.csv")
+    writematrix(["List of targets";exp_opt.list_target],path+subfolder+"/Target_list_optimize_price_experiments.csv")
+     writematrix(["List of possible targets","Price";prices_list],path+subfolder+"/Target price list.csv")
+    
+    savefig(fig_representation_exp,path+subfolder+"/Representation_experiments_optimize_nb_experiments.fig")
+    savefig(fig_representation_price,path+subfolder+"/Representation_experiments_optimize_price_experiments.fig")
+    if nb_cath==2
+        writematrix(["Target 1","gradient center","Target 2"; price_opt.name_alignement_opt(2:end,:)], path+subfolder+"/Experimental_gradients_optimize_price_experiments.csv")
+        writematrix(["Target 1","gradient center","Target 2";exp_opt.name_alignement_opt(2:end,:)], path+subfolder+"/Experimental_gradients_optimize_nb_experiments.csv")
+    end
+    
+    if nb_cath==3
+        writematrix(["Target 1","gradient center","Target 2","gradient center","Target 3","gradient center","plane center";price_opt.name_plane_opt(2:end,:)], path+subfolder+"/Experimental_plane_optimize_price_experiments.csv")
+        writematrix(exp_opt.name_plane_opt(2:end,:), path+subfolder+"/Experimental_plane_optimize_nb_experiments.csv")
+    
+    end
+    
+else
+    writematrix(["List of targets";list_target(2:end,:)],path+subfolder+"/Target_list.csv")
+    savefig(fig_representation,path+subfolder+"/Representation_experiments.fig")
+    if nb_cath==2
+        writematrix(["Target 1","gradient center","Target 2";name_alignement_opt(2:end,:)], path+subfolder+"/Experimental_gradients.csv")
+    end
+    
+    if nb_cath==3
+        writematrix(["Target 1","gradient center","Target 2","gradient center","Target 3","gradient center","plane center";name_plane_opt(2:end,:)], path+subfolder+"/Experimental_plane.csv")
+    end
+end
+
+
+fig_success=figure;
+set( fig_success ,  'position' , get(fig_success,'Position').*[1 1 0 0] + [0 -50 500 75])
+    uicontrol ( fig_success , 'style' , ' text' , 'position', [30 30 400 30] , 'FontSize', 16,'string' , 'Try was saved successfully' );
+
+##### SOURCE END #####
+--></body></html>

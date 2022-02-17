@@ -1,4 +1,4 @@
-function [fig] = plot_compo_space_planes(nb_elements,mixture, name_mixture,name_elements, plane_coord, plane_color, fignumber)%position)
+function [fig] = plot_compo_space_planes(nb_elements,mixture, name_mixture,name_elements, plane_coord, plane_color)
 % Plot the composition space with all the simplexe centroid points and planar gradients
 %
 %:param int nb_elements: number of components

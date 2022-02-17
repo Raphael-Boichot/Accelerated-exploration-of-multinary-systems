@@ -25,8 +25,10 @@ def get_model(profile):
     Get a model from a model profile.
     The profile contains the module and function name of the model, and the arguments.
     The model will be retrieved by calling the function with the arguments.
+
     Args:
         profile (dict): a model profile
+
     Returns:
         model (keras model): keras model as defined in the profile.
     '''

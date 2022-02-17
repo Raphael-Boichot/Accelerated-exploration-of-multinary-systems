@@ -18,15 +18,22 @@ During the run of the tasks, the bestmodel and results are saved in h5 and json 
 * `evaluation.json` : evaluation from model.evaluate()
 * `bestmodel.h5` : best model
 
-### Example :
+#########
+Example : 
+#########
+::
 
-```
-reporter.show_run_reports(settings,
-                          args   = ['dataset_id','model_id','batch_size'],
-                          evaluation = [2])
-```
+    reporter.show_run_reports(settings,
+                              args       = ['dataset_id','model_id','batch_size'],
+                              evaluation = [2])
 
 This module will retrieve information from json files and generate a report.
+
+
+
+
+
+
 """
 
 
@@ -221,12 +228,12 @@ def plot_history(run_dir, metric='val_mae', min=None, max=None, figsize=(10,8), 
     This will plot a curve for each one in a common plot.
 
     Args:
-
         run_dir (string): directory path of json history file
         metric (string): metric name to plot. Example : 'val_mae'
         figsize (tuple): figure size, default is (10,8)
         savefig (boolean): if True, figure will be save in run_dir.
         mplstyle (string): name of matplotlib style. default is 'pyterk', but all matplotlib are ok (default, bmh, ...)
+
     Returns:
         Nothing, but display a beautifull plot !    
     """
@@ -268,7 +275,6 @@ def plot_distribution(run_dir, metric_id=0, bins=10, min=None,max=None,
     For a kfold or an iterative kfold, all evaluation data are concatened in an evaluation.json file in main run_dir.
 
     Args:
-
         run_dir (string): directory path of json evaluation file
         metricid (int): number of metric to plot. Example : 2
         min (int): min value
@@ -279,7 +285,6 @@ def plot_distribution(run_dir, metric_id=0, bins=10, min=None,max=None,
         mplstyle (string): name of matplotlib style. default is 'pyterk', but all matplotlib are ok (default, bmh, ...)
 
     Returns:
-
         Nothing, but display a beautifull distribution plot !    
     """
      
@@ -313,7 +318,6 @@ def plot_kfold_correlation(run_dir, channel=0,
     Plot a correlation for a (y_test, y_pred) saved json file.
 
     Args:
-
         run_file: a manyfold directory where kfold subdirectories are
         channel: composant of y to plot
         figsize (tuple): figure size, default is (10,8)
@@ -327,8 +331,7 @@ def plot_kfold_correlation(run_dir, channel=0,
         savefig: if True, save fig in run_dir
 
     Returns:
-
-        Nothing, but display a beautifull correlation plot :-)
+        Nothing, but display a beautifull correlation plot 
     """
 
     if mplstyle=='pyterk' : mplstyle=config._pyterk_path('/pyterk.mplstyle')
@@ -415,7 +418,6 @@ def plot_confusion(run_dir, predict_type='softmax', normalize='pred', figsize=(5
     Plot a confusion matrix
 
     Args:
-
         iterations_dir : a directory with iterations subdirs (iter-000, iter-001, ...)
         predict_type : sigmoid, softmax or classes
         normalize : true, pred, all or None (pred)
@@ -423,7 +425,6 @@ def plot_confusion(run_dir, predict_type='softmax', normalize='pred', figsize=(5
         savefig: save fig (True) or not (False)
 
     Return:
-
         Just plot the matrix and print report and hamming loss
     '''
 
@@ -514,7 +515,6 @@ def show_run_reports(run_config,
     Very simple to use...
 
     Args:
-
         run_config (dict): settings, issued from config.load()
         run_filter (regx): regex to filter run entries from yml settings file (.*)
         sections (list): list of sections to include in the report
@@ -528,7 +528,6 @@ def show_run_reports(run_config,
         confusion (dict): parameters for confusion matrix (need yytest files)
 
     Returns:
-
         Nothing, but display a short and long report, with index.
 
     """
