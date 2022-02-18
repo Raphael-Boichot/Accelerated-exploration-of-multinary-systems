@@ -37,7 +37,7 @@ Requirements:
 * Create environment variables in bash_profile:
 	* path to folder that contains the datasets: export DATASETS_DIR = $path/to/datasets/
 	* path to folder that will contain the training results : export RUN_DIR= $path/to/run/
-NB: for windows, see [this help] (https://docs.oracle.com/en/database/oracle/machine-learning/oml4r/1.5.1/oread/creating-and-modifying-environment-variables-on-windows.html)
+NB: for windows, see [this help](https://docs.oracle.com/en/database/oracle/machine-learning/oml4r/1.5.1/oread/creating-and-modifying-environment-variables-on-windows.html)
 
 ### Evaluations Models Tables
 
@@ -50,14 +50,14 @@ Requirement: same as PyTerK
 
 ### PyTerK examples
 
-The experimental datasets produced for the study of multinary Nb-Ti-Zr-Cr-Mo are available [here] (https://zenodo.org/record/6104937#.Yg4ifC9ziRs). 
+The experimental datasets produced for the study of multinary Nb-Ti-Zr-Cr-Mo are available [here](https://zenodo.org/record/6104937#.Yg4ifC9ziRs). 
 Download the files and create the datasets folder corresponding to $DATASETS_DIR. You can use notebooks and yml of the campaigns file directly to reproduce the results. 
 
 If you just want to visualized the results we obtained, training results are available [here](https://zenodo.org/record/6104937#.Yg4ifC9ziRs). Add the files in $RUN_DIR files and execute the report notebook to visualized the results. Predcitions can also be performed with [prediction](Examples/prediction.ipynb) notebook using the trained models.
 
 ### Multiple Regression examples:
 
-Download the datasets [here] (https://zenodo.org/record/6104937#.Yg4ifC9ziRs) and execute the notebooks. 
+Download the datasets [here](https://zenodo.org/record/6104937#.Yg4ifC9ziRs) and execute the notebooks. 
 
 
 
