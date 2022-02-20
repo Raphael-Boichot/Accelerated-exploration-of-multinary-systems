@@ -10,7 +10,7 @@ A Matlab GUI interface was developed in order to automatically generate a set of
 * Representation of the composition space and of the gradients/planes that are explored. 
 * Give the list of targets that allow to perform the experiments
 
-<p align="center"><img src="./Supplementary_Matlab_interface.png" width="500" ></p>
+<p align="center">> <img src="./Supplementary_Matlab_interface.png" width="800" ></p>
 
 ## Examples of inputs:
 * The user chooses the number of cathodes they use: 2 cathodes (blue case) for linear gradients or 3 cathodes (green case) for planar gradients
