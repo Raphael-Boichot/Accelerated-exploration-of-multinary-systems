@@ -10,9 +10,9 @@ A Matlab GUI interface was developed in order to automatically generate a set of
 * Representation of the composition space and of the gradients/planes that are explored. 
 * Give the list of targets that allow to perform the experiments
 
-<p align="center">> <img src="./Supplementary_Matlab_interface.png" width="800" ></p>
+<p align="center"><img src="./Supplementary_Matlab_interface.png" width="800" ></p>
 
-## Examples of inputs:
+## Possible user inputs:
 * The user chooses the number of cathodes they use: 2 cathodes (blue case) for linear gradients or 3 cathodes (green case) for planar gradients
 * They input the elements of the investigated system (from 3 to 7 elements).
 
@@ -45,12 +45,14 @@ The user can screen finely the center of the tetrahedron without imposing a spec
 
 If the border of the composition is less interesting, the user wants to exclude the edges of the tetrahedron, meaning the gradients of type A-AB-B. They must then tick the box “1” to reject gradients containing 2 pure elements. 
 
-## Return 
+### Return 
 
 * The algorithm returns a representation of the gradients (linear in blue and planar in green). 
 
 * Finally, the user can input path to save the results. A folder “X_cathodes_A_B_C_D_day_hour” is created, in which we save the matlab figures, the list of targets the user needs, the list of samples, and the try parameters (users’input).
  
 
+## Examples
 
+Two examples, both with five elements, and 2 or 3 cathodes with imposed selection rules are given. Results on LiveScript are given in html and pdf, while saved documents are in the subfolders. 
 
