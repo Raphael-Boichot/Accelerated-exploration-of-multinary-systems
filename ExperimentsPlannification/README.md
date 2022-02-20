@@ -45,6 +45,9 @@ The user can screen finely the center of the tetrahedron without imposing a spec
 
 If the border of the composition is less interesting, the user wants to exclude the edges of the tetrahedron, meaning the gradients of type A-AB-B. They must then tick the box “1” to reject gradients containing 2 pure elements. 
 
+### Optimization of price and number of experiments
+User must input the prices of all the possible targets that can be used, either one by one in a GUI, either by loading a csv file that contain the target mixture associated to the price (see `Example` folder). The optimization is made by 500 draws among which are selected the best ones (one that optimize the price and one that optimizethe number of experiments, that can be different from one another)
+
 ### Return 
 
 * The algorithm returns a representation of the gradients (linear in blue and planar in green). 
