@@ -53,7 +53,7 @@ Requirement: same as PyTerK
 The experimental datasets produced for the study of multinary Nb-Ti-Zr-Cr-Mo are available [here](https://zenodo.org/record/6104937#.Yg4ifC9ziRs). 
 Download the files and create the datasets folder corresponding to $DATASETS_DIR. You can use notebooks and yml of the campaigns file directly to reproduce the results. 
 
-If you just want to visualized the results we obtained, training results are available [here](https://zenodo.org/record/6104937#.Yg4ifC9ziRs). Add the files in $RUN_DIR files and execute the report notebook to visualized the results. Predcitions can also be performed with [prediction](Examples/prediction.ipynb) notebook using the trained models.
+If you just want to visualized the results we obtained, training results are available [here](https://zenodo.org/record/6127502#.YhKccS9zgUs). Add the files in $RUN_DIR files and execute the report notebook to visualized the results. Predcitions can also be performed with [prediction](Examples/prediction.ipynb) notebook using the trained models.
 
 ### Multiple Regression examples:
 
