@@ -10,40 +10,46 @@ A Matlab GUI interface was developed in order to automatically generate a set of
 * Representation of the composition space and of the gradients/planes that are explored. 
 * Give the list of targets that allow to perform the experiments
 
-<img src="./Supplementary_Matlab_interface.png" width="300" >
-
+<p align="center"><img src="./Supplementary_Matlab_interface.png" width="500" ></p>
 
 ## Examples of inputs:
 * The user chooses the number of cathodes they use: 2 cathodes (blue case) for linear gradients or 3 cathodes (green case) for planar gradients
-* They input the elements of the investigated system (from 3 to 7 elements)
+* They input the elements of the investigated system (from 3 to 7 elements).
+
 __From these, the algorithm computes the list of all possible gradients__
 
-* Selection rules
-	* Choose or not to optimize the number of experiments and/or the price of the experiments. If selected, users must enter the real or relative prices of targets. The algorithm will execute 500 times and keep the set that minimizes the number of samples and/or the price. 
-	* Imposed alignments/gradients:
-	If the centre of a tetrahedron is particularly interesting, the user can choose to screen it finely by passing several times through the quaternary, from all directions (symmetric screening). They will impose the inclusion of the following set: 
-										A-ABCD-BCD
-										B-ABCD-ACD
-										C-ABCD-ABD
-										D-ABCD-ABC
+### Selection rules
+* Choose or not to optimize the number of experiments and/or the price of the experiments. If selected, users must enter the real or relative prices of targets. The algorithm will execute 500 times and keep the set that minimizes the number of samples and/or the price. 
 
-	* No repeat: pass only once through certain points
-	In the previous case, the user is probably less interested in the border of the domain. They do not want to explore exhaustively the binaries, thus they can select all the binaries in order to pass only once by each of these points.
-	__/!\ Depending on the mixture the users will chose, they can be no solution. After 10 attempts, the algorithm stops and displays “No solution found”__
+* __Imposed alignments/gradients:__ 
 
-	* Repeat only: 
-	The user wants to introduce a form of symmetry in the screening: they want to pass an even number of time through each unary/pure element. They impose a maximum number on gradients containing the same pure element. 
-	__/!\ There can be no solution found if the user is too restrictive.__
+If the centre of a tetrahedron is particularly interesting, the user can choose to screen it finely by passing several times through the quaternary, from all directions (symmetric screening). They will impose the inclusion of the following set: A-ABCD-BCD, B-ABCD-ACD, C-ABCD-ABD, D-ABCD-ABC.
 
-	* Repeat at least:
-	The user can screen finely the center of the tetrahedron without imposing a specific gradient selection, but simply by imposing a minimum number of gradients including it. 
+* __No repeat: pass only once through certain points__
 
-	* Do not align mixture of order: 
-	If the border of the composition is less interesting, the user wants to exclude the edges of the tetrahedron, meaning the gradients of type A-AB-B. They must then tick the box “1” to reject gradients containing 2 pure elements. 
-	
+In the previous case, the user is probably less interested in the border of the domain. They do not want to explore exhaustively the binaries, thus they can select all the binaries in order to pass only once by each of these points.
+
+__/!\ Depending on the mixture the users will chose, they can be no solution. After 10 attempts, the algorithm stops and displays “No solution found”__
+
+* __Repeat only:__
+
+The user wants to introduce a form of symmetry in the screening: they want to pass an even number of time through each unary/pure element. They impose a maximum number on gradients containing the same pure element. 
+
+ __/!\ There can be no solution found if the user is too restrictive.__
+
+* __Repeat at least:__
+
+The user can screen finely the center of the tetrahedron without imposing a specific gradient selection, but simply by imposing a minimum number of gradients including it. 
+
+* __Do not align mixture of order:__
+
+If the border of the composition is less interesting, the user wants to exclude the edges of the tetrahedron, meaning the gradients of type A-AB-B. They must then tick the box “1” to reject gradients containing 2 pure elements. 
+
+## Return 
+
 * The algorithm returns a representation of the gradients (linear in blue and planar in green). 
 
-* Finally, the user can input path to save the results. A folder “X_cathodes_A_B_C_D_day_hour” is created, in which we save the matlab figures, the list of targets the user need, the list of samples, and the try parameters (users’input).
+* Finally, the user can input path to save the results. A folder “X_cathodes_A_B_C_D_day_hour” is created, in which we save the matlab figures, the list of targets the user needs, the list of samples, and the try parameters (users’input).
  
 
 
