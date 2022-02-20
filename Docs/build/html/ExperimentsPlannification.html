@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ExperimentsPlannification &#8212; Accelerated exploration of multinary systems 1.1 documentation</title>
+    <title>Experiments Plannification &#8212; Accelerated exploration of multinary systems 1.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/bizstyle.css" />
     
@@ -43,7 +43,7 @@
           <a href="index.html" title="Welcome to Accelerated exploration of multinary systems’s documentation!"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Accelerated exploration of multinary systems 1.1 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">ExperimentsPlannification</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Experiments Plannification</a></li> 
       </ul>
     </div>  
 
@@ -52,11 +52,34 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="experimentsplannification">
-<h1>ExperimentsPlannification<a class="headerlink" href="#experimentsplannification" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="experiments-plannification">
+<h1>Experiments Plannification<a class="headerlink" href="#experiments-plannification" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
-<span class="target" id="module-modules"></span><dl class="mat function">
+<div class="section" id="principle">
+<h2>Principle<a class="headerlink" href="#principle" title="Permalink to this headline">¶</a></h2>
+<p>A Matlab GUI interface was developed in order to automatically generate a set of experiments to screen a N-element composition space using a combinatorial approach and a 2- to 3-cathodes magnetron sputtering. The starting point of this method is based on simplex centroid mixture design, in order to screen the space as uniformly as possible. From the composition points given by the mixture design, all linear/planar gradients passing by 3/7 of them are computed. Then a set of gradients/planes is chosen in order to pass at least once by each point and to respect the user inputs. The choice is done with a random exploration of all possible gradients, that starts all over again if the set does not meet the requirements.</p>
+<dl class="simple">
+<dt><strong>Features</strong> :</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>Adaptability to the user’s needs</dt><dd><ul>
+<li><p>The user enters the elements of the composition space they want to explore (from 3 to 7 elements).</p></li>
+<li><p>Chooses if they are using two or three cathodes</p></li>
+<li><p>Indicates if they want to preferentially explore some point of the mixture design.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Representation of the composition space and of the gradients/planes that are explored.</p></li>
+<li><p>Give the list of targets that allow to perform the experiments</p></li>
+</ul>
+</dd>
+</dl>
+<a class="reference internal image-reference" href="_images/Supplementary_Matlab_interface.png"><img alt="_images/Supplementary_Matlab_interface.png" src="_images/Supplementary_Matlab_interface.png" style="width: 700px;" /></a>
+</div>
+<div class="section" id="module-modules">
+<span id="modules"></span><h2>Modules<a class="headerlink" href="#module-modules" title="Permalink to this headline">¶</a></h2>
+<dl class="mat function">
 <dt class="sig sig-object mat" id="modules.check_do_not_align">
 <span class="sig-prename descclassname"><span class="pre">modules.</span></span><span class="sig-name descname"><span class="pre">check_do_not_align</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">name_alignments</span></em>, <em class="sig-param"><span class="pre">index</span></em>, <em class="sig-param"><span class="pre">do_not_align</span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.check_do_not_align" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check user condition to not align certain mixtures in the same gradient</p>
@@ -267,22 +290,27 @@ repeated and an edit box in which the user can enter the number of repetitions.<
 <span class="target" id="module-modules"></span><dl class="mat function">
 <dt class="sig sig-object mat" id="modules.gradients_set">
 <span class="sig-prename descclassname"><span class="pre">modules.</span></span><span class="sig-name descname"><span class="pre">gradients_set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">name_mixture</span></em>, <em class="sig-param"><span class="pre">mixture</span></em>, <em class="sig-param"><span class="pre">alignments</span></em>, <em class="sig-param"><span class="pre">name_alignement</span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.gradients_set" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="simple">
-<dt>Selection of a gradients set that pass at least once through each point</dt><dd><p>of the mixture design and that respect user condition inputs</p>
-</dd>
-</dl>
+<dd><p>Selection of a gradients set that pass at least once through each point of the mixture design and that respect user condition inputs</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>name_mixture</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">cell(str)</span></code></span>) – name of mixture, cell index being the mixture order</p></li>
 <li><p><strong>mixture</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">cell(float)</span></code></span>) – coordinates of mixtures, cell index being the mixture order <em>eg:mixtures{2} contains the binaries coordinates</em></p></li>
+<li><p><strong>alignments</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">cell(float)</span></code></span>) – coordinates of the points through which the gradient pass (3x3 columns)</p></li>
+<li><p><strong>name_alignement</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">cell(str)</span></code></span>) – points through which the gradient pass</p></li>
 </ul>
 </dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>name_alignement_opt: name of mixture trhough whch the set of gradients pass</p></li>
+<li><p>alignement_opt: coordinates of mixture trhough whch the set of gradients pass</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array(str),array(float)</p>
+</dd>
 </dl>
-<p>:param cell(float) alignments:coordinates of the points through which the gradient pass (3x3 columns)
-:param cell(str) name_alignement: points through which the gradient pass
-:return array(str) name_alignement_opt: name of mixture trhough whch the set of gradients pass
-:return array(float) alignement_opt: coordinates of mixture trhough whch the set of gradients pass</p>
 </dd></dl>
 
 <span class="target" id="module-modules"></span><dl class="mat function">
@@ -325,20 +353,15 @@ repeated and an edit box in which the user can enter the number of repetitions.<
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>P_Intersect: Best intersection point of the N lines, in least squares sense.</p>
-</dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>distances: Distances from intersection point to the input lines</p>
+<dd class="field-even"><p><ul class="simple">
+<li><p>P_Intersect: Best intersection point of the N lines, in least squares sense.</p></li>
+<li><p>distances: Distances from intersection point to the input lines</p></li>
+</ul>
+</p>
 </dd>
 </dl>
-<p>Anders Eikenes (2022). Intersection point of lines in 3D space
-(<a class="reference external" href="https://www.mathworks.com/matlabcentral/fileexchange/37192-intersection-point-of-lines-in-3d-space">https://www.mathworks.com/matlabcentral/fileexchange/37192-intersection-point-of-lines-in-3d-space</a>), MATLAB Central File Exchange. Retrieved February 10, 2022.</p>
+<p>Anders Eikenes (2022). Intersection point of lines in 3D space (<a class="reference external" href="https://www.mathworks.com/matlabcentral/fileexchange/37192-intersection-point-of-lines-in-3d-space">https://www.mathworks.com/matlabcentral/fileexchange/37192-intersection-point-of-lines-in-3d-space</a>), MATLAB Central File Exchange. Retrieved February 10, 2022.</p>
 </dd></dl>
-
-<span class="target" id="module-modules"></span><dl class="mat function">
-<dt class="sig sig-object mat" id="modules.nb_repetitions">
-<span class="sig-prename descclassname"><span class="pre">modules.</span></span><span class="sig-name descname"><span class="pre">nb_repetitions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.nb_repetitions" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <span class="target" id="module-modules"></span><dl class="mat function">
 <dt class="sig sig-object mat" id="modules.listing_targets">
@@ -381,13 +404,15 @@ repeated and an edit box in which the user can enter the number of repetitions.<
 <li><p><strong>nb_elements</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">int</span></code></span>) – number of components</p></li>
 <li><p><strong>mixture</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">cell(float)</span></code></span>) – mixture points coordinates</p></li>
 <li><p><strong>name_mixture</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">cell(str)</span></code></span>) – mixture names</p></li>
+<li><p><strong>name_elements</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">list(str)</span></code></span>) – name of the components</p></li>
+<li><p><strong>gradients</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">array(str)</span></code></span>) – coordinates of the gradients points</p></li>
+<li><p><strong>gradients_color</strong> – color of the gradients for plot</p></li>
 </ul>
 </dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>fig: plot the compositions space dans gradients</p>
+</dd>
 </dl>
-<p>:param list(str) name_elements:name of the components
-:param array(str) gradients : coordinates of the gradients points
-:param str/list(float) gradients_color: color of the gradients for plot
-:return: fig: plot the compositions space dans gradients</p>
 </dd></dl>
 
 <span class="target" id="module-modules"></span><dl class="mat function">
@@ -400,13 +425,15 @@ repeated and an edit box in which the user can enter the number of repetitions.<
 <li><p><strong>nb_elements</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">int</span></code></span>) – number of components</p></li>
 <li><p><strong>mixture</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">cell(float)</span></code></span>) – mixture points coordinates</p></li>
 <li><p><strong>name_mixture</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">cell(str)</span></code></span>) – mixture names</p></li>
+<li><p><strong>name_elements</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">list(str)</span></code></span>) – name of the components</p></li>
+<li><p><strong>plane_coord</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">array(str)</span></code></span>) – coordinates of the planes points</p></li>
+<li><p><strong>plane_color</strong> – color of the plane for plot</p></li>
 </ul>
 </dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>fig: plot the compositions space dans gradients</p>
+</dd>
 </dl>
-<p>:param list(str) name_elements:name of the components
-:param array(str) plane_coord : coordinates of the planes points
-:param str/list(float) plane_color: color of the plane for plot
-:return: fig: plot the compositions space dans gradients</p>
 </dd></dl>
 
 <span class="target" id="module-modules"></span><dl class="mat function">
@@ -424,13 +451,17 @@ repeated and an edit box in which the user can enter the number of repetitions.<
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>name_mixture</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">cell(str)</span></code></span>) – name of mixture, cell index being the mixture order</p></li>
 <li><p><strong>mixture</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">cell(float)</span></code></span>) – coordinates of mixtures, cell index being the mixture order <em>eg:mixtures{2} contains the binaries coordinates</em></p></li>
+<li><p><strong>plane</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">cell(float)</span></code></span>) – coordinates of the points through which the planes pass (3x3 columns)</p></li>
+<li><p><strong>name_planes</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">cell(str)</span></code></span>) – points through which the planes pass</p></li>
 </ul>
 </dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>array(str) name_planes_opt: name of mixture trhough whch the set of planes pass</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>array(float) planes_opt: coordinates of mixture trhough whch the set of planes pass</p>
+</dd>
 </dl>
-<p>:param cell(float) plane:coordinates of the points through which the planes pass (3x3 columns)
-:param cell(str) name_planes: points through which the planes pass
-:return: array(str) name_planes_opt: name of mixture trhough whch the set of planes pass
-:return: array(float) planes_opt: coordinates of mixture trhough whch the set of planes pass</p>
 </dd></dl>
 
 <span class="target" id="module-modules"></span><dl class="mat function">
@@ -468,6 +499,7 @@ repeated and an edit box in which the user can enter the number of repetitions.<
 </dd></dl>
 
 </div>
+</div>
 
 
             <div class="clearer"></div>
@@ -476,6 +508,17 @@ repeated and an edit box in which the user can enter the number of repetitions.<
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Experiments Plannification</a><ul>
+<li><a class="reference internal" href="#principle">Principle</a></li>
+<li><a class="reference internal" href="#module-modules">Modules</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
   <div>
     <h4>Previous topic</h4>
     <p class="topless"><a href="index.html"
@@ -526,7 +569,7 @@ repeated and an edit box in which the user can enter the number of repetitions.<
           <a href="index.html" title="Welcome to Accelerated exploration of multinary systems’s documentation!"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Accelerated exploration of multinary systems 1.1 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">ExperimentsPlannification</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Experiments Plannification</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

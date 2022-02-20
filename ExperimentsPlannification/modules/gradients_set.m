@@ -1,13 +1,13 @@
 function [name_alignement_opt,alignement_opt] = gradients_set(name_mixture, mixture,alignments,name_alignement)
-% Selection of a gradients set that pass at least once through each point
-% of the mixture design and that respect user condition inputs
+% Selection of a gradients set that pass at least once through each point of the mixture design and that respect user condition inputs
 %
 %:param cell(str) name_mixture: name of mixture, cell index being the mixture order 
 %:param cell(float) mixture: coordinates of mixtures, cell index being the mixture order *eg:mixtures{2} contains the binaries coordinates* 
-%:param cell(float) alignments:coordinates of the points through which the gradient pass (3x3 columns)
+%:param cell(float) alignments: coordinates of the points through which the gradient pass (3x3 columns)
 %:param cell(str) name_alignement: points through which the gradient pass 
-%:return array(str) name_alignement_opt: name of mixture trhough whch the set of gradients pass 
-%:return array(float) alignement_opt: coordinates of mixture trhough whch the set of gradients pass 
+%:return: - name_alignement_opt: name of mixture trhough whch the set of gradients pass 
+%         - alignement_opt: coordinates of mixture trhough whch the set of gradients pass 
+%:rtype: array(str),array(float)
 
 
 global do_not_align
@@ -61,7 +61,7 @@ while sum(ismember(mixture_name_list ,name_alignement_opt))<nb_mixture % check t
                 if chrono>100
                    fig5 = figure ;
                    set( fig5 , 'position' , [ 600 , 400 , 500 , 100 ]);
-                   uicontrol ( fig5 , 'style' , ' text' , 'position', [100 30 200 50] , 'string' , 'Pas de solution trouvée' );
+                   uicontrol ( fig5 , 'style' , ' text' , 'position', [100 30 200 50] , 'string' , 'Pas de solution trouvï¿½e' );
                    return
                 end
                 if ismember(repeat_at_least(ral,1),name_alignement(index,:))==1 && ismember(name_alignement(index,:),name_alignement_opt,'rows')==0

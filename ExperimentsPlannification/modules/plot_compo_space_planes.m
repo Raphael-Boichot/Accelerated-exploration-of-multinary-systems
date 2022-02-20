@@ -4,16 +4,14 @@ function [fig] = plot_compo_space_planes(nb_elements,mixture, name_mixture,name_
 %:param int nb_elements: number of components
 %:param cell(float) mixture: mixture points coordinates
 %:param cell(str) name_mixture: mixture names
-%:param list(str) name_elements:name of the components 
-%:param array(str) plane_coord : coordinates of the planes points
-%:param str/list(float) plane_color: color of the plane for plot
+%:param list(str) name_elements: name of the components 
+%:param array(str) plane_coord: coordinates of the planes points
+%:param plane_color: color of the plane for plot
 %:return: fig: plot the compositions space dans gradients
 
 
-% To plot gradients you need an array where each lines are the coordinates
-% of the gradient [x_begin, y_begin, z_begin, x_end, y_end, z_end]
-
-
+% To plot planes you need an array where each lines are the coordinates
+% of the 3 vertices of the section [x1, y1, z1, x2, y2, z2, x3, y3, z3]
 x=mixture{1,1}(:,1);
 y=mixture{1,1}(:,2);
 z=mixture{1,1}(:,3);

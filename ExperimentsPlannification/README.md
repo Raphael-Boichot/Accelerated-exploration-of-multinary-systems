@@ -1,6 +1,13 @@
 # Experiments Plannification
 
-A Matlab GUI interface was developed in order to automatically generate a set of experiments to screen a N-element composition space using a combinatorial approach and a 2- to 3-cathodes magnetron sputtering. The starting point of this method is based on simplex centroid mixture design, in order to screen the space as uniformly as possible. From the composition points given by the mixture design, all linear/planar gradients passing by 3/7 of them are computed. Then a set of gradients/planes is chosen in order to pass at least once by each point and to respect the user inputs. The choice is done with a random exploration of all possible gradients, that starts all over again if the set does not meet the requirements.
+A Matlab GUI interface was developed in order to automatically generate a set of experiments to screen a N-element composition space using a combinatorial approach and a 2- to 3-cathodes magnetron sputtering. The starting point of this method is based on simplex centroid mixture design, in order to screen the space as uniformly as possible. From the composition points given by the mixture design, all linear/planar gradients passing by 3/7 of them are computed. Then a set of gradients/planes is chosen in order to pass at least once by each point and to respect the user inputs. The choice is done with a random exploration of all possible gradients, that starts all over again if the set does not meet the requirements. 
+
+## Content
+
+* Matlab LiveScript with title and main comment should be executed by the user.
+* Documentation of the modules is given in [main documentation](../Documentation/Accelerated Exploration Of Multinary Systems modules.pdf)
+* `Examples` folder contains two examples, both with five elements, and 2 or 3 cathodes with imposed selection rules are given. Results on LiveScript are given in html and pdf, while saved documents are in the subfolders. 
+
 
 ## Features :
 * Adaptability to the user’s needs
@@ -55,7 +62,5 @@ User must input the prices of all the possible targets that can be used, either 
 * Finally, the user can input path to save the results. A folder “X_cathodes_A_B_C_D_day_hour” is created, in which we save the matlab figures, the list of targets the user needs, the list of samples, and the try parameters (users’input).
  
 
-## Examples
 
-Two examples, both with five elements, and 2 or 3 cathodes with imposed selection rules are given. Results on LiveScript are given in html and pdf, while saved documents are in the subfolders. 
 

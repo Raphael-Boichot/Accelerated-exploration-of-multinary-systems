@@ -18,7 +18,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="MultipleRegression module" href="MultipleRegression.html" />
-    <link rel="prev" title="Welcome to Accelerated exploration of multinary systems’s documentation!" href="index.html" />
+    <link rel="prev" title="ExperimentsPlannification" href="ExperimentsPlannification.html" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <!--[if lt IE 9]>
     <script src="_static/css3-mediaqueries.js"></script>
@@ -40,7 +40,7 @@
           <a href="MultipleRegression.html" title="MultipleRegression module"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="index.html" title="Welcome to Accelerated exploration of multinary systems’s documentation!"
+          <a href="ExperimentsPlannification.html" title="ExperimentsPlannification"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Accelerated exploration of multinary systems 1.1 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">pyterk package</a></li> 
@@ -54,6 +54,60 @@
             
   <div class="section" id="pyterk-package">
 <h1>pyterk package<a class="headerlink" href="#pyterk-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-pyterk">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pyterk" title="Permalink to this headline">¶</a></h2>
+<p><strong>PyTerK</strong> - A Python Iterated K-fold cross validation with shuffling</p>
+<p>By E Garel / JL Parouty - SIMaP 2021</p>
+<p>This package allows you to perform a <strong>statistical evaluation</strong> of different learning strategies (Keras/sklearn) by varying different (hyper)parameters.</p>
+<div class="section" id="description">
+<h3>Description :<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h3>
+<p>It is possible to combine the following (hyper)parameters :</p>
+<ul class="simple">
+<li><p>datasets</p></li>
+<li><p>models (with their characteristics…)</p></li>
+<li><p>batch size</p></li>
+<li><p>epochs</p></li>
+<li><p>iterations</p></li>
+<li><p>k fold</p></li>
+<li><p>seed (to control pseudo random generator)</p></li>
+</ul>
+<p>It is possible, for example, to combine 3 datasets, with 3 models and to perform for each combination, 5 iterations of a cross validation of KFold type, with k=10.
+In this case, the total number of models to test would be 3x3x5x10=450 training sessions…
+So, be careful, the number of model.fit can quickly be very important !</p>
+<p>The tasks will be run in <strong>parallel</strong> on the different CPUs/cores available.</p>
+</div>
+<div class="section" id="documentation-and-examples">
+<h3>Documentation and examples :<a class="headerlink" href="#documentation-and-examples" title="Permalink to this headline">¶</a></h3>
+<p>Here is a basic example, detailled in a notebook :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterk.config</span>       <span class="k">as</span> <span class="nn">config</span>
+<span class="kn">import</span> <span class="nn">pyterk.reporter</span>     <span class="k">as</span> <span class="nn">reporter</span>
+<span class="kn">import</span> <span class="nn">pyterk.task_manager</span> <span class="k">as</span> <span class="nn">task_manager</span>
+
+<span class="n">settings</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;settings_example.yml&#39;</span><span class="p">)</span>
+
+<span class="n">task_manager</span><span class="o">.</span><span class="n">add_combinational_iterative_manyfold</span><span class="p">(</span><span class="n">settings</span><span class="p">,</span> <span class="n">run_key</span><span class="o">=</span> <span class="s1">&#39;Example-03.1&#39;</span><span class="p">)</span>
+<span class="n">task_manager</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+<span class="n">reporter</span><span class="o">.</span><span class="n">show_run_reports</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This will retrieve all settings from <cite>settings_example.yml</cite>, prepare the different tasks and execute them.
+The last call, intended to be used from a Jupyter lab notebook, displays a complete execution report.</p>
+<p>You can find <strong>3 full example notebooks</strong>, with a setting file :</p>
+<ul class="simple">
+<li><p>settings_example.yml</p></li>
+<li><p>01-Example-01.ipynb</p></li>
+<li><p>02-Example-02.ipynb</p></li>
+<li><p>03-Example-03.ipynb</p></li>
+</ul>
+<dl class="py data">
+<dt class="sig sig-object py" id="pyterk.VERSION">
+<span class="sig-prename descclassname"><span class="pre">pyterk.</span></span><span class="sig-name descname"><span class="pre">VERSION</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2.14</span></em><a class="headerlink" href="#pyterk.VERSION" title="Permalink to this definition">¶</a></dt>
+<dd><p>pyterk version</p>
+</dd></dl>
+
+</div>
+</div>
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
@@ -61,19 +115,18 @@
 <span id="pyterk-config-module"></span><h2>pyterk.config module<a class="headerlink" href="#module-pyterk.config" title="Permalink to this headline">¶</a></h2>
 <p>Configuration management.</p>
 <p>The settings files allow to specify datasets and models.</p>
-<p>## Utilisation:
-Loading a settings file :
-<code class="docutils literal notranslate"><span class="pre">`</span>
-<span class="pre">settings</span> <span class="pre">=</span> <span class="pre">config.load('settings_example.yml')</span>
-<span class="pre">`</span></code>
-or:
-<a href="#id1"><span class="problematic" id="id2">``</span></a>`
-settings = config.load(‘settings_example.yml’,</p>
-<blockquote>
-<div><p>datasets_dir_env=’MY_DATASETS_DIR’)</p>
-</div></blockquote>
-<p><a href="#id3"><span class="problematic" id="id4">``</span></a><a href="#id5"><span class="problematic" id="id6">`</span></a></p>
-<p>where MY_DATASETS_DIR is an environment variable that will override <cite>datasets_dir</cite>
+<div class="section" id="utilisation">
+<h3>Utilisation:<a class="headerlink" href="#utilisation" title="Permalink to this headline">¶</a></h3>
+<p>Loading a settings file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">settings</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;settings_example.yml&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>or:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">settings</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;settings_example.yml&#39;</span><span class="p">,</span>
+                        <span class="n">datasets_dir_env</span><span class="o">=</span><span class="s1">&#39;DATASETS_DIR&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>where DATASETS_DIR is an environment variable that will override <cite>datasets_dir</cite>
 directive in settings file.</p>
 <dl class="py data">
 <dt class="sig sig-object py" id="pyterk.config.datasets">
@@ -83,12 +136,10 @@ directive in settings file.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="pyterk.config.load">
-<span class="sig-prename descclassname"><span class="pre">pyterk.config.</span></span><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datasets_dir_env</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'PYTERK_DATASETS_DIR'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_dir_env</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'PYTERK_RUN_DIR'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyterk.config.load" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="simple">
-<dt>Load a setting file and dfined datasets.</dt><dd><p>If given, environment variable can be use to overide <cite>datasets_dir</cite> directive from setting file.
+<span class="sig-prename descclassname"><span class="pre">pyterk.config.</span></span><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datasets_dir_env</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'DATASETS_DIR'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_dir_env</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'RUN_DIR'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyterk.config.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load a setting file and dfined datasets.
+If given, environment variable can be use to overide <cite>datasets_dir</cite> directive from setting file.
 Usefull for portability between several sites.</p>
-</dd>
-</dl>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -128,23 +179,25 @@ Usefull for portability between several sites.</p>
 </dd></dl>
 
 </div>
+</div>
 <div class="section" id="module-pyterk.models">
 <span id="pyterk-models-module"></span><h2>pyterk.models module<a class="headerlink" href="#module-pyterk.models" title="Permalink to this headline">¶</a></h2>
-<p>This module is for internal use only - You do not have to interact with ;-).</p>
+<p>This module is for internal use only - You do not have to interact with.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="pyterk.models.get_model">
 <span class="sig-prename descclassname"><span class="pre">pyterk.models.</span></span><span class="sig-name descname"><span class="pre">get_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">profile</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyterk.models.get_model" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get a model from a model profile.
 The profile contains the module and function name of the model, and the arguments.
-The model will be retrieved by calling the function with the arguments.
-:param profile: a model profile
-:type profile: dict</p>
+The model will be retrieved by calling the function with the arguments.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>keras model as defined in the profile.</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>profile</strong> (<em>dict</em>) – a model profile</p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>model (keras model)</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>keras or scikitlearn model as defined in the profile.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>model (keras/scikitlearn model)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -160,14 +213,13 @@ The model will be retrieved by calling the function with the arguments.
 <li><p><cite>evaluation.json</cite> : evaluation from model.evaluate()</p></li>
 <li><p><cite>bestmodel.h5</cite> : best model</p></li>
 </ul>
-<p>### Example :</p>
-<p><a href="#id7"><span class="problematic" id="id8">``</span></a>`
-reporter.show_run_reports(settings,</p>
-<blockquote>
-<div><p>args   = [‘dataset_id’,’model_id’,’batch_size’],
-evaluation = [2])</p>
-</div></blockquote>
-<p><a href="#id9"><span class="problematic" id="id10">``</span></a><a href="#id11"><span class="problematic" id="id12">`</span></a></p>
+<div class="section" id="example">
+<h3>Example :<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">reporter</span><span class="o">.</span><span class="n">show_run_reports</span><span class="p">(</span><span class="n">settings</span><span class="p">,</span>
+                          <span class="n">args</span>       <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;dataset_id&#39;</span><span class="p">,</span><span class="s1">&#39;model_id&#39;</span><span class="p">,</span><span class="s1">&#39;batch_size&#39;</span><span class="p">],</span>
+                          <span class="n">evaluation</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div>
 <p>This module will retrieve information from json files and generate a report.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="pyterk.reporter.plot_confusion">
@@ -256,10 +308,7 @@ This will plot a curve for each one in a common plot.</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>-)</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Nothing, but display a beautifull correlation plot</p>
+<dd class="field-even"><p>Nothing, but display a beautifull correlation plot</p>
 </dd>
 </dl>
 </dd></dl>
@@ -314,31 +363,31 @@ Very simple to use…</p>
 </dd></dl>
 
 </div>
+</div>
 <div class="section" id="module-pyterk.task_manager">
 <span id="pyterk-task-manager-module"></span><h2>pyterk.task_manager module<a class="headerlink" href="#module-pyterk.task_manager" title="Permalink to this headline">¶</a></h2>
 <p>Allows to generate tasks and to execute them in a distributed way.</p>
 <p>See example notebook : <cite>03-Example-03.ipynb</cite></p>
-<p>Example :
-<a href="#id13"><span class="problematic" id="id14">``</span></a>`
-task_manager.add_combinational_iterative_manyfold(settings = settings,</p>
-<blockquote>
-<div><p>run_key= ‘Example-03.3’)</p>
-</div></blockquote>
-<p><a href="#id15"><span class="problematic" id="id16">``</span></a><a href="#id17"><span class="problematic" id="id18">`</span></a></p>
+<p>Example :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">task_manager</span><span class="o">.</span><span class="n">add_combinational_iterative_manyfold</span><span class="p">(</span><span class="n">settings</span> <span class="o">=</span> <span class="n">settings</span><span class="p">,</span>
+                                                   <span class="n">run_key</span> <span class="o">=</span> <span class="s1">&#39;Example-03.3&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
 <dl class="py function">
 <dt class="sig sig-object py" id="pyterk.task_manager.add_combinational_iterative_manyfold">
 <span class="sig-prename descclassname"><span class="pre">pyterk.task_manager.</span></span><span class="sig-name descname"><span class="pre">add_combinational_iterative_manyfold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyterk.task_manager.add_combinational_iterative_manyfold" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add tasks for a combinational iterative manyfold - <cite>see 03-Example-03</cite>.ipynb
-Generates all the tasks of the combinatorial described in the run section of the settings file.
-:param settings: settings
-:type settings: dict
-:param run_key: name of the config run section
-:type run_key: string
-:param verbose: verbosity of generated tasks
-:type verbose: int</p>
+Generates all the tasks of the combinatorial described in the run section of the settings file.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Nothings. Task are added to the pending taks queue.</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>settings</strong> (<em>dict</em>) – settings</p></li>
+<li><p><strong>run_key</strong> (<em>string</em>) – name of the config run section</p></li>
+<li><p><strong>verbose</strong> (<em>int</em>) – verbosity of generated tasks</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Nothings. Task are added to the pending taks queue.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -347,34 +396,26 @@ Generates all the tasks of the combinatorial described in the run section of the
 <dt class="sig sig-object py" id="pyterk.task_manager.add_iterative_manyfold">
 <span class="sig-prename descclassname"><span class="pre">pyterk.task_manager.</span></span><span class="sig-name descname"><span class="pre">add_iterative_manyfold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_fold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epochs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_xxtest</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_yytest</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyterk.task_manager.add_iterative_manyfold" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add tasks for an iterative manyfold - see <cite>02-Example-02.ipynb</cite>
-Generate n_ter*k_fold tasks, each iteration will generate a subdirectory in run_dir.
-:param settings: settings
-:type settings: dict
-:param run_dir: run directoty to output k results (json files and best model)
-:type run_dir: string
-:param dataset_id: datasets id in settings file
-:type dataset_id: string
-:param model_id: model id in settings file
-:type model_id: string
-:param n_iter: number of iteration
-:type n_iter: int
-:param k_fold: number of fold
-:type k_fold: int
-:param epochs: number of epochs
-:type epochs: int
-:param batch_size: size of batch
-:type batch_size: int
-:param description: description of the action
-:type description: string
-:param save_xxtest: save x_test as json file, or not
-:type save_xxtest: Boolean
-:param save_yytest: save y_test and y_pred  as json file, or not
-:type save_yytest: Boolean
-:param verbose: verbosity of generated tasks
-:type verbose: int</p>
+Generate n_ter*k_fold tasks, each iteration will generate a subdirectory in run_dir.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Nothings. Task are added to the pending taks queue.</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>settings</strong> (<em>dict</em>) – settings</p></li>
+<li><p><strong>run_dir</strong> (<em>string</em>) – run directoty to output k results (json files and best model)</p></li>
+<li><p><strong>dataset_id</strong> (<em>string</em>) – datasets id in settings file</p></li>
+<li><p><strong>model_id</strong> (<em>string</em>) – model id in settings file</p></li>
+<li><p><strong>n_iter</strong> (<em>int</em>) – number of iteration</p></li>
+<li><p><strong>k_fold</strong> (<em>int</em>) – number of fold</p></li>
+<li><p><strong>epochs</strong> (<em>int</em>) – number of epochs</p></li>
+<li><p><strong>batch_size</strong> (<em>int</em>) – size of batch</p></li>
+<li><p><strong>description</strong> (<em>string</em>) – description of the action</p></li>
+<li><p><strong>save_xxtest</strong> (<em>Boolean</em>) – save x_test as json file, or not</p></li>
+<li><p><strong>save_yytest</strong> (<em>Boolean</em>) – save y_test and y_pred  as json file, or not</p></li>
+<li><p><strong>verbose</strong> (<em>int</em>) – verbosity of generated tasks</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Nothings. Task are added to the pending taks queue.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -383,32 +424,25 @@ Generate n_ter*k_fold tasks, each iteration will generate a subdirectory in run_
 <dt class="sig sig-object py" id="pyterk.task_manager.add_manyfold">
 <span class="sig-prename descclassname"><span class="pre">pyterk.task_manager.</span></span><span class="sig-name descname"><span class="pre">add_manyfold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_fold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epochs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_xxtest</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_yytest</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyterk.task_manager.add_manyfold" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add tasks for a manyfold - see <cite>01-Example-01.ipynb</cite>
-Generate k_fold tasks, each task will generate one subdirectory in run_dir.
-:param settings: settings
-:type settings: dict
-:param run_dir: run directoty to output k results (json files and best model)
-:type run_dir: string
-:param dataset_id: datasets id in settings file
-:type dataset_id: string
-:param model_id: model id in settings file
-:type model_id: string
-:param k_fold: number of fold
-:type k_fold: int
-:param epochs: number of epochs
-:type epochs: int
-:param batch_size: size of batch
-:type batch_size: int
-:param description: description of the action
-:type description: string
-:param save_xxtest: save x_test as json file, or not
-:type save_xxtest: Boolean
-:param save_yytest: save y_test and y_pred  as json file, or not
-:type save_yytest: Boolean
-:param verbose: verbosity of generated tasks
-:type verbose: int</p>
+Generate k_fold tasks, each task will generate one subdirectory in run_dir.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Nothings. Task are added to the pending taks queue.</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>settings</strong> (<em>dict</em>) – settings</p></li>
+<li><p><strong>run_dir</strong> (<em>string</em>) – run directoty to output k results (json files and best model)</p></li>
+<li><p><strong>dataset_id</strong> (<em>string</em>) – datasets id in settings file</p></li>
+<li><p><strong>model_id</strong> (<em>string</em>) – model id in settings file</p></li>
+<li><p><strong>k_fold</strong> (<em>int</em>) – number of fold</p></li>
+<li><p><strong>epochs</strong> (<em>int</em>) – number of epochs</p></li>
+<li><p><strong>batch_size</strong> (<em>int</em>) – size of batch</p></li>
+<li><p><strong>description</strong> (<em>string</em>) – description of the action</p></li>
+<li><p><strong>save_xxtest</strong> (<em>Boolean</em>) – save x_test as json file, or not</p></li>
+<li><p><strong>save_yytest</strong> (<em>Boolean</em>) – save y_test and y_pred  as json file, or not</p></li>
+<li><p><strong>verbose</strong> (<em>int</em>) – verbosity of generated tasks</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Nothings. Task are added to the pending taks queue.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -467,53 +501,6 @@ Generate k_fold tasks, each task will generate one subdirectory in run_dir.
 <dd></dd></dl>
 
 </div>
-<div class="section" id="module-pyterk">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pyterk" title="Permalink to this headline">¶</a></h2>
-<p><strong>PyTerK</strong> - A Python Iterated K-fold cross validation with shuffling</p>
-<p>By E Garel / JL Parouty - SIMaP 2021</p>
-<p>This package allows you to perform a <strong>statistical evaluation</strong> of different learning strategies (Keras/sklearn) by varying different (hyper)parameters.</p>
-<p>## Description :</p>
-<p>It is possible to combine the following (hyper)parameters :</p>
-<ul class="simple">
-<li><p>datasets</p></li>
-<li><p>models (with their characteristics…)</p></li>
-<li><p>batch size</p></li>
-<li><p>epochs</p></li>
-<li><p>iterations</p></li>
-<li><p>k fold</p></li>
-<li><p>seed (to control pseudo random generator)</p></li>
-</ul>
-<p>It is possible, for example, to combine 3 datasets, with 3 models and to perform for each combination, 5 iterations of a cross validation of KFold type, with k=10.
-In this case, the total number of models to test would be 3x3x5x10=450 training sessions…
-So, be careful, the number of model.fit can quickly be very important !</p>
-<p>The tasks will be run in <strong>parallel</strong> on the different CPUs/cores available.</p>
-<p>## Documentation and examples :</p>
-<p>Here is a basinc example, detailled in a notebook :</p>
-<p><a href="#id19"><span class="problematic" id="id20">``</span></a>`
-import pyterk.config       as config
-import pyterk.reporter     as reporter
-import pyterk.task_manager as task_manager</p>
-<p>settings = config.load(‘settings_example.yml’)</p>
-<p>task_manager.add_combinational_iterative_manyfold(settings, run_key= ‘Example-03.1’)
-task_manager.run()</p>
-<p>reporter.show_run_reports(settings)
-<a href="#id21"><span class="problematic" id="id22">``</span></a><a href="#id23"><span class="problematic" id="id24">`</span></a></p>
-<p>This will retrieve all settings from <cite>settings_example.yml</cite>, prepare the different tasks and execute them.
-The last call, intended to be used from a Jupyter lab notebook, displays a complete execution report.</p>
-<p>You can find <strong>3 full example notebooks</strong>, with a setting file :</p>
-<ul class="simple">
-<li><p>settings_example.yml</p></li>
-<li><p>01-Example-01.ipynb</p></li>
-<li><p>02-Example-02.ipynb</p></li>
-<li><p>03-Example-03.ipynb</p></li>
-</ul>
-<dl class="py data">
-<dt class="sig sig-object py" id="pyterk.VERSION">
-<span class="sig-prename descclassname"><span class="pre">pyterk.</span></span><span class="sig-name descname"><span class="pre">VERSION</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2.14</span></em><a class="headerlink" href="#pyterk.VERSION" title="Permalink to this definition">¶</a></dt>
-<dd><p>pyterk version</p>
-</dd></dl>
-
-</div>
 </div>
 
 
@@ -527,13 +514,23 @@ The last call, intended to be used from a Jupyter lab notebook, displays a compl
     <h3><a href="index.html">Table of Contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">pyterk package</a><ul>
+<li><a class="reference internal" href="#module-pyterk">Module contents</a><ul>
+<li><a class="reference internal" href="#description">Description :</a></li>
+<li><a class="reference internal" href="#documentation-and-examples">Documentation and examples :</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-pyterk.config">pyterk.config module</a></li>
+<li><a class="reference internal" href="#module-pyterk.config">pyterk.config module</a><ul>
+<li><a class="reference internal" href="#utilisation">Utilisation:</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#module-pyterk.models">pyterk.models module</a></li>
-<li><a class="reference internal" href="#module-pyterk.reporter">pyterk.reporter module</a></li>
+<li><a class="reference internal" href="#module-pyterk.reporter">pyterk.reporter module</a><ul>
+<li><a class="reference internal" href="#example">Example :</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#module-pyterk.task_manager">pyterk.task_manager module</a></li>
 <li><a class="reference internal" href="#module-pyterk.worker">pyterk.worker module</a></li>
-<li><a class="reference internal" href="#module-pyterk">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -541,8 +538,8 @@ The last call, intended to be used from a Jupyter lab notebook, displays a compl
   </div>
   <div>
     <h4>Previous topic</h4>
-    <p class="topless"><a href="index.html"
-                          title="previous chapter">Welcome to Accelerated exploration of multinary systems’s documentation!</a></p>
+    <p class="topless"><a href="ExperimentsPlannification.html"
+                          title="previous chapter">ExperimentsPlannification</a></p>
   </div>
   <div>
     <h4>Next topic</h4>
@@ -552,7 +549,7 @@ The last call, intended to be used from a Jupyter lab notebook, displays a compl
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/pyterk.rst.txt"
+      <li><a href="_sources/PyTerK.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -586,7 +583,7 @@ The last call, intended to be used from a Jupyter lab notebook, displays a compl
           <a href="MultipleRegression.html" title="MultipleRegression module"
              >next</a> |</li>
         <li class="right" >
-          <a href="index.html" title="Welcome to Accelerated exploration of multinary systems’s documentation!"
+          <a href="ExperimentsPlannification.html" title="ExperimentsPlannification"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Accelerated exploration of multinary systems 1.1 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">pyterk package</a></li> 

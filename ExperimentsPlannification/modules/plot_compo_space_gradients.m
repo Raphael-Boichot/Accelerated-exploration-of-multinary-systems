@@ -4,9 +4,9 @@ function [fig] = plot_compo_space_gradients(nb_elements,mixture, name_mixture,na
 %:param int nb_elements: number of components
 %:param cell(float) mixture: mixture points coordinates
 %:param cell(str) name_mixture: mixture names
-%:param list(str) name_elements:name of the components 
-%:param array(str) gradients : coordinates of the gradients points
-%:param str/list(float) gradients_color: color of the gradients for plot
+%:param list(str) name_elements: name of the components 
+%:param array(str) gradients: coordinates of the gradients points
+%:param gradients_color: color of the gradients for plot 
 %:return: fig: plot the compositions space dans gradients
 
 

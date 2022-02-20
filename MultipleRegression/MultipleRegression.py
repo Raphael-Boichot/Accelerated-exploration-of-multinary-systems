@@ -1,15 +1,19 @@
 # -*- coding: utf-8 -*-
 """
-Module to train Multiple Linear Regression with Scheffe ineteraction terms with iterative k-fold crossvalidation
+############
+Description
+############
+
+Module to train Multiple Linear Regression with Scheffe interaction terms, with iterative k-fold crossvalidation. The method that lies behind the model training is identical to PyTerK one, with iterative k-fold cross-validation. 
 
 Contains functions to :
+    * generate interactions
+    * train regression models
+    * plot iterative k-fold crossvalidation results
 
-    - generate interactions
-
-    - train regression models
-
-    - plot iterative k-fold crossvalidation results
-
+##########
+Functions
+##########
 
 """
 

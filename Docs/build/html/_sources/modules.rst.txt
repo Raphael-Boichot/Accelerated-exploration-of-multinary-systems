@@ -4,4 +4,4 @@ accelerated-exploration-of-multinary
 .. toctree::
    :maxdepth: 4
 
-   pyterk
+   introduction

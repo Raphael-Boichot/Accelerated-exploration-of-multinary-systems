@@ -53,7 +53,7 @@
 % Set up styles of URL: it should be placed after hyperref.
 \urlstyle{same}
 
-\addto\captionsenglish{\renewcommand{\contentsname}{Contents:}}
+\addto\captionsenglish{\renewcommand{\contentsname}{Contents}}
 
 \usepackage{sphinxmessages}
 \setcounter{tocdepth}{1}
@@ -61,7 +61,7 @@
 
 
 \title{Accelerated exploration of multinary systems}
-\date{Feb 15, 2022}
+\date{Feb 21, 2022}
 \release{1.1}
 \author{Elise Garel, Jean\sphinxhyphen{}Luc Parouty}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -77,9 +77,152 @@
 \phantomsection\label{\detokenize{index::doc}}
 
 
+\sphinxAtStartPar
+This documentation aims at helping use the codes developped for “Accelerated exploration of multinary systems using high\sphinxhyphen{}throughput experiments and machine learning” project.
 
-\chapter{ExperimentsPlannification}
-\label{\detokenize{ExperimentsPlannification:experimentsplannification}}\label{\detokenize{ExperimentsPlannification::doc}}\phantomsection\label{\detokenize{ExperimentsPlannification:module-modules}}\index{modules (module)@\spxentry{modules}\spxextra{module}}\index{check\_do\_not\_align() (in module modules)@\spxentry{check\_do\_not\_align()}\spxextra{in module modules}}
+\sphinxAtStartPar
+This project combines material Science and AI, and consists in producing experimental data using combinatorial high\sphinxhyphen{}throuput methods and mixture design, and then to analyse them using Machine Learning tools to extract predictive models linking compositions, structures and properties.
+
+\sphinxAtStartPar
+\sphinxstylestrong{Experiments Planification}
+
+\sphinxAtStartPar
+This Matlab GUI interface allow to prepare the experimental work. It gives a set of 1D linear gradients or 2D planar gradients for 3 to 7 element systems. It can optimize the number of samples or the experiments price.
+
+\sphinxAtStartPar
+\sphinxstyleemphasis{Requirements}: Matlab2019 or more
+
+\sphinxAtStartPar
+\sphinxstylestrong{PyTerK}
+
+\sphinxAtStartPar
+These Python modules and notebooks perform iterative k\sphinxhyphen{}fold crossvalidation for Scikit\sphinxhyphen{}learn or Keras models, on any datasets, with parallelization of works. Settings are written in yml files, trainings are performed in “run” notebooks and results are visualized in “report” notebooks.
+\begin{description}
+\item[{\sphinxstyleemphasis{Requirements}:}] \leavevmode\begin{itemize}
+\item {} \begin{description}
+\item[{Install following libraries, via pip or conda}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+tensorflow \sphinxhyphen{} keras
+
+\item {} 
+\sphinxAtStartPar
+pandas
+
+\item {} 
+\sphinxAtStartPar
+scikit\sphinxhyphen{}learn
+
+\end{itemize}
+
+\end{description}
+
+\item {} \begin{description}
+\item[{Create environment variables:}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+path to folder that contains the datasets DATASETS\_DIR : \$ path/to/datasets/
+
+\item {} 
+\sphinxAtStartPar
+path to folder that will contain the training results : RUN\_DIR : \$ path/to/run/
+
+\end{itemize}
+
+\end{description}
+
+\end{itemize}
+
+\end{description}
+
+\sphinxAtStartPar
+\sphinxstylestrong{Multiple Regression}
+
+\sphinxAtStartPar
+These Python modules and notebooks perform iterative k\sphinxhyphen{}fold crossvalidation for statsmodel multilinear regression, on any datasets. Training and report are performed in one notebook.
+\begin{description}
+\item[{\sphinxstyleemphasis{Requirements}:}] \leavevmode\begin{itemize}
+\item {} \begin{description}
+\item[{Install following libraries, via pip or conda}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+statsmodels.formula.api
+
+\item {} 
+\sphinxAtStartPar
+pandas
+
+\item {} 
+\sphinxAtStartPar
+scikit\sphinxhyphen{}learn
+
+\end{itemize}
+
+\end{description}
+
+\item {} \begin{description}
+\item[{Create environment variables in bash\_profile:}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+path to folder that contains the datasets: export DATASETS\_DIR = \$path/to/datasets/
+
+\item {} 
+\sphinxAtStartPar
+path to folder that will contain the training results : export RUN\_DIR= \$path/to/run/
+
+\end{itemize}
+
+\end{description}
+
+\end{itemize}
+
+\end{description}
+
+
+\chapter{Experiments Plannification}
+\label{\detokenize{ExperimentsPlannification:experiments-plannification}}\label{\detokenize{ExperimentsPlannification::doc}}
+
+\section{Principle}
+\label{\detokenize{ExperimentsPlannification:principle}}
+\sphinxAtStartPar
+A Matlab GUI interface was developed in order to automatically generate a set of experiments to screen a N\sphinxhyphen{}element composition space using a combinatorial approach and a 2\sphinxhyphen{} to 3\sphinxhyphen{}cathodes magnetron sputtering. The starting point of this method is based on simplex centroid mixture design, in order to screen the space as uniformly as possible. From the composition points given by the mixture design, all linear/planar gradients passing by 3/7 of them are computed. Then a set of gradients/planes is chosen in order to pass at least once by each point and to respect the user inputs. The choice is done with a random exploration of all possible gradients, that starts all over again if the set does not meet the requirements.
+\begin{description}
+\item[{\sphinxstylestrong{Features} :}] \leavevmode\begin{itemize}
+\item {} \begin{description}
+\item[{Adaptability to the user’s needs}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+The user enters the elements of the composition space they want to explore (from 3 to 7 elements).
+
+\item {} 
+\sphinxAtStartPar
+Chooses if they are using two or three cathodes
+
+\item {} 
+\sphinxAtStartPar
+Indicates if they want to preferentially explore some point of the mixture design.
+
+\end{itemize}
+
+\end{description}
+
+\item {} 
+\sphinxAtStartPar
+Representation of the composition space and of the gradients/planes that are explored.
+
+\item {} 
+\sphinxAtStartPar
+Give the list of targets that allow to perform the experiments
+
+\end{itemize}
+
+\end{description}
+
+\noindent\sphinxincludegraphics[width=700\sphinxpxdimen]{{Supplementary_Matlab_interface}.png}
+
+
+\section{Modules}
+\label{\detokenize{ExperimentsPlannification:module-modules}}\label{\detokenize{ExperimentsPlannification:modules}}\index{modules (module)@\spxentry{modules}\spxextra{module}}\index{check\_do\_not\_align() (in module modules)@\spxentry{check\_do\_not\_align()}\spxextra{in module modules}}
 
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{ExperimentsPlannification:modules.check_do_not_align}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{modules.}}\sphinxbfcode{\sphinxupquote{check\_do\_not\_align}}}{\emph{name\_alignments}, \emph{index}, \emph{do\_not\_align}}{}
@@ -410,12 +553,9 @@ list(str)
 \phantomsection\label{\detokenize{ExperimentsPlannification:module-modules}}\index{modules (module)@\spxentry{modules}\spxextra{module}}\index{gradients\_set() (in module modules)@\spxentry{gradients\_set()}\spxextra{in module modules}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{ExperimentsPlannification:modules.gradients_set}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{modules.}}\sphinxbfcode{\sphinxupquote{gradients\_set}}}{\emph{name\_mixture}, \emph{mixture}, \emph{alignments}, \emph{name\_alignement}}{}\begin{description}
-\item[{Selection of a gradients set that pass at least once through each point}] \leavevmode
+\phantomsection\label{\detokenize{ExperimentsPlannification:modules.gradients_set}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{modules.}}\sphinxbfcode{\sphinxupquote{gradients\_set}}}{\emph{name\_mixture}, \emph{mixture}, \emph{alignments}, \emph{name\_alignement}}{}
 \sphinxAtStartPar
-of the mixture design and that respect user condition inputs
-
-\end{description}
+Selection of a gradients set that pass at least once through each point of the mixture design and that respect user condition inputs
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode\begin{itemize}
 \item {} 
@@ -426,15 +566,35 @@ of the mixture design and that respect user condition inputs
 \sphinxAtStartPar
 \sphinxstyleliteralstrong{\sphinxupquote{mixture}} (\sphinxcode{\sphinxupquote{cell(float)}}) \textendash{} coordinates of mixtures, cell index being the mixture order \sphinxstyleemphasis{eg:mixtures\{2\} contains the binaries coordinates}
 
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{alignments}} (\sphinxcode{\sphinxupquote{cell(float)}}) \textendash{} coordinates of the points through which the gradient pass (3x3 columns)
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{name\_alignement}} (\sphinxcode{\sphinxupquote{cell(str)}}) \textendash{} points through which the gradient pass
+
 \end{itemize}
 
-\end{description}\end{quote}
-
+\item[{Returns}] \leavevmode
 \sphinxAtStartPar
-:param cell(float) alignments:coordinates of the points through which the gradient pass (3x3 columns)
-:param cell(str) name\_alignement: points through which the gradient pass
-:return array(str) name\_alignement\_opt: name of mixture trhough whch the set of gradients pass
-:return array(float) alignement\_opt: coordinates of mixture trhough whch the set of gradients pass
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+name\_alignement\_opt: name of mixture trhough whch the set of gradients pass
+
+\item {} 
+\sphinxAtStartPar
+alignement\_opt: coordinates of mixture trhough whch the set of gradients pass
+
+\end{itemize}
+
+
+\item[{Return type}] \leavevmode
+\sphinxAtStartPar
+array(str),array(float)
+
+\end{description}\end{quote}
 
 \end{fulllineitems}
 
@@ -442,7 +602,7 @@ of the mixture design and that respect user condition inputs
 
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{ExperimentsPlannification:modules.index_alignments}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{modules.}}\sphinxbfcode{\sphinxupquote{index\_alignments}}}{\emph{cell\_coeff\_dir}}{}\begin{description}
-\item[{Called in {\color{red}\bfseries{}\textasciigrave{}compute\_alignments\textasciigrave{}\_}: we get cell structure with vector coefficient between one reference mixture and all the mixtures with the same or higher orders .}] \leavevmode
+\item[{Called in \sphinxtitleref{compute\_alignments}}] \leavevmode{[}we get cell structure with vector coefficient between one reference mixture and all the mixtures with the same or higher orders .{]}
 \sphinxAtStartPar
 This function compares all the coefficients one by one to find equal ones
 
@@ -495,24 +655,23 @@ Find intersection point of lines in 3D space, in the least squares sense.
 
 \item[{Returns}] \leavevmode
 \sphinxAtStartPar
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
 P\_Intersect: Best intersection point of the N lines, in least squares sense.
 
-\item[{Returns}] \leavevmode
+\item {} 
 \sphinxAtStartPar
 distances: Distances from intersection point to the input lines
+
+\end{itemize}
+
 
 \end{description}\end{quote}
 
 \sphinxAtStartPar
-Anders Eikenes (2022). Intersection point of lines in 3D space
-(\sphinxurl{https://www.mathworks.com/matlabcentral/fileexchange/37192-intersection-point-of-lines-in-3d-space}), MATLAB Central File Exchange. Retrieved February 10, 2022.
+Anders Eikenes (2022). Intersection point of lines in 3D space (\sphinxurl{https://www.mathworks.com/matlabcentral/fileexchange/37192-intersection-point-of-lines-in-3d-space}), MATLAB Central File Exchange. Retrieved February 10, 2022.
 
-\end{fulllineitems}
-
-\phantomsection\label{\detokenize{ExperimentsPlannification:module-modules}}\index{modules (module)@\spxentry{modules}\spxextra{module}}\index{nb\_repetitions() (in module modules)@\spxentry{nb\_repetitions()}\spxextra{in module modules}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{ExperimentsPlannification:modules.nb_repetitions}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{modules.}}\sphinxbfcode{\sphinxupquote{nb\_repetitions}}}{}{}
 \end{fulllineitems}
 
 \phantomsection\label{\detokenize{ExperimentsPlannification:module-modules}}\index{modules (module)@\spxentry{modules}\spxextra{module}}\index{listing\_targets() (in module modules)@\spxentry{listing\_targets()}\spxextra{in module modules}}
@@ -576,22 +735,32 @@ Plot the composition space with all the simplexe centroid points and linear grad
 \sphinxAtStartPar
 \sphinxstyleliteralstrong{\sphinxupquote{name\_mixture}} (\sphinxcode{\sphinxupquote{cell(str)}}) \textendash{} mixture names
 
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{name\_elements}} (\sphinxcode{\sphinxupquote{list(str)}}) \textendash{} name of the components
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{gradients}} (\sphinxcode{\sphinxupquote{array(str)}}) \textendash{} coordinates of the gradients points
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{gradients\_color}} \textendash{} color of the gradients for plot
+
 \end{itemize}
 
-\end{description}\end{quote}
-
+\item[{Returns}] \leavevmode
 \sphinxAtStartPar
-:param list(str) name\_elements:name of the components
-:param array(str) gradients : coordinates of the gradients points
-:param str/list(float) gradients\_color: color of the gradients for plot
-:return: fig: plot the compositions space dans gradients
+fig: plot the compositions space dans gradients
+
+\end{description}\end{quote}
 
 \end{fulllineitems}
 
 \phantomsection\label{\detokenize{ExperimentsPlannification:module-modules}}\index{modules (module)@\spxentry{modules}\spxextra{module}}\index{plot\_compo\_space\_planes() (in module modules)@\spxentry{plot\_compo\_space\_planes()}\spxextra{in module modules}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{ExperimentsPlannification:modules.plot_compo_space_planes}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{modules.}}\sphinxbfcode{\sphinxupquote{plot\_compo\_space\_planes}}}{\emph{nb\_elements}, \emph{mixture}, \emph{name\_mixture}, \emph{name\_elements}, \emph{plane\_coord}, \emph{plane\_color}, \emph{fignumber)\%position}}{}
+\phantomsection\label{\detokenize{ExperimentsPlannification:modules.plot_compo_space_planes}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{modules.}}\sphinxbfcode{\sphinxupquote{plot\_compo\_space\_planes}}}{\emph{nb\_elements}, \emph{mixture}, \emph{name\_mixture}, \emph{name\_elements}, \emph{plane\_coord}, \emph{plane\_color}}{}
 \sphinxAtStartPar
 Plot the composition space with all the simplexe centroid points and planar gradients
 \begin{quote}\begin{description}
@@ -608,15 +777,25 @@ Plot the composition space with all the simplexe centroid points and planar grad
 \sphinxAtStartPar
 \sphinxstyleliteralstrong{\sphinxupquote{name\_mixture}} (\sphinxcode{\sphinxupquote{cell(str)}}) \textendash{} mixture names
 
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{name\_elements}} (\sphinxcode{\sphinxupquote{list(str)}}) \textendash{} name of the components
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{plane\_coord}} (\sphinxcode{\sphinxupquote{array(str)}}) \textendash{} coordinates of the planes points
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{plane\_color}} \textendash{} color of the plane for plot
+
 \end{itemize}
 
-\end{description}\end{quote}
-
+\item[{Returns}] \leavevmode
 \sphinxAtStartPar
-:param list(str) name\_elements:name of the components
-:param array(str) plane\_coord : coordinates of the planes points
-:param str/list(float) plane\_color: color of the plane for plot
-:return: fig: plot the compositions space dans gradients
+fig: plot the compositions space dans gradients
+
+\end{description}\end{quote}
 
 \end{fulllineitems}
 
@@ -645,15 +824,25 @@ Selection of a planes set that encompass at least once  each point of the mixtur
 \sphinxAtStartPar
 \sphinxstyleliteralstrong{\sphinxupquote{mixture}} (\sphinxcode{\sphinxupquote{cell(float)}}) \textendash{} coordinates of mixtures, cell index being the mixture order \sphinxstyleemphasis{eg:mixtures\{2\} contains the binaries coordinates}
 
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{plane}} (\sphinxcode{\sphinxupquote{cell(float)}}) \textendash{} coordinates of the points through which the planes pass (3x3 columns)
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{name\_planes}} (\sphinxcode{\sphinxupquote{cell(str)}}) \textendash{} points through which the planes pass
+
 \end{itemize}
 
-\end{description}\end{quote}
-
+\item[{Returns}] \leavevmode
 \sphinxAtStartPar
-:param cell(float) plane:coordinates of the points through which the planes pass (3x3 columns)
-:param cell(str) name\_planes: points through which the planes pass
-:return: array(str) name\_planes\_opt: name of mixture trhough whch the set of planes pass
-:return: array(float) planes\_opt: coordinates of mixture trhough whch the set of planes pass
+array(str) name\_planes\_opt: name of mixture trhough whch the set of planes pass
+
+\item[{Returns}] \leavevmode
+\sphinxAtStartPar
+array(float) planes\_opt: coordinates of mixture trhough whch the set of planes pass
+
+\end{description}\end{quote}
 
 \end{fulllineitems}
 
@@ -709,10 +898,10 @@ coordinates of the normed vector corresponding to (AB) line
 
 
 \chapter{pyterk package}
-\label{\detokenize{pyterk:pyterk-package}}\label{\detokenize{pyterk::doc}}
+\label{\detokenize{PyTerK:pyterk-package}}\label{\detokenize{PyTerK::doc}}
 
 \section{Module contents}
-\label{\detokenize{pyterk:module-pyterk}}\label{\detokenize{pyterk:module-contents}}\index{module@\spxentry{module}!pyterk@\spxentry{pyterk}}\index{pyterk@\spxentry{pyterk}!module@\spxentry{module}}
+\label{\detokenize{PyTerK:module-pyterk}}\label{\detokenize{PyTerK:module-contents}}\index{module@\spxentry{module}!pyterk@\spxentry{pyterk}}\index{pyterk@\spxentry{pyterk}!module@\spxentry{module}}
 \sphinxAtStartPar
 \sphinxstylestrong{PyTerK} \sphinxhyphen{} A Python Iterated K\sphinxhyphen{}fold cross validation with shuffling
 
@@ -722,9 +911,9 @@ By E Garel / JL Parouty \sphinxhyphen{} SIMaP 2021
 \sphinxAtStartPar
 This package allows you to perform a \sphinxstylestrong{statistical evaluation} of different learning strategies (Keras/sklearn) by varying different (hyper)parameters.
 
-\sphinxAtStartPar
-\#\# Description :
 
+\subsection{Description :}
+\label{\detokenize{PyTerK:description}}
 \sphinxAtStartPar
 It is possible to combine the following (hyper)parameters :
 \begin{itemize}
@@ -766,28 +955,24 @@ So, be careful, the number of model.fit can quickly be very important !
 \sphinxAtStartPar
 The tasks will be run in \sphinxstylestrong{parallel} on the different CPUs/cores available.
 
-\sphinxAtStartPar
-\#\# Documentation and examples :
 
+\subsection{Documentation and examples :}
+\label{\detokenize{PyTerK:documentation-and-examples}}
 \sphinxAtStartPar
-Here is a basinc example, detailled in a notebook :
+Here is a basic example, detailled in a notebook :
 
-\sphinxAtStartPar
-{\color{red}\bfseries{}\textasciigrave{}\textasciigrave{}}\textasciigrave{}
-import pyterk.config       as config
-import pyterk.reporter     as reporter
-import pyterk.task\_manager as task\_manager
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{pyterk}\PYG{n+nn}{.}\PYG{n+nn}{config}       \PYG{k}{as} \PYG{n+nn}{config}
+\PYG{k+kn}{import} \PYG{n+nn}{pyterk}\PYG{n+nn}{.}\PYG{n+nn}{reporter}     \PYG{k}{as} \PYG{n+nn}{reporter}
+\PYG{k+kn}{import} \PYG{n+nn}{pyterk}\PYG{n+nn}{.}\PYG{n+nn}{task\PYGZus{}manager} \PYG{k}{as} \PYG{n+nn}{task\PYGZus{}manager}
 
-\sphinxAtStartPar
-settings = config.load(‘settings\_example.yml’)
+\PYG{n}{settings} \PYG{o}{=} \PYG{n}{config}\PYG{o}{.}\PYG{n}{load}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{settings\PYGZus{}example.yml}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 
-\sphinxAtStartPar
-task\_manager.add\_combinational\_iterative\_manyfold(settings, run\_key= ‘Example\sphinxhyphen{}03.1’)
-task\_manager.run()
+\PYG{n}{task\PYGZus{}manager}\PYG{o}{.}\PYG{n}{add\PYGZus{}combinational\PYGZus{}iterative\PYGZus{}manyfold}\PYG{p}{(}\PYG{n}{settings}\PYG{p}{,} \PYG{n}{run\PYGZus{}key}\PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Example\PYGZhy{}03.1}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{task\PYGZus{}manager}\PYG{o}{.}\PYG{n}{run}\PYG{p}{(}\PYG{p}{)}
 
-\sphinxAtStartPar
-reporter.show\_run\_reports(settings)
-{\color{red}\bfseries{}\textasciigrave{}\textasciigrave{}}{\color{red}\bfseries{}\textasciigrave{}}
+\PYG{n}{reporter}\PYG{o}{.}\PYG{n}{show\PYGZus{}run\PYGZus{}reports}\PYG{p}{(}\PYG{n}{settings}\PYG{p}{)}
+\end{sphinxVerbatim}
 
 \sphinxAtStartPar
 This will retrieve all settings from \sphinxtitleref{settings\_example.yml}, prepare the different tasks and execute them.
@@ -816,7 +1001,7 @@ settings\_example.yml
 \index{VERSION (in module pyterk)@\spxentry{VERSION}\spxextra{in module pyterk}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{pyterk:pyterk.VERSION}}\pysigline{\sphinxcode{\sphinxupquote{pyterk.}}\sphinxbfcode{\sphinxupquote{VERSION}}\sphinxbfcode{\sphinxupquote{\DUrole{w}{  }\DUrole{p}{=}\DUrole{w}{  }2.14}}}
+\phantomsection\label{\detokenize{PyTerK:pyterk.VERSION}}\pysigline{\sphinxcode{\sphinxupquote{pyterk.}}\sphinxbfcode{\sphinxupquote{VERSION}}\sphinxbfcode{\sphinxupquote{\DUrole{w}{  }\DUrole{p}{=}\DUrole{w}{  }2.14}}}
 \sphinxAtStartPar
 pyterk version
 
@@ -825,41 +1010,41 @@ pyterk version
 
 
 \section{Submodules}
-\label{\detokenize{pyterk:submodules}}
+\label{\detokenize{PyTerK:submodules}}
 
 \section{pyterk.config module}
-\label{\detokenize{pyterk:module-pyterk.config}}\label{\detokenize{pyterk:pyterk-config-module}}\index{module@\spxentry{module}!pyterk.config@\spxentry{pyterk.config}}\index{pyterk.config@\spxentry{pyterk.config}!module@\spxentry{module}}
+\label{\detokenize{PyTerK:module-pyterk.config}}\label{\detokenize{PyTerK:pyterk-config-module}}\index{module@\spxentry{module}!pyterk.config@\spxentry{pyterk.config}}\index{pyterk.config@\spxentry{pyterk.config}!module@\spxentry{module}}
 \sphinxAtStartPar
 Configuration management.
 
 \sphinxAtStartPar
 The settings files allow to specify datasets and models.
 
+
+\subsection{Utilisation:}
+\label{\detokenize{PyTerK:utilisation}}
 \sphinxAtStartPar
-\#\# Utilisation:
-Loading a settings file :
-\sphinxcode{\sphinxupquote{\textasciigrave{}
-settings = config.load(\textquotesingle{}settings\_example.yml\textquotesingle{})
-\textasciigrave{}}}
+Loading a settings file:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{settings} \PYG{o}{=} \PYG{n}{config}\PYG{o}{.}\PYG{n}{load}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{settings\PYGZus{}example.yml}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
 or:
-{\color{red}\bfseries{}\textasciigrave{}\textasciigrave{}}\textasciigrave{}
-settings = config.load(‘settings\_example.yml’,
-\begin{quote}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{settings} \PYG{o}{=} \PYG{n}{config}\PYG{o}{.}\PYG{n}{load}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{settings\PYGZus{}example.yml}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
+                        \PYG{n}{datasets\PYGZus{}dir\PYGZus{}env}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{DATASETS\PYGZus{}DIR}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
 
 \sphinxAtStartPar
-datasets\_dir\_env=’MY\_DATASETS\_DIR’)
-\end{quote}
-
-\sphinxAtStartPar
-{\color{red}\bfseries{}\textasciigrave{}\textasciigrave{}}{\color{red}\bfseries{}\textasciigrave{}}
-
-\sphinxAtStartPar
-where MY\_DATASETS\_DIR is an environment variable that will override \sphinxtitleref{datasets\_dir}
+where DATASETS\_DIR is an environment variable that will override \sphinxtitleref{datasets\_dir}
 directive in settings file.
 \index{datasets (in module pyterk.config)@\spxentry{datasets}\spxextra{in module pyterk.config}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{pyterk:pyterk.config.datasets}}\pysigline{\sphinxcode{\sphinxupquote{pyterk.config.}}\sphinxbfcode{\sphinxupquote{datasets}}\sphinxbfcode{\sphinxupquote{\DUrole{w}{  }\DUrole{p}{=}\DUrole{w}{  }None}}}
+\phantomsection\label{\detokenize{PyTerK:pyterk.config.datasets}}\pysigline{\sphinxcode{\sphinxupquote{pyterk.config.}}\sphinxbfcode{\sphinxupquote{datasets}}\sphinxbfcode{\sphinxupquote{\DUrole{w}{  }\DUrole{p}{=}\DUrole{w}{  }None}}}
 \sphinxAtStartPar
 datasets profiles
 
@@ -868,13 +1053,11 @@ datasets profiles
 \index{load() (in module pyterk.config)@\spxentry{load()}\spxextra{in module pyterk.config}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{pyterk:pyterk.config.load}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{pyterk.config.}}\sphinxbfcode{\sphinxupquote{load}}}{\emph{\DUrole{n}{filename}}, \emph{\DUrole{n}{datasets\_dir\_env}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}PYTERK\_DATASETS\_DIR\textquotesingle{}}}, \emph{\DUrole{n}{run\_dir\_env}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}PYTERK\_RUN\_DIR\textquotesingle{}}}, \emph{\DUrole{n}{verbose}\DUrole{o}{=}\DUrole{default_value}{0}}}{}\begin{description}
-\item[{Load a setting file and dfined datasets.}] \leavevmode
+\phantomsection\label{\detokenize{PyTerK:pyterk.config.load}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{pyterk.config.}}\sphinxbfcode{\sphinxupquote{load}}}{\emph{\DUrole{n}{filename}}, \emph{\DUrole{n}{datasets\_dir\_env}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}DATASETS\_DIR\textquotesingle{}}}, \emph{\DUrole{n}{run\_dir\_env}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}RUN\_DIR\textquotesingle{}}}, \emph{\DUrole{n}{verbose}\DUrole{o}{=}\DUrole{default_value}{0}}}{}
 \sphinxAtStartPar
+Load a setting file and dfined datasets.
 If given, environment variable can be use to overide \sphinxtitleref{datasets\_dir} directive from setting file.
 Usefull for portability between several sites.
-
-\end{description}
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode\begin{itemize}
 \item {} 
@@ -902,7 +1085,7 @@ A dict from setting file, completed by datasets and more.
 \index{models (in module pyterk.config)@\spxentry{models}\spxextra{in module pyterk.config}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{pyterk:pyterk.config.models}}\pysigline{\sphinxcode{\sphinxupquote{pyterk.config.}}\sphinxbfcode{\sphinxupquote{models}}\sphinxbfcode{\sphinxupquote{\DUrole{w}{  }\DUrole{p}{=}\DUrole{w}{  }None}}}
+\phantomsection\label{\detokenize{PyTerK:pyterk.config.models}}\pysigline{\sphinxcode{\sphinxupquote{pyterk.config.}}\sphinxbfcode{\sphinxupquote{models}}\sphinxbfcode{\sphinxupquote{\DUrole{w}{  }\DUrole{p}{=}\DUrole{w}{  }None}}}
 \sphinxAtStartPar
 models profiles
 
@@ -911,7 +1094,7 @@ models profiles
 \index{run\_dir (in module pyterk.config)@\spxentry{run\_dir}\spxextra{in module pyterk.config}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{pyterk:pyterk.config.run_dir}}\pysigline{\sphinxcode{\sphinxupquote{pyterk.config.}}\sphinxbfcode{\sphinxupquote{run\_dir}}\sphinxbfcode{\sphinxupquote{\DUrole{w}{  }\DUrole{p}{=}\DUrole{w}{  }None}}}
+\phantomsection\label{\detokenize{PyTerK:pyterk.config.run_dir}}\pysigline{\sphinxcode{\sphinxupquote{pyterk.config.}}\sphinxbfcode{\sphinxupquote{run\_dir}}\sphinxbfcode{\sphinxupquote{\DUrole{w}{  }\DUrole{p}{=}\DUrole{w}{  }None}}}
 \sphinxAtStartPar
 run\_dir, the place to put all output directories
 
@@ -920,7 +1103,7 @@ run\_dir, the place to put all output directories
 \index{runs (in module pyterk.config)@\spxentry{runs}\spxextra{in module pyterk.config}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{pyterk:pyterk.config.runs}}\pysigline{\sphinxcode{\sphinxupquote{pyterk.config.}}\sphinxbfcode{\sphinxupquote{runs}}\sphinxbfcode{\sphinxupquote{\DUrole{w}{  }\DUrole{p}{=}\DUrole{w}{  }None}}}
+\phantomsection\label{\detokenize{PyTerK:pyterk.config.runs}}\pysigline{\sphinxcode{\sphinxupquote{pyterk.config.}}\sphinxbfcode{\sphinxupquote{runs}}\sphinxbfcode{\sphinxupquote{\DUrole{w}{  }\DUrole{p}{=}\DUrole{w}{  }None}}}
 \sphinxAtStartPar
 dict of runs section
 
@@ -929,7 +1112,7 @@ dict of runs section
 \index{settings (in module pyterk.config)@\spxentry{settings}\spxextra{in module pyterk.config}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{pyterk:pyterk.config.settings}}\pysigline{\sphinxcode{\sphinxupquote{pyterk.config.}}\sphinxbfcode{\sphinxupquote{settings}}\sphinxbfcode{\sphinxupquote{\DUrole{w}{  }\DUrole{p}{=}\DUrole{w}{  }None}}}
+\phantomsection\label{\detokenize{PyTerK:pyterk.config.settings}}\pysigline{\sphinxcode{\sphinxupquote{pyterk.config.}}\sphinxbfcode{\sphinxupquote{settings}}\sphinxbfcode{\sphinxupquote{\DUrole{w}{  }\DUrole{p}{=}\DUrole{w}{  }None}}}
 \sphinxAtStartPar
 Dict of settings
 
@@ -938,27 +1121,29 @@ Dict of settings
 
 
 \section{pyterk.models module}
-\label{\detokenize{pyterk:module-pyterk.models}}\label{\detokenize{pyterk:pyterk-models-module}}\index{module@\spxentry{module}!pyterk.models@\spxentry{pyterk.models}}\index{pyterk.models@\spxentry{pyterk.models}!module@\spxentry{module}}
+\label{\detokenize{PyTerK:module-pyterk.models}}\label{\detokenize{PyTerK:pyterk-models-module}}\index{module@\spxentry{module}!pyterk.models@\spxentry{pyterk.models}}\index{pyterk.models@\spxentry{pyterk.models}!module@\spxentry{module}}
 \sphinxAtStartPar
-This module is for internal use only \sphinxhyphen{} You do not have to interact with ;\sphinxhyphen{}).
+This module is for internal use only \sphinxhyphen{} You do not have to interact with.
 \index{get\_model() (in module pyterk.models)@\spxentry{get\_model()}\spxextra{in module pyterk.models}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{pyterk:pyterk.models.get_model}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{pyterk.models.}}\sphinxbfcode{\sphinxupquote{get\_model}}}{\emph{\DUrole{n}{profile}}}{}
+\phantomsection\label{\detokenize{PyTerK:pyterk.models.get_model}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{pyterk.models.}}\sphinxbfcode{\sphinxupquote{get\_model}}}{\emph{\DUrole{n}{profile}}}{}
 \sphinxAtStartPar
 Get a model from a model profile.
 The profile contains the module and function name of the model, and the arguments.
 The model will be retrieved by calling the function with the arguments.
-:param profile: a model profile
-:type profile: dict
 \begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{profile}} (\sphinxstyleliteralemphasis{\sphinxupquote{dict}}) \textendash{} a model profile
+
 \item[{Returns}] \leavevmode
 \sphinxAtStartPar
-keras model as defined in the profile.
+keras or scikitlearn model as defined in the profile.
 
 \item[{Return type}] \leavevmode
 \sphinxAtStartPar
-model (keras model)
+model (keras/scikitlearn model)
 
 \end{description}\end{quote}
 
@@ -967,7 +1152,7 @@ model (keras model)
 
 
 \section{pyterk.reporter module}
-\label{\detokenize{pyterk:module-pyterk.reporter}}\label{\detokenize{pyterk:pyterk-reporter-module}}\index{module@\spxentry{module}!pyterk.reporter@\spxentry{pyterk.reporter}}\index{pyterk.reporter@\spxentry{pyterk.reporter}!module@\spxentry{module}}
+\label{\detokenize{PyTerK:module-pyterk.reporter}}\label{\detokenize{PyTerK:pyterk-reporter-module}}\index{module@\spxentry{module}!pyterk.reporter@\spxentry{pyterk.reporter}}\index{pyterk.reporter@\spxentry{pyterk.reporter}!module@\spxentry{module}}
 \sphinxAtStartPar
 Module to generate execution reports.
 
@@ -992,28 +1177,21 @@ During the run of the tasks, the bestmodel and results are saved in h5 and json 
 
 \end{itemize}
 
-\sphinxAtStartPar
-\#\#\# Example :
 
-\sphinxAtStartPar
-{\color{red}\bfseries{}\textasciigrave{}\textasciigrave{}}\textasciigrave{}
-reporter.show\_run\_reports(settings,
-\begin{quote}
-
-\sphinxAtStartPar
-args   = {[}‘dataset\_id’,’model\_id’,’batch\_size’{]},
-evaluation = {[}2{]})
-\end{quote}
-
-\sphinxAtStartPar
-{\color{red}\bfseries{}\textasciigrave{}\textasciigrave{}}{\color{red}\bfseries{}\textasciigrave{}}
+\subsection{Example :}
+\label{\detokenize{PyTerK:example}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{reporter}\PYG{o}{.}\PYG{n}{show\PYGZus{}run\PYGZus{}reports}\PYG{p}{(}\PYG{n}{settings}\PYG{p}{,}
+                          \PYG{n}{args}       \PYG{o}{=} \PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{dataset\PYGZus{}id}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{model\PYGZus{}id}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{batch\PYGZus{}size}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{,}
+                          \PYG{n}{evaluation} \PYG{o}{=} \PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{)}
+\end{sphinxVerbatim}
 
 \sphinxAtStartPar
 This module will retrieve information from json files and generate a report.
 \index{plot\_confusion() (in module pyterk.reporter)@\spxentry{plot\_confusion()}\spxextra{in module pyterk.reporter}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{pyterk:pyterk.reporter.plot_confusion}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{pyterk.reporter.}}\sphinxbfcode{\sphinxupquote{plot\_confusion}}}{\emph{\DUrole{n}{run\_dir}}, \emph{\DUrole{n}{predict\_type}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}softmax\textquotesingle{}}}, \emph{\DUrole{n}{normalize}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}pred\textquotesingle{}}}, \emph{\DUrole{n}{figsize}\DUrole{o}{=}\DUrole{default_value}{(5, 5)}}, \emph{\DUrole{n}{savefig}\DUrole{o}{=}\DUrole{default_value}{True}}, \emph{\DUrole{n}{mplstyle}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}pyterk\textquotesingle{}}}}{}
+\phantomsection\label{\detokenize{PyTerK:pyterk.reporter.plot_confusion}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{pyterk.reporter.}}\sphinxbfcode{\sphinxupquote{plot\_confusion}}}{\emph{\DUrole{n}{run\_dir}}, \emph{\DUrole{n}{predict\_type}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}softmax\textquotesingle{}}}, \emph{\DUrole{n}{normalize}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}pred\textquotesingle{}}}, \emph{\DUrole{n}{figsize}\DUrole{o}{=}\DUrole{default_value}{(5, 5)}}, \emph{\DUrole{n}{savefig}\DUrole{o}{=}\DUrole{default_value}{True}}, \emph{\DUrole{n}{mplstyle}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}pyterk\textquotesingle{}}}}{}
 \sphinxAtStartPar
 Plot a confusion matrix
 \begin{quote}\begin{description}
@@ -1051,7 +1229,7 @@ Just plot the matrix and print report and hamming loss
 \index{plot\_distribution() (in module pyterk.reporter)@\spxentry{plot\_distribution()}\spxextra{in module pyterk.reporter}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{pyterk:pyterk.reporter.plot_distribution}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{pyterk.reporter.}}\sphinxbfcode{\sphinxupquote{plot\_distribution}}}{\emph{\DUrole{n}{run\_dir}}, \emph{\DUrole{n}{metric\_id}\DUrole{o}{=}\DUrole{default_value}{0}}, \emph{\DUrole{n}{bins}\DUrole{o}{=}\DUrole{default_value}{10}}, \emph{\DUrole{n}{min}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{max}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{figsize}\DUrole{o}{=}\DUrole{default_value}{(10, 8)}}, \emph{\DUrole{n}{savefig}\DUrole{o}{=}\DUrole{default_value}{False}}, \emph{\DUrole{n}{mplstyle}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}pyterk\textquotesingle{}}}}{}
+\phantomsection\label{\detokenize{PyTerK:pyterk.reporter.plot_distribution}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{pyterk.reporter.}}\sphinxbfcode{\sphinxupquote{plot\_distribution}}}{\emph{\DUrole{n}{run\_dir}}, \emph{\DUrole{n}{metric\_id}\DUrole{o}{=}\DUrole{default_value}{0}}, \emph{\DUrole{n}{bins}\DUrole{o}{=}\DUrole{default_value}{10}}, \emph{\DUrole{n}{min}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{max}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{figsize}\DUrole{o}{=}\DUrole{default_value}{(10, 8)}}, \emph{\DUrole{n}{savefig}\DUrole{o}{=}\DUrole{default_value}{False}}, \emph{\DUrole{n}{mplstyle}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}pyterk\textquotesingle{}}}}{}
 \sphinxAtStartPar
 Plot distribution of a given metric from an evaluation.json saved file.
 For a kfold or an iterative kfold, all evaluation data are concatened in an evaluation.json file in main run\_dir.
@@ -1102,7 +1280,7 @@ Nothing, but display a beautifull distribution plot !
 \index{plot\_history() (in module pyterk.reporter)@\spxentry{plot\_history()}\spxextra{in module pyterk.reporter}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{pyterk:pyterk.reporter.plot_history}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{pyterk.reporter.}}\sphinxbfcode{\sphinxupquote{plot\_history}}}{\emph{\DUrole{n}{run\_dir}}, \emph{\DUrole{n}{metric}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}val\_mae\textquotesingle{}}}, \emph{\DUrole{n}{min}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{max}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{figsize}\DUrole{o}{=}\DUrole{default_value}{(10, 8)}}, \emph{\DUrole{n}{savefig}\DUrole{o}{=}\DUrole{default_value}{False}}, \emph{\DUrole{n}{mplstyle}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}pyterk\textquotesingle{}}}}{}
+\phantomsection\label{\detokenize{PyTerK:pyterk.reporter.plot_history}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{pyterk.reporter.}}\sphinxbfcode{\sphinxupquote{plot\_history}}}{\emph{\DUrole{n}{run\_dir}}, \emph{\DUrole{n}{metric}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}val\_mae\textquotesingle{}}}, \emph{\DUrole{n}{min}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{max}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{figsize}\DUrole{o}{=}\DUrole{default_value}{(10, 8)}}, \emph{\DUrole{n}{savefig}\DUrole{o}{=}\DUrole{default_value}{False}}, \emph{\DUrole{n}{mplstyle}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}pyterk\textquotesingle{}}}}{}
 \sphinxAtStartPar
 Plot history evolution from history.json saved file.
 For a kfold or an iterative kfold, all history data are concatened in history.json file in main run\_dir.
@@ -1142,7 +1320,7 @@ Nothing, but display a beautifull plot !
 \index{plot\_kfold\_correlation() (in module pyterk.reporter)@\spxentry{plot\_kfold\_correlation()}\spxextra{in module pyterk.reporter}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{pyterk:pyterk.reporter.plot_kfold_correlation}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{pyterk.reporter.}}\sphinxbfcode{\sphinxupquote{plot\_kfold\_correlation}}}{\emph{\DUrole{n}{run\_dir}}, \emph{\DUrole{n}{channel}\DUrole{o}{=}\DUrole{default_value}{0}}, \emph{\DUrole{n}{figsize}\DUrole{o}{=}\DUrole{default_value}{(8, 6)}}, \emph{\DUrole{n}{axes\_min}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}auto\textquotesingle{}}}, \emph{\DUrole{n}{axes\_max}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}auto\textquotesingle{}}}, \emph{\DUrole{n}{yy\_deltamax}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{marker}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}o\textquotesingle{}}}, \emph{\DUrole{n}{markersize}\DUrole{o}{=}\DUrole{default_value}{8}}, \emph{\DUrole{n}{alpha}\DUrole{o}{=}\DUrole{default_value}{0.7}}, \emph{\DUrole{n}{color}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}auto\textquotesingle{}}}, \emph{\DUrole{n}{savefig}\DUrole{o}{=}\DUrole{default_value}{True}}, \emph{\DUrole{n}{mplstyle}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}pyterk\textquotesingle{}}}}{}
+\phantomsection\label{\detokenize{PyTerK:pyterk.reporter.plot_kfold_correlation}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{pyterk.reporter.}}\sphinxbfcode{\sphinxupquote{plot\_kfold\_correlation}}}{\emph{\DUrole{n}{run\_dir}}, \emph{\DUrole{n}{channel}\DUrole{o}{=}\DUrole{default_value}{0}}, \emph{\DUrole{n}{figsize}\DUrole{o}{=}\DUrole{default_value}{(8, 6)}}, \emph{\DUrole{n}{axes\_min}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}auto\textquotesingle{}}}, \emph{\DUrole{n}{axes\_max}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}auto\textquotesingle{}}}, \emph{\DUrole{n}{yy\_deltamax}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{marker}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}o\textquotesingle{}}}, \emph{\DUrole{n}{markersize}\DUrole{o}{=}\DUrole{default_value}{8}}, \emph{\DUrole{n}{alpha}\DUrole{o}{=}\DUrole{default_value}{0.7}}, \emph{\DUrole{n}{color}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}auto\textquotesingle{}}}, \emph{\DUrole{n}{savefig}\DUrole{o}{=}\DUrole{default_value}{True}}, \emph{\DUrole{n}{mplstyle}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}pyterk\textquotesingle{}}}}{}
 \sphinxAtStartPar
 Plot a correlation for a (y\_test, y\_pred) saved json file.
 \begin{quote}\begin{description}
@@ -1195,10 +1373,6 @@ Plot a correlation for a (y\_test, y\_pred) saved json file.
 
 \item[{Returns}] \leavevmode
 \sphinxAtStartPar
-\sphinxhyphen{})
-
-\item[{Return type}] \leavevmode
-\sphinxAtStartPar
 Nothing, but display a beautifull correlation plot
 
 \end{description}\end{quote}
@@ -1208,7 +1382,7 @@ Nothing, but display a beautifull correlation plot
 \index{show\_report() (in module pyterk.reporter)@\spxentry{show\_report()}\spxextra{in module pyterk.reporter}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{pyterk:pyterk.reporter.show_report}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{pyterk.reporter.}}\sphinxbfcode{\sphinxupquote{show\_report}}}{\emph{\DUrole{n}{run\_dir}}, \emph{\DUrole{n}{padding}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}\textquotesingle{}}}, \emph{\DUrole{n}{sections}\DUrole{o}{=}\DUrole{default_value}{{[}\textquotesingle{}title\textquotesingle{}, \textquotesingle{}context\textquotesingle{}, \textquotesingle{}args\textquotesingle{}, \textquotesingle{}settings\textquotesingle{}, \textquotesingle{}evaluation\textquotesingle{}, \textquotesingle{}monitoring\textquotesingle{}, \textquotesingle{}history\textquotesingle{}, \textquotesingle{}distribution\textquotesingle{}, \textquotesingle{}correlation\textquotesingle{}{]}}}, \emph{\DUrole{n}{context}\DUrole{o}{=}\DUrole{default_value}{{[}\textquotesingle{}function\textquotesingle{}, \textquotesingle{}version\textquotesingle{}, \textquotesingle{}date\textquotesingle{}, \textquotesingle{}description\textquotesingle{}, \textquotesingle{}seed\textquotesingle{}{]}}}, \emph{\DUrole{n}{args}\DUrole{o}{=}\DUrole{default_value}{{[}\textquotesingle{}run\_dir\textquotesingle{}, \textquotesingle{}dataset\_id\textquotesingle{}, \textquotesingle{}model\_id\textquotesingle{}, \textquotesingle{}n\_iter\textquotesingle{}, \textquotesingle{}k\_fold\textquotesingle{}, \textquotesingle{}epochs\textquotesingle{}, \textquotesingle{}batch\_size\textquotesingle{}{]}}}, \emph{\DUrole{n}{settings}\DUrole{o}{=}\DUrole{default_value}{{[}\textquotesingle{}file\textquotesingle{}, \textquotesingle{}version\textquotesingle{}, \textquotesingle{}description\textquotesingle{}, \textquotesingle{}datasets\_dir\textquotesingle{}, \textquotesingle{}run\_dir\textquotesingle{}{]}}}, \emph{\DUrole{n}{evaluation}\DUrole{o}{=}\DUrole{default_value}{{[}\textquotesingle{}all\textquotesingle{}{]}}}, \emph{\DUrole{n}{monitoring}\DUrole{o}{=}\DUrole{default_value}{{[}\textquotesingle{}duration\textquotesingle{}, \textquotesingle{}used\_data\textquotesingle{}{]}}}, \emph{\DUrole{n}{history}\DUrole{o}{=}\DUrole{default_value}{{[}\{\textquotesingle{}metric\textquotesingle{}: \textquotesingle{}val\_mae\textquotesingle{}, \textquotesingle{}min\textquotesingle{}: None, \textquotesingle{}max\textquotesingle{}: None, \textquotesingle{}figsize\textquotesingle{}: (8, 6), \textquotesingle{}savefig\textquotesingle{}: True, \textquotesingle{}mplstyle\textquotesingle{}: \textquotesingle{}pyterk\textquotesingle{}\}{]}}}, \emph{\DUrole{n}{distribution}\DUrole{o}{=}\DUrole{default_value}{{[}\{\textquotesingle{}metric\_id\textquotesingle{}: 2, \textquotesingle{}bins\textquotesingle{}: 4, \textquotesingle{}min\textquotesingle{}: None, \textquotesingle{}max\textquotesingle{}: None, \textquotesingle{}figsize\textquotesingle{}: (8, 6), \textquotesingle{}savefig\textquotesingle{}: True, \textquotesingle{}mplstyle\textquotesingle{}: \textquotesingle{}pyterk\textquotesingle{}\}{]}}}, \emph{\DUrole{n}{correlation}\DUrole{o}{=}\DUrole{default_value}{{[}\{\textquotesingle{}axes\_min\textquotesingle{}: \textquotesingle{}auto\textquotesingle{}, \textquotesingle{}axes\_max\textquotesingle{}: \textquotesingle{}auto\textquotesingle{}, \textquotesingle{}figsize\textquotesingle{}: (8, 6), \textquotesingle{}marker\textquotesingle{}: \textquotesingle{}.\textquotesingle{}, \textquotesingle{}markersize\textquotesingle{}: 8, \textquotesingle{}alpha\textquotesingle{}: 0.7, \textquotesingle{}color\textquotesingle{}: \textquotesingle{}auto\textquotesingle{}, \textquotesingle{}savefig\textquotesingle{}: True, \textquotesingle{}mplstyle\textquotesingle{}: \textquotesingle{}pyterk\textquotesingle{}\}{]}}}, \emph{\DUrole{n}{confusion}\DUrole{o}{=}\DUrole{default_value}{{[}\{\textquotesingle{}normalize\textquotesingle{}: \textquotesingle{}pred\textquotesingle{}, \textquotesingle{}predict\_type\textquotesingle{}: \textquotesingle{}softmax\textquotesingle{}, \textquotesingle{}figsize\textquotesingle{}: (5, 5), \textquotesingle{}savefig\textquotesingle{}: True, \textquotesingle{}mplstyle\textquotesingle{}: \textquotesingle{}pyterk\textquotesingle{}\}{]}}}}{}
+\phantomsection\label{\detokenize{PyTerK:pyterk.reporter.show_report}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{pyterk.reporter.}}\sphinxbfcode{\sphinxupquote{show\_report}}}{\emph{\DUrole{n}{run\_dir}}, \emph{\DUrole{n}{padding}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}\textquotesingle{}}}, \emph{\DUrole{n}{sections}\DUrole{o}{=}\DUrole{default_value}{{[}\textquotesingle{}title\textquotesingle{}, \textquotesingle{}context\textquotesingle{}, \textquotesingle{}args\textquotesingle{}, \textquotesingle{}settings\textquotesingle{}, \textquotesingle{}evaluation\textquotesingle{}, \textquotesingle{}monitoring\textquotesingle{}, \textquotesingle{}history\textquotesingle{}, \textquotesingle{}distribution\textquotesingle{}, \textquotesingle{}correlation\textquotesingle{}{]}}}, \emph{\DUrole{n}{context}\DUrole{o}{=}\DUrole{default_value}{{[}\textquotesingle{}function\textquotesingle{}, \textquotesingle{}version\textquotesingle{}, \textquotesingle{}date\textquotesingle{}, \textquotesingle{}description\textquotesingle{}, \textquotesingle{}seed\textquotesingle{}{]}}}, \emph{\DUrole{n}{args}\DUrole{o}{=}\DUrole{default_value}{{[}\textquotesingle{}run\_dir\textquotesingle{}, \textquotesingle{}dataset\_id\textquotesingle{}, \textquotesingle{}model\_id\textquotesingle{}, \textquotesingle{}n\_iter\textquotesingle{}, \textquotesingle{}k\_fold\textquotesingle{}, \textquotesingle{}epochs\textquotesingle{}, \textquotesingle{}batch\_size\textquotesingle{}{]}}}, \emph{\DUrole{n}{settings}\DUrole{o}{=}\DUrole{default_value}{{[}\textquotesingle{}file\textquotesingle{}, \textquotesingle{}version\textquotesingle{}, \textquotesingle{}description\textquotesingle{}, \textquotesingle{}datasets\_dir\textquotesingle{}, \textquotesingle{}run\_dir\textquotesingle{}{]}}}, \emph{\DUrole{n}{evaluation}\DUrole{o}{=}\DUrole{default_value}{{[}\textquotesingle{}all\textquotesingle{}{]}}}, \emph{\DUrole{n}{monitoring}\DUrole{o}{=}\DUrole{default_value}{{[}\textquotesingle{}duration\textquotesingle{}, \textquotesingle{}used\_data\textquotesingle{}{]}}}, \emph{\DUrole{n}{history}\DUrole{o}{=}\DUrole{default_value}{{[}\{\textquotesingle{}metric\textquotesingle{}: \textquotesingle{}val\_mae\textquotesingle{}, \textquotesingle{}min\textquotesingle{}: None, \textquotesingle{}max\textquotesingle{}: None, \textquotesingle{}figsize\textquotesingle{}: (8, 6), \textquotesingle{}savefig\textquotesingle{}: True, \textquotesingle{}mplstyle\textquotesingle{}: \textquotesingle{}pyterk\textquotesingle{}\}{]}}}, \emph{\DUrole{n}{distribution}\DUrole{o}{=}\DUrole{default_value}{{[}\{\textquotesingle{}metric\_id\textquotesingle{}: 2, \textquotesingle{}bins\textquotesingle{}: 4, \textquotesingle{}min\textquotesingle{}: None, \textquotesingle{}max\textquotesingle{}: None, \textquotesingle{}figsize\textquotesingle{}: (8, 6), \textquotesingle{}savefig\textquotesingle{}: True, \textquotesingle{}mplstyle\textquotesingle{}: \textquotesingle{}pyterk\textquotesingle{}\}{]}}}, \emph{\DUrole{n}{correlation}\DUrole{o}{=}\DUrole{default_value}{{[}\{\textquotesingle{}axes\_min\textquotesingle{}: \textquotesingle{}auto\textquotesingle{}, \textquotesingle{}axes\_max\textquotesingle{}: \textquotesingle{}auto\textquotesingle{}, \textquotesingle{}figsize\textquotesingle{}: (8, 6), \textquotesingle{}marker\textquotesingle{}: \textquotesingle{}.\textquotesingle{}, \textquotesingle{}markersize\textquotesingle{}: 8, \textquotesingle{}alpha\textquotesingle{}: 0.7, \textquotesingle{}color\textquotesingle{}: \textquotesingle{}auto\textquotesingle{}, \textquotesingle{}savefig\textquotesingle{}: True, \textquotesingle{}mplstyle\textquotesingle{}: \textquotesingle{}pyterk\textquotesingle{}\}{]}}}, \emph{\DUrole{n}{confusion}\DUrole{o}{=}\DUrole{default_value}{{[}\{\textquotesingle{}normalize\textquotesingle{}: \textquotesingle{}pred\textquotesingle{}, \textquotesingle{}predict\_type\textquotesingle{}: \textquotesingle{}softmax\textquotesingle{}, \textquotesingle{}figsize\textquotesingle{}: (5, 5), \textquotesingle{}savefig\textquotesingle{}: True, \textquotesingle{}mplstyle\textquotesingle{}: \textquotesingle{}pyterk\textquotesingle{}\}{]}}}}{}
 \sphinxAtStartPar
 Builds and displays a report from the json data of a given run\_dir.
 \begin{quote}\begin{description}
@@ -1262,7 +1436,7 @@ Builds and displays a report from the json data of a given run\_dir.
 \index{show\_run\_reports() (in module pyterk.reporter)@\spxentry{show\_run\_reports()}\spxextra{in module pyterk.reporter}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{pyterk:pyterk.reporter.show_run_reports}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{pyterk.reporter.}}\sphinxbfcode{\sphinxupquote{show\_run\_reports}}}{\emph{\DUrole{n}{run\_config}}, \emph{\DUrole{n}{run\_filter}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}.*\textquotesingle{}}}, \emph{\DUrole{n}{sections}\DUrole{o}{=}\DUrole{default_value}{{[}\textquotesingle{}title\textquotesingle{}, \textquotesingle{}context\textquotesingle{}, \textquotesingle{}args\textquotesingle{}, \textquotesingle{}settings\textquotesingle{}, \textquotesingle{}evaluation\textquotesingle{}, \textquotesingle{}monitoring\textquotesingle{}, \textquotesingle{}history\textquotesingle{}, \textquotesingle{}distribution\textquotesingle{}, \textquotesingle{}correlation\textquotesingle{}, \textquotesingle{}confusion\textquotesingle{}{]}}}, \emph{\DUrole{n}{context}\DUrole{o}{=}\DUrole{default_value}{{[}\textquotesingle{}function\textquotesingle{}, \textquotesingle{}version\textquotesingle{}, \textquotesingle{}date\textquotesingle{}, \textquotesingle{}description\textquotesingle{}, \textquotesingle{}seed\textquotesingle{}{]}}}, \emph{\DUrole{n}{args}\DUrole{o}{=}\DUrole{default_value}{{[}\textquotesingle{}run\_dir\textquotesingle{}, \textquotesingle{}dataset\_id\textquotesingle{}, \textquotesingle{}model\_id\textquotesingle{}, \textquotesingle{}n\_iter\textquotesingle{}, \textquotesingle{}k\_fold\textquotesingle{}, \textquotesingle{}epochs\textquotesingle{}, \textquotesingle{}batch\_size\textquotesingle{}{]}}}, \emph{\DUrole{n}{settings}\DUrole{o}{=}\DUrole{default_value}{{[}\textquotesingle{}file\textquotesingle{}, \textquotesingle{}version\textquotesingle{}, \textquotesingle{}description\textquotesingle{}, \textquotesingle{}datasets\_dir\textquotesingle{}, \textquotesingle{}run\_dir\textquotesingle{}{]}}}, \emph{\DUrole{n}{evaluation}\DUrole{o}{=}\DUrole{default_value}{{[}\textquotesingle{}all\textquotesingle{}{]}}}, \emph{\DUrole{n}{monitoring}\DUrole{o}{=}\DUrole{default_value}{{[}\textquotesingle{}duration\textquotesingle{}, \textquotesingle{}used\_data\textquotesingle{}{]}}}, \emph{\DUrole{n}{history}\DUrole{o}{=}\DUrole{default_value}{{[}\{\textquotesingle{}metric\textquotesingle{}: \textquotesingle{}val\_mae\textquotesingle{}, \textquotesingle{}min\textquotesingle{}: None, \textquotesingle{}max\textquotesingle{}: None, \textquotesingle{}figsize\textquotesingle{}: (8, 6), \textquotesingle{}savefig\textquotesingle{}: True, \textquotesingle{}mplstyle\textquotesingle{}: \textquotesingle{}pyterk\textquotesingle{}\}{]}}}, \emph{\DUrole{n}{distribution}\DUrole{o}{=}\DUrole{default_value}{{[}\{\textquotesingle{}metric\_id\textquotesingle{}: 2, \textquotesingle{}bins\textquotesingle{}: 4, \textquotesingle{}min\textquotesingle{}: None, \textquotesingle{}max\textquotesingle{}: None, \textquotesingle{}figsize\textquotesingle{}: (8, 6), \textquotesingle{}savefig\textquotesingle{}: True, \textquotesingle{}mplstyle\textquotesingle{}: \textquotesingle{}pyterk\textquotesingle{}\}{]}}}, \emph{\DUrole{n}{correlation}\DUrole{o}{=}\DUrole{default_value}{{[}\{\textquotesingle{}axes\_min\textquotesingle{}: \textquotesingle{}auto\textquotesingle{}, \textquotesingle{}axes\_max\textquotesingle{}: \textquotesingle{}auto\textquotesingle{}, \textquotesingle{}figsize\textquotesingle{}: (8, 6), \textquotesingle{}marker\textquotesingle{}: \textquotesingle{}.\textquotesingle{}, \textquotesingle{}markersize\textquotesingle{}: 8, \textquotesingle{}alpha\textquotesingle{}: 0.7, \textquotesingle{}color\textquotesingle{}: \textquotesingle{}auto\textquotesingle{}, \textquotesingle{}savefig\textquotesingle{}: True, \textquotesingle{}mplstyle\textquotesingle{}: \textquotesingle{}pyterk\textquotesingle{}\}{]}}}, \emph{\DUrole{n}{confusion}\DUrole{o}{=}\DUrole{default_value}{{[}\{\textquotesingle{}normalize\textquotesingle{}: \textquotesingle{}pred\textquotesingle{}, \textquotesingle{}predict\_type\textquotesingle{}: \textquotesingle{}softmax\textquotesingle{}, \textquotesingle{}figsize\textquotesingle{}: (5, 5), \textquotesingle{}savefig\textquotesingle{}: True, \textquotesingle{}mplstyle\textquotesingle{}: \textquotesingle{}pyterk\textquotesingle{}\}{]}}}}{}
+\phantomsection\label{\detokenize{PyTerK:pyterk.reporter.show_run_reports}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{pyterk.reporter.}}\sphinxbfcode{\sphinxupquote{show\_run\_reports}}}{\emph{\DUrole{n}{run\_config}}, \emph{\DUrole{n}{run\_filter}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}.*\textquotesingle{}}}, \emph{\DUrole{n}{sections}\DUrole{o}{=}\DUrole{default_value}{{[}\textquotesingle{}title\textquotesingle{}, \textquotesingle{}context\textquotesingle{}, \textquotesingle{}args\textquotesingle{}, \textquotesingle{}settings\textquotesingle{}, \textquotesingle{}evaluation\textquotesingle{}, \textquotesingle{}monitoring\textquotesingle{}, \textquotesingle{}history\textquotesingle{}, \textquotesingle{}distribution\textquotesingle{}, \textquotesingle{}correlation\textquotesingle{}, \textquotesingle{}confusion\textquotesingle{}{]}}}, \emph{\DUrole{n}{context}\DUrole{o}{=}\DUrole{default_value}{{[}\textquotesingle{}function\textquotesingle{}, \textquotesingle{}version\textquotesingle{}, \textquotesingle{}date\textquotesingle{}, \textquotesingle{}description\textquotesingle{}, \textquotesingle{}seed\textquotesingle{}{]}}}, \emph{\DUrole{n}{args}\DUrole{o}{=}\DUrole{default_value}{{[}\textquotesingle{}run\_dir\textquotesingle{}, \textquotesingle{}dataset\_id\textquotesingle{}, \textquotesingle{}model\_id\textquotesingle{}, \textquotesingle{}n\_iter\textquotesingle{}, \textquotesingle{}k\_fold\textquotesingle{}, \textquotesingle{}epochs\textquotesingle{}, \textquotesingle{}batch\_size\textquotesingle{}{]}}}, \emph{\DUrole{n}{settings}\DUrole{o}{=}\DUrole{default_value}{{[}\textquotesingle{}file\textquotesingle{}, \textquotesingle{}version\textquotesingle{}, \textquotesingle{}description\textquotesingle{}, \textquotesingle{}datasets\_dir\textquotesingle{}, \textquotesingle{}run\_dir\textquotesingle{}{]}}}, \emph{\DUrole{n}{evaluation}\DUrole{o}{=}\DUrole{default_value}{{[}\textquotesingle{}all\textquotesingle{}{]}}}, \emph{\DUrole{n}{monitoring}\DUrole{o}{=}\DUrole{default_value}{{[}\textquotesingle{}duration\textquotesingle{}, \textquotesingle{}used\_data\textquotesingle{}{]}}}, \emph{\DUrole{n}{history}\DUrole{o}{=}\DUrole{default_value}{{[}\{\textquotesingle{}metric\textquotesingle{}: \textquotesingle{}val\_mae\textquotesingle{}, \textquotesingle{}min\textquotesingle{}: None, \textquotesingle{}max\textquotesingle{}: None, \textquotesingle{}figsize\textquotesingle{}: (8, 6), \textquotesingle{}savefig\textquotesingle{}: True, \textquotesingle{}mplstyle\textquotesingle{}: \textquotesingle{}pyterk\textquotesingle{}\}{]}}}, \emph{\DUrole{n}{distribution}\DUrole{o}{=}\DUrole{default_value}{{[}\{\textquotesingle{}metric\_id\textquotesingle{}: 2, \textquotesingle{}bins\textquotesingle{}: 4, \textquotesingle{}min\textquotesingle{}: None, \textquotesingle{}max\textquotesingle{}: None, \textquotesingle{}figsize\textquotesingle{}: (8, 6), \textquotesingle{}savefig\textquotesingle{}: True, \textquotesingle{}mplstyle\textquotesingle{}: \textquotesingle{}pyterk\textquotesingle{}\}{]}}}, \emph{\DUrole{n}{correlation}\DUrole{o}{=}\DUrole{default_value}{{[}\{\textquotesingle{}axes\_min\textquotesingle{}: \textquotesingle{}auto\textquotesingle{}, \textquotesingle{}axes\_max\textquotesingle{}: \textquotesingle{}auto\textquotesingle{}, \textquotesingle{}figsize\textquotesingle{}: (8, 6), \textquotesingle{}marker\textquotesingle{}: \textquotesingle{}.\textquotesingle{}, \textquotesingle{}markersize\textquotesingle{}: 8, \textquotesingle{}alpha\textquotesingle{}: 0.7, \textquotesingle{}color\textquotesingle{}: \textquotesingle{}auto\textquotesingle{}, \textquotesingle{}savefig\textquotesingle{}: True, \textquotesingle{}mplstyle\textquotesingle{}: \textquotesingle{}pyterk\textquotesingle{}\}{]}}}, \emph{\DUrole{n}{confusion}\DUrole{o}{=}\DUrole{default_value}{{[}\{\textquotesingle{}normalize\textquotesingle{}: \textquotesingle{}pred\textquotesingle{}, \textquotesingle{}predict\_type\textquotesingle{}: \textquotesingle{}softmax\textquotesingle{}, \textquotesingle{}figsize\textquotesingle{}: (5, 5), \textquotesingle{}savefig\textquotesingle{}: True, \textquotesingle{}mplstyle\textquotesingle{}: \textquotesingle{}pyterk\textquotesingle{}\}{]}}}}{}
 \sphinxAtStartPar
 Displays a full report in two parts, short and long, for all runs defined in the settings.
 Very simple to use…
@@ -1325,7 +1499,7 @@ Nothing, but display a short and long report, with index.
 
 
 \section{pyterk.task\_manager module}
-\label{\detokenize{pyterk:module-pyterk.task_manager}}\label{\detokenize{pyterk:pyterk-task-manager-module}}\index{module@\spxentry{module}!pyterk.task\_manager@\spxentry{pyterk.task\_manager}}\index{pyterk.task\_manager@\spxentry{pyterk.task\_manager}!module@\spxentry{module}}
+\label{\detokenize{PyTerK:module-pyterk.task_manager}}\label{\detokenize{PyTerK:pyterk-task-manager-module}}\index{module@\spxentry{module}!pyterk.task\_manager@\spxentry{pyterk.task\_manager}}\index{pyterk.task\_manager@\spxentry{pyterk.task\_manager}!module@\spxentry{module}}
 \sphinxAtStartPar
 Allows to generate tasks and to execute them in a distributed way.
 
@@ -1334,30 +1508,34 @@ See example notebook : \sphinxtitleref{03\sphinxhyphen{}Example\sphinxhyphen{}03
 
 \sphinxAtStartPar
 Example :
-{\color{red}\bfseries{}\textasciigrave{}\textasciigrave{}}\textasciigrave{}
-task\_manager.add\_combinational\_iterative\_manyfold(settings = settings,
-\begin{quote}
 
-\sphinxAtStartPar
-run\_key= ‘Example\sphinxhyphen{}03.3’)
-\end{quote}
-
-\sphinxAtStartPar
-{\color{red}\bfseries{}\textasciigrave{}\textasciigrave{}}{\color{red}\bfseries{}\textasciigrave{}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{task\PYGZus{}manager}\PYG{o}{.}\PYG{n}{add\PYGZus{}combinational\PYGZus{}iterative\PYGZus{}manyfold}\PYG{p}{(}\PYG{n}{settings} \PYG{o}{=} \PYG{n}{settings}\PYG{p}{,}
+                                                   \PYG{n}{run\PYGZus{}key} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Example\PYGZhy{}03.3}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
 \index{add\_combinational\_iterative\_manyfold() (in module pyterk.task\_manager)@\spxentry{add\_combinational\_iterative\_manyfold()}\spxextra{in module pyterk.task\_manager}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{pyterk:pyterk.task_manager.add_combinational_iterative_manyfold}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{pyterk.task\_manager.}}\sphinxbfcode{\sphinxupquote{add\_combinational\_iterative\_manyfold}}}{\emph{\DUrole{n}{settings}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{run\_key}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{verbose}\DUrole{o}{=}\DUrole{default_value}{1}}}{}
+\phantomsection\label{\detokenize{PyTerK:pyterk.task_manager.add_combinational_iterative_manyfold}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{pyterk.task\_manager.}}\sphinxbfcode{\sphinxupquote{add\_combinational\_iterative\_manyfold}}}{\emph{\DUrole{n}{settings}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{run\_key}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{verbose}\DUrole{o}{=}\DUrole{default_value}{1}}}{}
 \sphinxAtStartPar
 Add tasks for a combinational iterative manyfold \sphinxhyphen{} \sphinxtitleref{see 03\sphinxhyphen{}Example\sphinxhyphen{}03}.ipynb
 Generates all the tasks of the combinatorial described in the run section of the settings file.
-:param settings: settings
-:type settings: dict
-:param run\_key: name of the config run section
-:type run\_key: string
-:param verbose: verbosity of generated tasks
-:type verbose: int
 \begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{settings}} (\sphinxstyleliteralemphasis{\sphinxupquote{dict}}) \textendash{} settings
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{run\_key}} (\sphinxstyleliteralemphasis{\sphinxupquote{string}}) \textendash{} name of the config run section
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{verbose}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} verbosity of generated tasks
+
+\end{itemize}
+
 \item[{Returns}] \leavevmode
 \sphinxAtStartPar
 Nothings. Task are added to the pending taks queue.
@@ -1369,35 +1547,62 @@ Nothings. Task are added to the pending taks queue.
 \index{add\_iterative\_manyfold() (in module pyterk.task\_manager)@\spxentry{add\_iterative\_manyfold()}\spxextra{in module pyterk.task\_manager}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{pyterk:pyterk.task_manager.add_iterative_manyfold}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{pyterk.task\_manager.}}\sphinxbfcode{\sphinxupquote{add\_iterative\_manyfold}}}{\emph{\DUrole{n}{settings}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{run\_dir}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{dataset\_id}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{model\_id}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{n\_iter}\DUrole{o}{=}\DUrole{default_value}{2}}, \emph{\DUrole{n}{k\_fold}\DUrole{o}{=}\DUrole{default_value}{10}}, \emph{\DUrole{n}{epochs}\DUrole{o}{=}\DUrole{default_value}{10}}, \emph{\DUrole{n}{batch\_size}\DUrole{o}{=}\DUrole{default_value}{10}}, \emph{\DUrole{n}{description}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{save\_xxtest}\DUrole{o}{=}\DUrole{default_value}{False}}, \emph{\DUrole{n}{save\_yytest}\DUrole{o}{=}\DUrole{default_value}{False}}, \emph{\DUrole{n}{verbose}\DUrole{o}{=}\DUrole{default_value}{1}}}{}
+\phantomsection\label{\detokenize{PyTerK:pyterk.task_manager.add_iterative_manyfold}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{pyterk.task\_manager.}}\sphinxbfcode{\sphinxupquote{add\_iterative\_manyfold}}}{\emph{\DUrole{n}{settings}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{run\_dir}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{dataset\_id}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{model\_id}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{n\_iter}\DUrole{o}{=}\DUrole{default_value}{2}}, \emph{\DUrole{n}{k\_fold}\DUrole{o}{=}\DUrole{default_value}{10}}, \emph{\DUrole{n}{epochs}\DUrole{o}{=}\DUrole{default_value}{10}}, \emph{\DUrole{n}{batch\_size}\DUrole{o}{=}\DUrole{default_value}{10}}, \emph{\DUrole{n}{description}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{save\_xxtest}\DUrole{o}{=}\DUrole{default_value}{False}}, \emph{\DUrole{n}{save\_yytest}\DUrole{o}{=}\DUrole{default_value}{False}}, \emph{\DUrole{n}{verbose}\DUrole{o}{=}\DUrole{default_value}{1}}}{}
 \sphinxAtStartPar
 Add tasks for an iterative manyfold \sphinxhyphen{} see \sphinxtitleref{02\sphinxhyphen{}Example\sphinxhyphen{}02.ipynb}
 Generate n\_ter*k\_fold tasks, each iteration will generate a subdirectory in run\_dir.
-:param settings: settings
-:type settings: dict
-:param run\_dir: run directoty to output k results (json files and best model)
-:type run\_dir: string
-:param dataset\_id: datasets id in settings file
-:type dataset\_id: string
-:param model\_id: model id in settings file
-:type model\_id: string
-:param n\_iter: number of iteration
-:type n\_iter: int
-:param k\_fold: number of fold
-:type k\_fold: int
-:param epochs: number of epochs
-:type epochs: int
-:param batch\_size: size of batch
-:type batch\_size: int
-:param description: description of the action
-:type description: string
-:param save\_xxtest: save x\_test as json file, or not
-:type save\_xxtest: Boolean
-:param save\_yytest: save y\_test and y\_pred  as json file, or not
-:type save\_yytest: Boolean
-:param verbose: verbosity of generated tasks
-:type verbose: int
 \begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{settings}} (\sphinxstyleliteralemphasis{\sphinxupquote{dict}}) \textendash{} settings
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{run\_dir}} (\sphinxstyleliteralemphasis{\sphinxupquote{string}}) \textendash{} run directoty to output k results (json files and best model)
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{dataset\_id}} (\sphinxstyleliteralemphasis{\sphinxupquote{string}}) \textendash{} datasets id in settings file
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{model\_id}} (\sphinxstyleliteralemphasis{\sphinxupquote{string}}) \textendash{} model id in settings file
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{n\_iter}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} number of iteration
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{k\_fold}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} number of fold
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{epochs}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} number of epochs
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{batch\_size}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} size of batch
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{description}} (\sphinxstyleliteralemphasis{\sphinxupquote{string}}) \textendash{} description of the action
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{save\_xxtest}} (\sphinxstyleliteralemphasis{\sphinxupquote{Boolean}}) \textendash{} save x\_test as json file, or not
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{save\_yytest}} (\sphinxstyleliteralemphasis{\sphinxupquote{Boolean}}) \textendash{} save y\_test and y\_pred  as json file, or not
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{verbose}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} verbosity of generated tasks
+
+\end{itemize}
+
 \item[{Returns}] \leavevmode
 \sphinxAtStartPar
 Nothings. Task are added to the pending taks queue.
@@ -1409,33 +1614,58 @@ Nothings. Task are added to the pending taks queue.
 \index{add\_manyfold() (in module pyterk.task\_manager)@\spxentry{add\_manyfold()}\spxextra{in module pyterk.task\_manager}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{pyterk:pyterk.task_manager.add_manyfold}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{pyterk.task\_manager.}}\sphinxbfcode{\sphinxupquote{add\_manyfold}}}{\emph{\DUrole{n}{settings}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{run\_dir}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{dataset\_id}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{model\_id}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{k\_fold}\DUrole{o}{=}\DUrole{default_value}{10}}, \emph{\DUrole{n}{epochs}\DUrole{o}{=}\DUrole{default_value}{10}}, \emph{\DUrole{n}{batch\_size}\DUrole{o}{=}\DUrole{default_value}{10}}, \emph{\DUrole{n}{description}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{save\_xxtest}\DUrole{o}{=}\DUrole{default_value}{False}}, \emph{\DUrole{n}{save\_yytest}\DUrole{o}{=}\DUrole{default_value}{False}}, \emph{\DUrole{n}{verbose}\DUrole{o}{=}\DUrole{default_value}{1}}}{}
+\phantomsection\label{\detokenize{PyTerK:pyterk.task_manager.add_manyfold}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{pyterk.task\_manager.}}\sphinxbfcode{\sphinxupquote{add\_manyfold}}}{\emph{\DUrole{n}{settings}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{run\_dir}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{dataset\_id}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{model\_id}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{k\_fold}\DUrole{o}{=}\DUrole{default_value}{10}}, \emph{\DUrole{n}{epochs}\DUrole{o}{=}\DUrole{default_value}{10}}, \emph{\DUrole{n}{batch\_size}\DUrole{o}{=}\DUrole{default_value}{10}}, \emph{\DUrole{n}{description}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{save\_xxtest}\DUrole{o}{=}\DUrole{default_value}{False}}, \emph{\DUrole{n}{save\_yytest}\DUrole{o}{=}\DUrole{default_value}{False}}, \emph{\DUrole{n}{verbose}\DUrole{o}{=}\DUrole{default_value}{1}}}{}
 \sphinxAtStartPar
 Add tasks for a manyfold \sphinxhyphen{} see \sphinxtitleref{01\sphinxhyphen{}Example\sphinxhyphen{}01.ipynb}
 Generate k\_fold tasks, each task will generate one subdirectory in run\_dir.
-:param settings: settings
-:type settings: dict
-:param run\_dir: run directoty to output k results (json files and best model)
-:type run\_dir: string
-:param dataset\_id: datasets id in settings file
-:type dataset\_id: string
-:param model\_id: model id in settings file
-:type model\_id: string
-:param k\_fold: number of fold
-:type k\_fold: int
-:param epochs: number of epochs
-:type epochs: int
-:param batch\_size: size of batch
-:type batch\_size: int
-:param description: description of the action
-:type description: string
-:param save\_xxtest: save x\_test as json file, or not
-:type save\_xxtest: Boolean
-:param save\_yytest: save y\_test and y\_pred  as json file, or not
-:type save\_yytest: Boolean
-:param verbose: verbosity of generated tasks
-:type verbose: int
 \begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{settings}} (\sphinxstyleliteralemphasis{\sphinxupquote{dict}}) \textendash{} settings
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{run\_dir}} (\sphinxstyleliteralemphasis{\sphinxupquote{string}}) \textendash{} run directoty to output k results (json files and best model)
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{dataset\_id}} (\sphinxstyleliteralemphasis{\sphinxupquote{string}}) \textendash{} datasets id in settings file
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{model\_id}} (\sphinxstyleliteralemphasis{\sphinxupquote{string}}) \textendash{} model id in settings file
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{k\_fold}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} number of fold
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{epochs}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} number of epochs
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{batch\_size}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} size of batch
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{description}} (\sphinxstyleliteralemphasis{\sphinxupquote{string}}) \textendash{} description of the action
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{save\_xxtest}} (\sphinxstyleliteralemphasis{\sphinxupquote{Boolean}}) \textendash{} save x\_test as json file, or not
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{save\_yytest}} (\sphinxstyleliteralemphasis{\sphinxupquote{Boolean}}) \textendash{} save y\_test and y\_pred  as json file, or not
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{verbose}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} verbosity of generated tasks
+
+\end{itemize}
+
 \item[{Returns}] \leavevmode
 \sphinxAtStartPar
 Nothings. Task are added to the pending taks queue.
@@ -1447,7 +1677,7 @@ Nothings. Task are added to the pending taks queue.
 \index{reset() (in module pyterk.task\_manager)@\spxentry{reset()}\spxextra{in module pyterk.task\_manager}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{pyterk:pyterk.task_manager.reset}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{pyterk.task\_manager.}}\sphinxbfcode{\sphinxupquote{reset}}}{}{}
+\phantomsection\label{\detokenize{PyTerK:pyterk.task_manager.reset}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{pyterk.task\_manager.}}\sphinxbfcode{\sphinxupquote{reset}}}{}{}
 \sphinxAtStartPar
 Reset pending tasks. Suppress all of them !
 
@@ -1456,13 +1686,13 @@ Reset pending tasks. Suppress all of them !
 \index{run() (in module pyterk.task\_manager)@\spxentry{run()}\spxextra{in module pyterk.task\_manager}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{pyterk:pyterk.task_manager.run}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{pyterk.task\_manager.}}\sphinxbfcode{\sphinxupquote{run}}}{\emph{\DUrole{n}{processes}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{maxtasksperchild}\DUrole{o}{=}\DUrole{default_value}{10}}, \emph{\DUrole{n}{verbose}\DUrole{o}{=}\DUrole{default_value}{1}}}{}
+\phantomsection\label{\detokenize{PyTerK:pyterk.task_manager.run}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{pyterk.task\_manager.}}\sphinxbfcode{\sphinxupquote{run}}}{\emph{\DUrole{n}{processes}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{maxtasksperchild}\DUrole{o}{=}\DUrole{default_value}{10}}, \emph{\DUrole{n}{verbose}\DUrole{o}{=}\DUrole{default_value}{1}}}{}
 \end{fulllineitems}
 
 \index{seed() (in module pyterk.task\_manager)@\spxentry{seed()}\spxextra{in module pyterk.task\_manager}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{pyterk:pyterk.task_manager.seed}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{pyterk.task\_manager.}}\sphinxbfcode{\sphinxupquote{seed}}}{\emph{\DUrole{n}{seed}\DUrole{o}{=}\DUrole{default_value}{None}}}{}
+\phantomsection\label{\detokenize{PyTerK:pyterk.task_manager.seed}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{pyterk.task\_manager.}}\sphinxbfcode{\sphinxupquote{seed}}}{\emph{\DUrole{n}{seed}\DUrole{o}{=}\DUrole{default_value}{None}}}{}
 \sphinxAtStartPar
 Init random generators with given seed
 
@@ -1471,7 +1701,7 @@ Init random generators with given seed
 \index{show\_tasks\_size() (in module pyterk.task\_manager)@\spxentry{show\_tasks\_size()}\spxextra{in module pyterk.task\_manager}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{pyterk:pyterk.task_manager.show_tasks_size}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{pyterk.task\_manager.}}\sphinxbfcode{\sphinxupquote{show\_tasks\_size}}}{}{}
+\phantomsection\label{\detokenize{PyTerK:pyterk.task_manager.show_tasks_size}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{pyterk.task\_manager.}}\sphinxbfcode{\sphinxupquote{show\_tasks\_size}}}{}{}
 \sphinxAtStartPar
 Print pending tasks size
 
@@ -1480,13 +1710,13 @@ Print pending tasks size
 
 
 \section{pyterk.worker module}
-\label{\detokenize{pyterk:module-pyterk.worker}}\label{\detokenize{pyterk:pyterk-worker-module}}\index{module@\spxentry{module}!pyterk.worker@\spxentry{pyterk.worker}}\index{pyterk.worker@\spxentry{pyterk.worker}!module@\spxentry{module}}
+\label{\detokenize{PyTerK:module-pyterk.worker}}\label{\detokenize{PyTerK:pyterk-worker-module}}\index{module@\spxentry{module}!pyterk.worker@\spxentry{pyterk.worker}}\index{pyterk.worker@\spxentry{pyterk.worker}!module@\spxentry{module}}
 \sphinxAtStartPar
 This module is for internal use only \sphinxhyphen{} You do not have to interact with ;\sphinxhyphen{}).
 \index{get\_model\_family() (in module pyterk.worker)@\spxentry{get\_model\_family()}\spxextra{in module pyterk.worker}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{pyterk:pyterk.worker.get_model_family}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{pyterk.worker.}}\sphinxbfcode{\sphinxupquote{get\_model\_family}}}{\emph{\DUrole{n}{model}}}{}
+\phantomsection\label{\detokenize{PyTerK:pyterk.worker.get_model_family}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{pyterk.worker.}}\sphinxbfcode{\sphinxupquote{get\_model\_family}}}{\emph{\DUrole{n}{model}}}{}
 \sphinxAtStartPar
 Should return the model family : ‘tensorflow’, ‘keras’ or ‘sklearn’
 
@@ -1495,37 +1725,38 @@ Should return the model family : ‘tensorflow’, ‘keras’ or ‘sklearn’
 \index{init() (in module pyterk.worker)@\spxentry{init()}\spxextra{in module pyterk.worker}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{pyterk:pyterk.worker.init}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{pyterk.worker.}}\sphinxbfcode{\sphinxupquote{init}}}{\emph{\DUrole{n}{s}}, \emph{\DUrole{n}{l}}, \emph{\DUrole{n}{v}}}{}
+\phantomsection\label{\detokenize{PyTerK:pyterk.worker.init}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{pyterk.worker.}}\sphinxbfcode{\sphinxupquote{init}}}{\emph{\DUrole{n}{s}}, \emph{\DUrole{n}{l}}, \emph{\DUrole{n}{v}}}{}
 \end{fulllineitems}
 
 \index{model\_fit() (in module pyterk.worker)@\spxentry{model\_fit()}\spxextra{in module pyterk.worker}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{pyterk:pyterk.worker.model_fit}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{pyterk.worker.}}\sphinxbfcode{\sphinxupquote{model\_fit}}}{\emph{\DUrole{n}{run\_dir}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{dataset\_id}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{train\_index}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{test\_index}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{model\_id}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{epochs}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{batch\_size}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{seed}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{description}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{save\_xxtest}\DUrole{o}{=}\DUrole{default_value}{False}}, \emph{\DUrole{n}{save\_yytest}\DUrole{o}{=}\DUrole{default_value}{False}}}{}
+\phantomsection\label{\detokenize{PyTerK:pyterk.worker.model_fit}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{pyterk.worker.}}\sphinxbfcode{\sphinxupquote{model\_fit}}}{\emph{\DUrole{n}{run\_dir}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{dataset\_id}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{train\_index}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{test\_index}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{model\_id}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{epochs}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{batch\_size}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{seed}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{description}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{save\_xxtest}\DUrole{o}{=}\DUrole{default_value}{False}}, \emph{\DUrole{n}{save\_yytest}\DUrole{o}{=}\DUrole{default_value}{False}}}{}
 \end{fulllineitems}
 
 \index{model\_fit\_sklearn() (in module pyterk.worker)@\spxentry{model\_fit\_sklearn()}\spxextra{in module pyterk.worker}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{pyterk:pyterk.worker.model_fit_sklearn}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{pyterk.worker.}}\sphinxbfcode{\sphinxupquote{model\_fit\_sklearn}}}{\emph{\DUrole{n}{model}}, \emph{\DUrole{n}{run\_dir}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{x\_train}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{y\_train}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{x\_test}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{y\_test}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{save\_xxtest}\DUrole{o}{=}\DUrole{default_value}{False}}, \emph{\DUrole{n}{save\_yytest}\DUrole{o}{=}\DUrole{default_value}{False}}}{}
+\phantomsection\label{\detokenize{PyTerK:pyterk.worker.model_fit_sklearn}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{pyterk.worker.}}\sphinxbfcode{\sphinxupquote{model\_fit\_sklearn}}}{\emph{\DUrole{n}{model}}, \emph{\DUrole{n}{run\_dir}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{x\_train}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{y\_train}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{x\_test}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{y\_test}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{save\_xxtest}\DUrole{o}{=}\DUrole{default_value}{False}}, \emph{\DUrole{n}{save\_yytest}\DUrole{o}{=}\DUrole{default_value}{False}}}{}
 \end{fulllineitems}
 
 \index{model\_fit\_tensorflow() (in module pyterk.worker)@\spxentry{model\_fit\_tensorflow()}\spxextra{in module pyterk.worker}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{pyterk:pyterk.worker.model_fit_tensorflow}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{pyterk.worker.}}\sphinxbfcode{\sphinxupquote{model\_fit\_tensorflow}}}{\emph{\DUrole{n}{model}}, \emph{\DUrole{n}{run\_dir}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{x\_train}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{y\_train}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{x\_test}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{y\_test}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{epochs}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{batch\_size}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{save\_xxtest}\DUrole{o}{=}\DUrole{default_value}{False}}, \emph{\DUrole{n}{save\_yytest}\DUrole{o}{=}\DUrole{default_value}{False}}}{}
+\phantomsection\label{\detokenize{PyTerK:pyterk.worker.model_fit_tensorflow}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{pyterk.worker.}}\sphinxbfcode{\sphinxupquote{model\_fit\_tensorflow}}}{\emph{\DUrole{n}{model}}, \emph{\DUrole{n}{run\_dir}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{x\_train}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{y\_train}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{x\_test}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{y\_test}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{epochs}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{batch\_size}\DUrole{o}{=}\DUrole{default_value}{None}}, \emph{\DUrole{n}{save\_xxtest}\DUrole{o}{=}\DUrole{default_value}{False}}, \emph{\DUrole{n}{save\_yytest}\DUrole{o}{=}\DUrole{default_value}{False}}}{}
 \end{fulllineitems}
 
 
 
 \chapter{MultipleRegression module}
 \label{\detokenize{MultipleRegression:module-MultipleRegression}}\label{\detokenize{MultipleRegression:multipleregression-module}}\label{\detokenize{MultipleRegression::doc}}\index{module@\spxentry{module}!MultipleRegression@\spxentry{MultipleRegression}}\index{MultipleRegression@\spxentry{MultipleRegression}!module@\spxentry{module}}
-\sphinxAtStartPar
-Module to train Multiple Linear Regression with Scheffe ineteraction terms with iterative k\sphinxhyphen{}fold crossvalidation
 
+\section{Description}
+\label{\detokenize{MultipleRegression:description}}
 \sphinxAtStartPar
-Contains functions to :
-\begin{itemize}
+Module to train Multiple Linear Regression with Scheffe interaction terms, with iterative k\sphinxhyphen{}fold crossvalidation. The method that lies behind the model training is identical to PyTerK one, with iterative k\sphinxhyphen{}fold cross\sphinxhyphen{}validation.
+\begin{description}
+\item[{Contains functions to :}] \leavevmode\begin{itemize}
 \item {} 
 \sphinxAtStartPar
 generate interactions
@@ -1539,7 +1770,12 @@ train regression models
 plot iterative k\sphinxhyphen{}fold crossvalidation results
 
 \end{itemize}
-\index{Scheffe\_interactions\_terms() (in module MultipleRegression)@\spxentry{Scheffe\_interactions\_terms()}\spxextra{in module MultipleRegression}}
+
+\end{description}
+
+
+\section{Functions}
+\label{\detokenize{MultipleRegression:functions}}\index{Scheffe\_interactions\_terms() (in module MultipleRegression)@\spxentry{Scheffe\_interactions\_terms()}\spxextra{in module MultipleRegression}}
 
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{MultipleRegression:MultipleRegression.Scheffe_interactions_terms}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{MultipleRegression.}}\sphinxbfcode{\sphinxupquote{Scheffe\_interactions\_terms}}}{\emph{\DUrole{n}{data}}, \emph{\DUrole{n}{in\_percent}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}True\textquotesingle{}}}, \emph{\DUrole{n}{compo\_columns}\DUrole{o}{=}\DUrole{default_value}{{[}\textquotesingle{}Zr\textquotesingle{}, \textquotesingle{}Nb\textquotesingle{}, \textquotesingle{}Mo\textquotesingle{}, \textquotesingle{}Ti\textquotesingle{}, \textquotesingle{}Cr\textquotesingle{}{]}}}}{}
@@ -1615,9 +1851,9 @@ list of MAE for every run of iterative k\sphinxhyphen{}fold crossvalidation, bet
 \sphinxAtStartPar
 list
 
-\item[{Return R2\_list}] \leavevmode
+\item[{Return R2\_adj\_list}] \leavevmode
 \sphinxAtStartPar
-list of R2 for every run of iterative k\sphinxhyphen{}fold crossvalidation, between expected vs predicted value on test set
+list of R2 adjusted for every run of iterative k\sphinxhyphen{}fold crossvalidation, between expected vs predicted value on test set
 
 \item[{Return type}] \leavevmode
 \sphinxAtStartPar
@@ -1727,12 +1963,12 @@ plot regression over a certain number of k\sphinxhyphen{}fold for each iteration
 \item\relax\sphinxstyleindexentry{MultipleRegression}\sphinxstyleindexpageref{MultipleRegression:\detokenize{module-MultipleRegression}}
 \indexspace
 \bigletter{p}
-\item\relax\sphinxstyleindexentry{pyterk}\sphinxstyleindexpageref{pyterk:\detokenize{module-pyterk}}
-\item\relax\sphinxstyleindexentry{pyterk.config}\sphinxstyleindexpageref{pyterk:\detokenize{module-pyterk.config}}
-\item\relax\sphinxstyleindexentry{pyterk.models}\sphinxstyleindexpageref{pyterk:\detokenize{module-pyterk.models}}
-\item\relax\sphinxstyleindexentry{pyterk.reporter}\sphinxstyleindexpageref{pyterk:\detokenize{module-pyterk.reporter}}
-\item\relax\sphinxstyleindexentry{pyterk.task\_manager}\sphinxstyleindexpageref{pyterk:\detokenize{module-pyterk.task_manager}}
-\item\relax\sphinxstyleindexentry{pyterk.worker}\sphinxstyleindexpageref{pyterk:\detokenize{module-pyterk.worker}}
+\item\relax\sphinxstyleindexentry{pyterk}\sphinxstyleindexpageref{PyTerK:\detokenize{module-pyterk}}
+\item\relax\sphinxstyleindexentry{pyterk.config}\sphinxstyleindexpageref{PyTerK:\detokenize{module-pyterk.config}}
+\item\relax\sphinxstyleindexentry{pyterk.models}\sphinxstyleindexpageref{PyTerK:\detokenize{module-pyterk.models}}
+\item\relax\sphinxstyleindexentry{pyterk.reporter}\sphinxstyleindexpageref{PyTerK:\detokenize{module-pyterk.reporter}}
+\item\relax\sphinxstyleindexentry{pyterk.task\_manager}\sphinxstyleindexpageref{PyTerK:\detokenize{module-pyterk.task_manager}}
+\item\relax\sphinxstyleindexentry{pyterk.worker}\sphinxstyleindexpageref{PyTerK:\detokenize{module-pyterk.worker}}
 \end{sphinxtheindex}
 \renewcommand{\indexname}{MATLAB Module Index}
 \begin{sphinxtheindex}

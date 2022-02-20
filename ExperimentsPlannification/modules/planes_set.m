@@ -3,7 +3,7 @@ function [name_planes_opt,planes_opt] = planes_set(name_mixture, mixture,planes,
 %
 %:param cell(str) name_mixture: name of mixture, cell index being the mixture order 
 %:param cell(float) mixture: coordinates of mixtures, cell index being the mixture order *eg:mixtures{2} contains the binaries coordinates* 
-%:param cell(float) plane:coordinates of the points through which the planes pass (3x3 columns)
+%:param cell(float) plane: coordinates of the points through which the planes pass (3x3 columns)
 %:param cell(str) name_planes: points through which the planes pass 
 %:return: array(str) name_planes_opt: name of mixture trhough whch the set of planes pass 
 %:return: array(float) planes_opt: coordinates of mixture trhough whch the set of planes pass 
