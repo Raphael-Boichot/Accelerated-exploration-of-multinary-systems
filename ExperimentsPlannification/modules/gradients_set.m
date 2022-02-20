@@ -60,7 +60,7 @@ while sum(ismember(mixture_name_list ,name_alignement_opt))<nb_mixture % check t
                 chrono=toc;
                 if chrono>100
                    fig5 = figure ;
-                   set( fig5 , 'position' , [ 600 , 400 , 500 , 100 ])
+                   set( fig5 , 'position' , [ 600 , 400 , 500 , 100 ]);
                    uicontrol ( fig5 , 'style' , ' text' , 'position', [100 30 200 50] , 'string' , 'Pas de solution trouvée' );
                    return
                 end
@@ -147,9 +147,9 @@ while sum(ismember(mixture_name_list ,name_alignement_opt))<nb_mixture % check t
                                 index=randi(size(alignments,1));
                             else
                                 alignement_opt=[alignement_opt;alignments(index,:)];
-                                name_alignement_opt=[name_alignement_opt; name_alignement(index,:)]    ;                           
+                                name_alignement_opt=[name_alignement_opt; name_alignement(index,:)];                           
                                 already_in_al_opt=1;
-                                sum(ismember(mixture_name_list ,name_alignement_opt))
+                                sum(ismember(mixture_name_list ,name_alignement_opt));
                                 waitbar(nb_draw/nb_draws_tot + sum(ismember(mixture_name_list ,name_alignement_opt))/(nb_mixture*nb_draws_tot),f_gradient_set,"Compute gradient set: set number "+num2str(nb_draw)+", try number "+num2str(nb_overtime+1)); 
                                 pause(0.01)
                             end
@@ -160,7 +160,7 @@ while sum(ismember(mixture_name_list ,name_alignement_opt))<nb_mixture % check t
                             return
                          end
                         if chrono>10 || sum(ismember(mixture_name_list ,name_alignement_opt))>=nb_mixture
-                            sum(ismember(mixture_name_list ,name_alignement_opt))
+                            sum(ismember(mixture_name_list ,name_alignement_opt));
                             overtime=1;
 
                             break;

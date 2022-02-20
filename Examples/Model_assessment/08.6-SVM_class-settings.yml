@@ -1,0 +1,188 @@
+# ------------------------------------------------------------------
+#                  ____        _            _
+#                 |  _ \ _   _| |_ ___ _ __| | __
+#                 | |_) | | | | __/ _ \ '__| |/ /
+#                 |  __/| |_| | ||  __/ |  |   <
+#                 |_|    \__, |\__\___|_|  |_|\_\
+#                        |___/                        Settings file
+# ------------------------------------------------------------------
+# Python Iterator for Kfold and co. - pjluc 2021
+#
+# This is a sample configuration
+# 
+# Note : Afin d'être portable, le paramètre datasets_dir peut être
+#        forcé via une variable d'environnement.
+
+global:
+    description: Test of SVM architectures for classification models.
+    settings v.: 1.0
+    seed: 123
+    datasets_dir: ./
+    run_dir: ./ModelAssessment/SVM_c
+
+
+datasets:
+    
+    compo_CI_class:
+        filename: Data_averaged.csv
+        columns_x: ['Zr_at','Nb_at','Mo_at','Ti_at','Cr_at']
+        columns_y: ['Phase class (0: amorphous)']
+    compo_DRX_class:
+        filename: Database_XRD.csv
+        columns_x: ['Zr_at','Nb_at','Mo_at','Ti_at','Cr_at']
+        columns_y: ['XRD (0: amorphous)']
+        
+        
+        
+models:
+
+    sklearn-SVC-poly2-1:
+        module: sklearn.svm
+        class: SVC
+        args: { 'kernel':'poly', 'degree':2,'C':1}
+    
+    sklearn-SVC-poly2-100:
+        module: sklearn.svm
+        class: SVC
+        args: { 'kernel':'poly', 'degree':2, 'C':100}
+    
+    sklearn-SVC-poly2-1000:
+        module: sklearn.svm
+        class: SVC
+        args: { 'kernel':'poly', 'degree':2,  'C':1000}
+    
+    sklearn-SVC-poly3-1:
+        module: sklearn.svm
+        class: SVC
+        args: { 'kernel':'poly', 'degree':3,  'C':1}
+   
+    sklearn-SVC-poly3-100:
+        module: sklearn.svm
+        class: SVC
+        args: { 'kernel':'poly', 'degree':3,  'C':100}
+
+    sklearn-SVC-poly3-1000:
+        module: sklearn.svm
+        class: SVC
+        args: { 'kernel':'poly', 'degree':3, 'C':1000}
+    
+    
+
+    sklearn-SVC-rbf-1:
+        module: sklearn.svm
+        class: SVC
+        args: { 'kernel':'rbf',  'C':1}
+    
+    
+    sklearn-SVC-rbf-100:
+        module: sklearn.svm
+        class: SVC
+        args: { 'kernel':'rbf', 'C':100}
+    
+   
+    sklearn-SVC-rbf-1000:
+        module: sklearn.svm
+        class: SVC
+        args: { 'kernel':'rbf', 'C':1000}
+    
+    sklearn-SVC-sigmoid-1:
+        module: sklearn.svm
+        class: SVC
+        args: { 'kernel':'sigmoid',  'C':1}
+     
+    sklearn-SVC-sigmoid-100:
+        module: sklearn.svm
+        class: SVC
+        args: { 'kernel':'sigmoid', 'C':100}
+    
+    sklearn-SVC-sigmoid-1000:
+        module: sklearn.svm
+        class: SVC
+        args: { 'kernel':'sigmoid','C':1000}
+    
+    sklearn-LinearSVC-1:
+        module: sklearn.svm
+        class: LinearSVC
+        args: { 'C':1}
+    
+    sklearn-LinearSVC-100:
+        module: sklearn.svm
+        class: LinearSVC
+        args: { 'C':100}
+    
+    sklearn-LinearSVC-1000:
+        module: sklearn.svm
+        class: LinearSVC
+        args: {'C':1000}
+
+    sklearn-nuSVC-poly2-0.2:
+        module: sklearn.svm
+        class: NuSVC
+        args: { 'kernel':'poly', 'degree':2, 'nu':0.2}
+    
+    sklearn-nuSVC-poly3-0.2:
+        module: sklearn.svm
+        class: NuSVC
+        args: { 'kernel':'poly', 'degree':3, 'nu':0.2}
+    
+    sklearn-nuSVC-poly2-0.5:
+        module: sklearn.svm
+        class: NuSVC
+        args: { 'kernel':'poly', 'degree':2, 'nu':0.5}
+    
+    sklearn-nuSVC-poly3-0.5:
+        module: sklearn.svm
+        class: NuSVC
+        args: { 'kernel':'poly', 'degree':3, 'nu':0.5}
+    
+    sklearn-nuSVC-poly2-0.8:
+        module: sklearn.svm
+        class: NuSVC
+        args: { 'kernel':'poly', 'degree':2, 'nu':0.8}
+    
+    sklearn-nuSVC-poly3-0.8:
+        module: sklearn.svm
+        class: NuSVC
+        args: { 'kernel':'poly', 'degree':3, 'nu':0.8}
+    
+    sklearn-nuSVC-rbf-0.2:
+        module: sklearn.svm
+        class: NuSVC
+        args: { 'kernel':'rbf', 'nu':0.2}
+    
+    sklearn-nuSVC-rbf-0.5:
+        module: sklearn.svm
+        class: NuSVC
+        args: { 'kernel':'rbf', 'nu':0.5}
+    
+    sklearn-nuSVC-rbf-0.8:
+        module: sklearn.svm
+        class: NuSVC
+        args: { 'kernel':'rbf', 'nu':0.8}
+    
+
+runs:
+
+    Class_CI:
+        description: Comparison of architecture on CI class
+        datasets : [ 'compo_CI_class']
+        models: [ 'sklearn-SVC-poly2-1','sklearn-SVC-poly2-100','sklearn-SVC-poly2-1000','sklearn-SVC-poly3-1','sklearn-SVC-poly3-100','sklearn-SVC-poly3-1000','sklearn-SVC-rbf-1','sklearn-SVC-rbf-100','sklearn-SVC-rbf-1000','sklearn-SVC-sigmoid-1','sklearn-SVC-sigmoid-100','sklearn-SVC-sigmoid-1000','sklearn-LinearSVC-1','sklearn-LinearSVC-100','sklearn-LinearSVC-1000','sklearn-nuSVC-poly2-0.2','sklearn-nuSVC-poly3-0.2','sklearn-nuSVC-poly2-0.5','sklearn-nuSVC-poly3-0.5','sklearn-nuSVC-poly2-0.8','sklearn-nuSVC-poly3-0.8','sklearn-nuSVC-rbf-0.2','sklearn-nuSVC-rbf-0.5','sklearn-nuSVC-rbf-0.8']
+        n_iters: [ 30 ]
+        k_folds: [ 5 ]
+        epochs: [ 200 ]
+        batch_sizes: [ 8 ]
+        seed: 123
+        save_yytest: True
+        predict_type: classes 
+   
+    Class_DRX:
+        description: Comparison of architecture on DRX class
+        datasets: [ 'compo_DRX_class']
+        models:  [ 'sklearn-SVC-poly2-1','sklearn-SVC-poly2-100','sklearn-SVC-poly2-1000','sklearn-SVC-poly3-1','sklearn-SVC-poly3-100','sklearn-SVC-poly3-1000','sklearn-SVC-rbf-1','sklearn-SVC-rbf-100','sklearn-SVC-rbf-1000','sklearn-SVC-sigmoid-1','sklearn-SVC-sigmoid-100','sklearn-SVC-sigmoid-1000','sklearn-LinearSVC-1','sklearn-LinearSVC-100','sklearn-LinearSVC-1000','sklearn-nuSVC-poly2-0.2','sklearn-nuSVC-poly3-0.2','sklearn-nuSVC-poly2-0.5','sklearn-nuSVC-poly3-0.5','sklearn-nuSVC-rbf-0.2','sklearn-nuSVC-rbf-0.5']
+        n_iters: [ 30 ]
+        k_folds: [ 5 ]
+        epochs: [ 200 ]
+        batch_sizes: [ 8 ]
+        seed: 123
+        save_yytest: True 
+        predict_type: classes

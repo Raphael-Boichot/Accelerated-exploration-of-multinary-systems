@@ -1,0 +1,17 @@
+Elements: A,B,C,D,E 
+Number of cathodes: 3 
+Optimize price and number of experiments: Yes  
+Imposed alignements:  
+      None
+Compositions that are not repeated:  
+      ABC, ABD, ABE
+Repeat composition only X times:  
+      A : 3
+      B : 3
+      C : 3
+      D : 3
+      E : 3
+
+Repeat composition at least X times :  
+      ABCDE : 5
+

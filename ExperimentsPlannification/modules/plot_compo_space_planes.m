@@ -44,6 +44,7 @@ if isempty(plane_coord)==0
 end
 
 hold off
+view(45,0)
 end
 
 

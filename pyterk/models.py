@@ -11,7 +11,7 @@
 
 
 """
-This module is for internal use only - You do not have to interact with ;-).
+This module is for internal use only - You do not have to interact with.
 """
 
 
@@ -30,7 +30,7 @@ def get_model(profile):
         profile (dict): a model profile
 
     Returns:
-        model (keras model): keras model as defined in the profile.
+        model (keras/scikitlearn model): keras or scikitlearn model as defined in the profile.
     '''
     
     module_name   = profile.get('module')
