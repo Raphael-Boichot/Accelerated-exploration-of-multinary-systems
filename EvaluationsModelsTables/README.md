@@ -9,7 +9,7 @@ These notebooks are a complement to report in PyTerK. They allowed to gather eva
 	* scikit-learn
 * Create environment variables:
 	* path to folder that will contain the training results : RUN_DIR : $ path/to/run/ 
-NB: for windows, see [this help] (https://docs.oracle.com/en/database/oracle/machine-learning/oml4r/1.5.1/oread/creating-and-modifying-environment-variables-on-windows.html)
+NB: for windows, see [this help](https://docs.oracle.com/en/database/oracle/machine-learning/oml4r/1.5.1/oread/creating-and-modifying-environment-variables-on-windows.html)
 
 ## Content 
 
