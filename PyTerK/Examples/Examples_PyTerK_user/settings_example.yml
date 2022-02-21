@@ -1,0 +1,111 @@
+# ------------------------------------------------------------------
+#                  ____        _            _
+#                 |  _ \ _   _| |_ ___ _ __| | __
+#                 | |_) | | | | __/ _ \ '__| |/ /
+#                 |  __/| |_| | ||  __/ |  |   <
+#                 |_|    \__, |\__\___|_|  |_|\_\
+#                        |___/                        Settings file
+# ------------------------------------------------------------------
+# Python Iterator for Kfold and co. - pjluc 2021
+#
+# This is a sample configuration
+# 
+# Note : Afin d'être portable, le paramètre datasets_dir peut être
+#        forcé via une variable d'environnement.
+
+global:
+    description: Parameters for a first iteration campaign.
+    settings v.: 1.0
+    seed: 123
+    datasets_dir: .
+    run_dir: ./run
+
+datasets:
+    BHPD1:
+        filename: BostonHousing.csv
+        columns_x: ["crim","zn","indus","chas","nox","rm","age","dis","rad","tax","ptratio","b","lstat"]
+        columns_y: ["medv"]
+    BHPD2:
+        filename: BostonHousing.csv
+        columns_x: ["crim","zn","indus","chas","nox","rm","age","dis","rad","tax","ptratio","b","lstat"]
+        columns_y: ["medv"]
+    IRIS:
+        filename: Iris.csv
+        columns_x: ["sepal.length","sepal.width","petal.length","petal.width"]
+        columns_y: ["variety"]
+
+models:
+    keras-20x20:
+        module: my_models
+        function: get_keras_mpp
+        args: { 'input_shape':[13], 'neurons':[20,20,1], 'activations':['relu','relu',None], 'optimizer':'adam', 'loss':'mse', 'metrics':['mse','mae','mape'] }
+    keras-40x40:
+        module: my_models
+        function: get_keras_mpp
+        args: { 'input_shape':[13], 'neurons':[40,40,1], 'activations':['relu','relu',None], 'optimizer':'adam', 'loss':'mse', 'metrics':['mse','mae'] }
+    keras-32x64x32:
+        module: my_models
+        function: get_keras_mpp
+        args: { 'input_shape':[13], 'neurons':[32,64,32,1], 'activations':['relu','relu','relu',None], 'optimizer':'adam', 'loss':'mse', 'metrics':['mse','mae','mape'] }
+    sklearn-rfr-01:
+        module: my_models
+        function: get_sklearn_rfr
+        args: { 'max_depth':5, 'n_estimators':50}
+    sklearn-rfr-02:
+        module: sklearn.ensemble
+        class: RandomForestRegressor
+        args: { 'max_depth':3, 'n_estimators':20}
+    keras-20x20-c:
+        module: my_models
+        function: get_keras_mpp
+        args: { 'input_shape':[4], 'neurons':[20,20,3], 'activations':['relu','relu','softmax'], 'optimizer':'adam', 'loss':'sparse_categorical_crossentropy', 'metrics':['accuracy'] }
+
+runs:
+    Example-04.1:
+        description: Comparison of datasets
+        predict_type: regression
+        datasets: [ 'BHPD1', 'BHPD2' ]
+        models: [ 'keras-40x40' ]
+        n_iters: [ 2 ]
+        k_folds: [ 4 ]
+        epochs: [ 10 ]
+        batch_sizes: [ 10 ]
+        seed: 123
+        save_yytest: False
+        save_xxtest: False
+    Example-04.2:
+        description: Comparison of models
+        predict_type: regression
+        datasets: [ 'BHPD1' ]
+        models: [ 'keras-20x20', 'keras-40x40', 'keras-32x64x32' ]
+        n_iters: [ 2 ]
+        k_folds: [ 4 ]
+        epochs: [ 10 ]
+        batch_sizes: [ 10 ]
+        seed: 123
+        save_yytest: True
+        save_xxtest: True
+    Example-04.3:
+        description: Influence of batch sizes
+        predict_type: regression
+        datasets: [ 'BHPD1' ]
+        models: [ 'keras-32x64x32' ]
+        n_iters: [ 2 ]
+        k_folds: [ 4 ]
+        epochs: [ 10 ]
+        batch_sizes: [ 8, 16, 32, 64 ]
+        seed: 125
+        save_yytest: True
+        save_xxtest: True
+    Example-05.1:
+        description: Influence of k sizes
+        datasets: [ 'IRIS' ]
+        models: [ 'keras-20x20-c' ]
+        n_iters: [ 20 ]
+        k_folds: [ 5, 8]
+        epochs: [ 12 ]
+        batch_sizes: [ 8 ]
+        seed: 125
+        save_yytest: True
+        save_xxtest: True
+        

@@ -1,6 +1,14 @@
 pyterk package
 ==============
 
+Module contents
+---------------
+
+.. automodule:: pyterk
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   
 Submodules
 ----------
 
@@ -44,10 +52,3 @@ pyterk.worker module
    :undoc-members:
    :show-inheritance:
 
-Module contents
----------------
-
-.. automodule:: pyterk
-   :members:
-   :undoc-members:
-   :show-inheritance:

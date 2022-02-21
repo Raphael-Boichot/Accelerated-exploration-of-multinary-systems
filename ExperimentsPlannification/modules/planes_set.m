@@ -3,7 +3,7 @@ function [name_planes_opt,planes_opt] = planes_set(name_mixture, mixture,planes,
 %
 %:param cell(str) name_mixture: name of mixture, cell index being the mixture order 
 %:param cell(float) mixture: coordinates of mixtures, cell index being the mixture order *eg:mixtures{2} contains the binaries coordinates* 
-%:param cell(float) plane:coordinates of the points through which the planes pass (3x3 columns)
+%:param cell(float) plane: coordinates of the points through which the planes pass (3x3 columns)
 %:param cell(str) name_planes: points through which the planes pass 
 %:return: array(str) name_planes_opt: name of mixture trhough whch the set of planes pass 
 %:return: array(float) planes_opt: coordinates of mixture trhough whch the set of planes pass 
@@ -16,8 +16,8 @@ global impose_plane_name
 global impose_plane_index
 global mixture_name_list 
 global state
-global nb_tirages_tot
-global nb_tirage
+global nb_draws_tot
+global nb_draw
 global f_plane_set
 
 planes_opt=[];
@@ -49,7 +49,7 @@ while sum(ismember(mixture_name_list ,name_planes_opt))<nb_mixture
         for ral=1:size(repeat_at_least,1)
             tic
             while count_occur(repeat_at_least(ral,1),name_planes_opt)<str2num(repeat_at_least(ral,2))
-                chrono=toc
+                chrono=toc;
                 if chrono>10
                     fig5 = figure ;
                    set( fig5 , 'position' , [ 600 , 400 , 500 , 100 ])
@@ -71,7 +71,7 @@ while sum(ismember(mixture_name_list ,name_planes_opt))<nb_mixture
                     
                     if check_nr=="ok" || check_ro=="ok" 
                           planes_opt=[planes_opt;planes(index,:)];
-                          name_planes_opt=[name_planes_opt; name_planes(index,:)]                      
+                          name_planes_opt=[name_planes_opt; name_planes(index,:)]   ;                   
                         
                     else
                         index=randi(size(alignements,1));
@@ -129,10 +129,10 @@ while sum(ismember(mixture_name_list ,name_planes_opt))<nb_mixture
                                 index=randi(size(planes,1));
                             else
                                 planes_opt=[planes_opt;planes(index,:)];
-                                name_planes_opt=[name_planes_opt; name_planes(index,:)]                               
+                                name_planes_opt=[name_planes_opt; name_planes(index,:)] ;                              
                                 already_in_pl_opt=1;
-                                sum(ismember(mixture_name_list ,name_planes_opt))
-                                waitbar(nb_tirage/nb_tirages_tot + sum(ismember(mixture_name_list ,name_planes_opt))/(nb_mixture*nb_tirages_tot),f_plane_set,"Compute plane set: set number "+num2str(nb_tirage)+", try number "+num2str(nb_overtime+1)); 
+                                sum(ismember(mixture_name_list ,name_planes_opt));
+                                waitbar(nb_draw/nb_draws_tot + sum(ismember(mixture_name_list ,name_planes_opt))/(nb_mixture*nb_draws_tot),f_plane_set,"Compute plane set: set number "+num2str(nb_draw)+", try number "+num2str(nb_overtime+1)); 
                                 
                                 pause(0.01)
                             end
@@ -143,7 +143,7 @@ while sum(ismember(mixture_name_list ,name_planes_opt))<nb_mixture
                             return
                         end
                         if chrono>10 || sum(ismember(mixture_name_list ,name_planes_opt))>=nb_mixture
-                            sum(ismember(mixture_name_list ,name_planes_opt))
+                            sum(ismember(mixture_name_list ,name_planes_opt));
                             overtime=1;
                             break;
                         end
@@ -152,7 +152,7 @@ while sum(ismember(mixture_name_list ,name_planes_opt))<nb_mixture
                 end
                 if chrono>10 || sum(ismember(mixture_name_list ,name_planes_opt))>=nb_mixture
                     overtime=1;
-                    nb_overtime=nb_overtime+1
+                    nb_overtime=nb_overtime+1;
                     break;
                 end
             end

@@ -13,7 +13,7 @@ function [nb_repet] = fix_nb_repetition(repeat_list,fig, position)
 index_align_to_repeat=get(repeat_list,'Value');
 align_to_repeat=get(repeat_list,'string');
 for i=1:size(index_align_to_repeat,2)
-    uicontrol ( fig , 'style' , ' text' , 'position', position-[0 i*20 0 0] , 'string' , align_to_repeat{index_align_to_repeat(i)} )
+    uicontrol ( fig , 'style' , ' text' , 'position', position-[0 i*20 0 0] , 'string' , align_to_repeat{index_align_to_repeat(i)} );
     nb_repet(i) = uicontrol ( fig , 'style' , ' edit' , 'position', position-[-50 i*20 0 0], 'Max' , 1 , 'string' , '' );
 end
 
