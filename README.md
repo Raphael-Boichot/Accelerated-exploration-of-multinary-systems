@@ -1,13 +1,13 @@
 # Accelerated exploration of multinary systems using high-throughput experiments and machine learning
 
 Repository of codes for experiments scheduling and machine learning modeling of experimental data. 
-More details are given in README of each modules and in Documentation. 
+More details are given in README of each modules and in Documentation. The dataset used is stored in a separate dedicated cloud storage fitted for big data and can be consulted and downloaded from [here](https://zenodo.org/record/6104937#.YhOpROjMLct).
 
 ## Contents 
 
 ### Experiments Planification
 
-This Matlab GUI interface allow to prepare the experimental work. It gives a set of 1D linear gradients or 2D planar gradients for 3 to 7 element systems. It can optimize the number of samples or the experiments price.  
+This Matlab GUI interface allows to prepare the experimental work. It gives a set of 1D linear gradients or 2D planar gradients for 3 to 7 element systems. It can minimize the total number of samples or the experiments price.  
 
 __Requirements__: Matlab2019 or more 
 
@@ -37,7 +37,7 @@ __Requirements__:
 * Create environment variables in bash_profile:
 	* path to folder that contains the datasets: export DATASETS_DIR = $path/to/datasets/
 	* path to folder that will contain the training results : export RUN_DIR= $path/to/run/
-NB: for windows, see [this help] (https://docs.oracle.com/en/database/oracle/machine-learning/oml4r/1.5.1/oread/creating-and-modifying-environment-variables-on-windows.html)
+NB: for windows, see [this help](https://docs.oracle.com/en/database/oracle/machine-learning/oml4r/1.5.1/oread/creating-and-modifying-environment-variables-on-windows.html)
 
 ### Evaluations Models Tables
 
