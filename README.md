@@ -7,7 +7,7 @@ More details are given in README of each modules and in Documentation.
 
 ### Experiments Planification
 
-This Matlab GUI interface allow to prepare the experimental work. It gives a set of 1D linear gradients or 2D planar gradients for 3 to 7 element systems. It can optimize the number of samples or the experiments price.  
+This Matlab GUI interface allows to prepare the experimental work. It gives a set of 1D linear gradients or 2D planar gradients for 3 to 7 element systems. It can minimize the total number of samples or the experiments price.  
 
 __Requirements__: Matlab2019 or more 
 
