@@ -25,7 +25,7 @@ import matplotlib.pyplot as plt
 import sys
 
 
-sys.path.append('../')
+sys.path.append('../PyTerK')
 import pyterk.config as config
 
 

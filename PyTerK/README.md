@@ -33,5 +33,5 @@ Contains the pyhton modules, documentend in [main documentation](../Documentatio
 
 The experimental datasets produced for the study of multinary Nb-Ti-Zr-Cr-Mo are available as csv [here](https://zenodo.org/record/6104937#.Yg4ifC9ziRs). Download the files and create the datasets folder corresponding to $DATASETS_DIR. You can use notebooks and yml of the campaigns file directly to reproduce the results. 
 
-If you just want to visualized the results we obtained, trained models and evaluation metrics are available as tar.gz archives [here](https://zenodo.org/record/6127502#.YhKccS9zgUs). Extract the tarballs in $RUN_DIR files and execute the "report" notebooks to visualized the results. Predicitions can also be performed with [prediction](Examples/prediction.ipynb) notebook using the trained models.
+If you just want to visualized the results we obtained, trained models and evaluation metrics are available as tar.gz archives [here](https://zenodo.org/record/6104937#.Yg4ifC9ziRs). Extract the tarballs in $RUN_DIR files and execute the "report" notebooks to visualized the results. Predicitions can also be performed with [prediction](Examples/prediction.ipynb) notebook using the trained models.
 
