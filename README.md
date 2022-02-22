@@ -41,7 +41,7 @@ NB: for windows, see [this help](https://docs.oracle.com/en/database/oracle/mach
 
 ### Evaluations Models Tables
 
-These notebooks are a complement to report in PyTerK. They allowed to gather evaluation metrics/scores in tables and export them as csv, while "report" notebooks allows to visualize them. 
+These notebooks are a complement to report in PyTerK. They allowed to gather evaluation metrics/scores in tables and export them as csv, while notebooks allows to visualize them. 
 
 __Requirement__: same as PyTerK
 
