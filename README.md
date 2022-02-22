@@ -41,7 +41,24 @@ NB: for windows, see [this help](https://docs.oracle.com/en/database/oracle/mach
 
 ### Evaluations Models Tables
 
-These notebooks are a complement to report in PyTerK. They allowed to gather evaluation metrics/scores in tables and export them as csv, while "report" notebooks allows to visualize them. 
+These notebooks are a complement to report in PyTerK. They allowed to gather evaluation metrics/scores in tables and export them as csv, while Notebooks allows to visualize them. 
+
+Requirement: same as PyTerK
+
+
+## Examples : open-source datasets, campaigns and training results on these datasets
+
+### PyTerK examples
+
+The experimental datasets produced for the study of multinary Nb-Ti-Zr-Cr-Mo are available [here](https://zenodo.org/record/6104937#.Yg4ifC9ziRs). 
+Download the files and create the datasets folder corresponding to $DATASETS_DIR. You can use notebooks and yml of the campaigns file directly to reproduce the results. 
+
+If you just want to visualized the results we obtained, training results are available [here](https://zenodo.org/record/6104937#.Yg4ifC9ziRs). Add the files in $RUN_DIR files and execute the report notebook to visualized the results. Predcitions can also be performed with [prediction](Examples/prediction.ipynb) notebook using the trained models.
+
+### Multiple Regression examples:
+
+Download the datasets [here](https://zenodo.org/record/6104937#.Yg4ifC9ziRs) and execute the notebooks. 
+
 
 __Requirement__: same as PyTerK
 
