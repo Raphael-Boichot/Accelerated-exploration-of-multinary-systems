@@ -7,7 +7,7 @@ This code allows to compute elastic-plastic zone :math:`\\frac{b_s}{c}`, the con
 
 Model summary
 --------------
-Scheme of the interaction of a conical indenter and a sample under load P
+Scheme of the interaction of a conical indenter and a sample under load P (from Galanov *et al*)
 
 .. image:: ../../GalanovModel/Schema.png
   :width: 500

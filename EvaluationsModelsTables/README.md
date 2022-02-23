@@ -15,7 +15,7 @@ NB: for windows, see [this help](https://docs.oracle.com/en/database/oracle/mach
 
 * `Evaluation_tables_model_assessment`: Gather in a table evaluation metrics of `PyTerK/Examples/Model_assessment` campaign used to assess best models architecture/hyperparameters for NN, SVM and RF. It can be directly used with our trained models and evaluation metrics (see below)
 
-* `Evaluation_tables_models_all_databases`: Gather in a table evaluation metrics  of `PyyTerK/Examples/Train_best_models_all_datasets` used to train the best models assessed before on different datasets. It can be directly used with our trained models and evaluation metrics (see below)
+* `Evaluation_tables_models_all_databases`: Gather in a table evaluation metrics  of `PyTerK/Examples/Train_best_models_all_datasets` used to train the best models assessed before on different datasets. It can be directly used with our trained models and evaluation metrics (see below)
 
 ### Open-source datasets, campaigns and training results on these datasets
 

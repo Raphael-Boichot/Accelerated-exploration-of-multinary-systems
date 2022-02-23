@@ -8,8 +8,8 @@ These modules were build to perform iterative k§fold crossvalidation trainings 
 	* pandas 
 	* scikit-learn
 * Create environment variables:
-	* path to folder that contains the datasets DATASETS_DIR : $ path/to/datasets/
-	* path to folder that will contain the training results : RUN_DIR : $ path/to/run/ 
+	* path to folder that contains the datasets DATASETS_DIR=$path/to/datasets/
+	* path to folder that will contain the training results : RUN_DIR=$path/to/run/ 
 NB: for windows, see [this help](https://docs.oracle.com/en/database/oracle/machine-learning/oml4r/1.5.1/oread/creating-and-modifying-environment-variables-on-windows.html)
 
 
