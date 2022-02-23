@@ -82,17 +82,24 @@
 <dd><p>Select database lines thanks to a mask and return the associated coordinates. Can interpolate a property isolvalue and return the corresponding compositions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>database</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">table</span></code></span>) – database as a table</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>database</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">table</span></code></span>) – database as a table</p></li>
+<li><p><strong>compo_indices</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">list(int)</span></code></span>) – column indices that contains the compositions</p></li>
+<li><p><strong>output_column</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">str</span></code></span>) – output one wants to represent for a certain value</p></li>
+<li><p><strong>isovalue</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">float</span></code></span>) – value of output one want to lpot in the simplexe</p></li>
+<li><p><strong>mask</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">list</span></code></span>) – database selection. If isovalue is interpolated from data then the mask select a range of isovalue +/- delta. Else it select directly the isovalue</p></li>
+<li><p><strong>connexions_table</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">array</span></code></span>) – array of indices of nearest neighbours</p></li>
+<li><p><strong>interpolation</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">bool</span></code></span>) – boolean to indicate if isovalue is obtained from interpolation or not</p></li>
+<li><p><strong>x,y,z</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">float</span></code></span>) – coordinates of vertices (pure elements)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>selection_coord : coordinates of selected compositions</p></li>
+</ul>
+</p>
 </dd>
 </dl>
-<p>:param list(int) compo_indices : column indices that contains the compositions
-:param str output_column: output one wants to represent for a certain value
-:param float isovalue : value of output one want to lpot in the simplexe
-:param list mask: database selection. If isovalue is interpolated from data then the mask select a range of isovalue +/- delta. Else it select directly the isovalue
-:param array connexions_table: array of indices of nearest neighbours
-:param bool interpolation: boolean to indicate if isovalue is obtained from interpolation or not
-:param float x,y,z : coordinates of vertices (pure elements)
-:return: - selection_coord : coordinates of selected compositions</p>
 </dd></dl>
 
 </div>
