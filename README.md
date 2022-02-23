@@ -48,7 +48,7 @@ __Requirement__: same as PyTerK
 
 ## Galanov Model
 
-This module allows to compute elastic-plastic zone $\frac{b_s}{c}$, the constrain factor $C$ and ductility characteristic $\delta_H$ by solving equations proposed by Galanov `et al` (Galanov, Ivanov, et Kartuzov, `Improved Core Model of the Indentation for the Experimental Determination of Mechanical Properties of Elastic-Plastic Materials and Its Application`.)
+This module allows to compute elastic-plastic zone $\frac{b_s}{c}$, the constrain factor $C$ and ductility characteristic $\delta_H$ by solving equations proposed by Galanov *et al* (Galanov, Ivanov, et Kartuzov, *Improved Core Model of the Indentation for the Experimental Determination of Mechanical Properties of Elastic-Plastic Materials and Its Application*.)
 
 # Requirements:
 * Install following libraries, via pip or conda
