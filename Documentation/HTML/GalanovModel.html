@@ -1,0 +1,242 @@
+
+
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Galanov Model module &#8212; Accelerated exploration of multinary systems 1.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/bizstyle.css" />
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Pareto Front module" href="ParetoFront.html" />
+    <link rel="prev" title="Multiple Regression module" href="MultipleRegression.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="ParetoFront.html" title="Pareto Front module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="MultipleRegression.html" title="Multiple Regression module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Accelerated exploration of multinary systems 1.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Galanov Model module</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-GalanovModel">
+<span id="galanov-model-module"></span><h1>Galanov Model module<a class="headerlink" href="#module-GalanovModel" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="galanov-model">
+<h2>Galanov model<a class="headerlink" href="#galanov-model" title="Permalink to this headline">¶</a></h2>
+<p>This code allows to compute elastic-plastic zone <span class="math notranslate nohighlight">\(\frac{b_s}{c}\)</span>, the constrain factor <span class="math notranslate nohighlight">\(C\)</span> and ductility characteristic <span class="math notranslate nohighlight">\(\delta_H\)</span> by solving equations proposed by Galanov <em>et al</em> (Galanov, Ivanov, et Kartuzov, <em>Improved Core Model of the Indentation for the Experimental Determination of Mechanical Properties of Elastic-Plastic Materials and Its Application</em>.)</p>
+<div class="section" id="model-summary">
+<h3>Model summary<a class="headerlink" href="#model-summary" title="Permalink to this headline">¶</a></h3>
+<p>Scheme of the interaction of a conical indenter and a sample under load P</p>
+<a class="reference internal image-reference" href="_images/Schema.png"><img alt="_images/Schema.png" src="_images/Schema.png" style="width: 500px;" /></a>
+<dl class="simple">
+<dt>We know:</dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(E_S\)</span> : elastic modulus of the sample</p></li>
+<li><p><span class="math notranslate nohighlight">\(\nu_S\)</span> : Poisson coefficient of the sample</p></li>
+<li><p><span class="math notranslate nohighlight">\(E_i\)</span> : elastic modulus of indenter</p></li>
+<li><p><span class="math notranslate nohighlight">\(\nu_i\)</span> : Poisson coefficient of indenter</p></li>
+<li><p><span class="math notranslate nohighlight">\(H\)</span> : hardness of the sample</p></li>
+<li><p><span class="math notranslate nohighlight">\(\cot \gamma_i=\sqrt[4]{\frac{\pi^{2}}{27}} \cot \gamma_{B}\)</span> with <span class="math notranslate nohighlight">\(\gamma_{B}=65°\)</span> for Brkovitch indenter</p></li>
+</ul>
+</dd>
+</dl>
+<p>From:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}E_{i}^{*}=\frac{E_i}{1-\nu_i**2}\\Ks=\frac{E_s}{3(1-2\nu_s)}\end{aligned}\end{align} \]</div>
+<p>We define:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\begin{aligned}
+    \alpha_S &amp; = \frac{2(1-2\nu_s}{3(1-\nu_S)} \\\    \beta_{S} &amp; = \frac{E_{S}}{6\left(1-\nu_{S}\right) H} \\\    \theta_{S} &amp; = \frac{H}{K_{S}} \
+\end{aligned}\end{aligned}\end{align} \]</div>
+<p>and dimensionless unknowns</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\begin{aligned}
+    x&amp;=\frac{b_{S}}{c}\\\    y&amp;=\frac{Y_{S}}{H M}\\\    z&amp;=\cot \psi\
+\end{aligned}\end{aligned}\end{align} \]</div>
+<p>The system to solve is then:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\left\{\begin{array}{l}
+    z=\cot \gamma_{i}-\frac{2 H M}{E_{i}^{*}} \\\  \left(1-\theta_{S}(1-2 y \ln x)\right)\left(x^{3}-\alpha_{S}\right)=\frac{\beta_{S} z}{y} \\\    1=y\left(\frac{2}{3}+\frac{y\left(x^{3}-\alpha_{S}\right)}{\beta_{S}} \ln \left[1-\frac{y\left(x^{3}-\alpha_{S}\right)}{2 \beta_{S}}\right]^{-1}+2 \ln x\right)
+\end{array}\right.\end{aligned}\end{align} \]</div>
+<p>were <span class="math notranslate nohighlight">\(z\)</span> is completely known.
+Moreover, <span class="math notranslate nohighlight">\(C=\frac{1}{y}\)</span></p>
+<dl class="py function">
+<dt class="sig sig-object py" id="GalanovModel.Galanov_math_values">
+<span class="sig-prename descclassname"><span class="pre">GalanovModel.</span></span><span class="sig-name descname"><span class="pre">Galanov_math_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">E_s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nu_s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">E_i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nu_i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">H_s</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#GalanovModel.Galanov_math_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the known values in Galanov models from machanical properties of sample and indenter</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>E_s</strong> (<em>float</em>) – elastic modulus of sample</p></li>
+<li><p><strong>nu_s</strong> (<em>float</em>) – Poisson coefficient of sample</p></li>
+<li><p><strong>E_i</strong> (<em>float</em>) – elastic modulus of indenter</p></li>
+<li><p><strong>nu_i</strong> (<em>float</em>) – Poisson coefficient of indenter</p></li>
+<li><p><strong>H_s</strong> (<em>float</em>) – Hardness of the sample</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>Ei_star</p></li>
+<li><p>Ks</p></li>
+<li><p>alpha_s</p></li>
+<li><p>beta_s</p></li>
+<li><p>cot_gamma_i,z</p></li>
+<li><p>theta_s</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="GalanovModel.delta_H_value">
+<span class="sig-prename descclassname"><span class="pre">GalanovModel.</span></span><span class="sig-name descname"><span class="pre">delta_H_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">E_s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">H_s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nu_s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#GalanovModel.delta_H_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute ductility characteristics</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>E_s</strong> (<em>float</em>) – elastic modulus of sample</p></li>
+<li><p><strong>nu_s</strong> (<em>float</em>) – Poisson coefficient of sample</p></li>
+<li><p><strong>H_s</strong> (<em>float</em>) – Hardness of the sample</p></li>
+<li><p><strong>z</strong> (<em>float</em>) – Galanov unknown</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>delta_H the ductility characteristics</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float between 0 and 1</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="GalanovModel.system_x_y">
+<span class="sig-prename descclassname"><span class="pre">GalanovModel.</span></span><span class="sig-name descname"><span class="pre">system_x_y</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#GalanovModel.system_x_y" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solve Galanov sytem</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p</strong> (<em>tuple</em>) – tuple of values of x and y</p></li>
+<li><p><strong>args</strong> (<em>tuple</em>) – contains alpha_s,beta_s,theta_s,z</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>result of equation 1 and 2 with x and y values</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Galanov Model module</a><ul>
+<li><a class="reference internal" href="#galanov-model">Galanov model</a><ul>
+<li><a class="reference internal" href="#model-summary">Model summary</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="MultipleRegression.html"
+                          title="previous chapter">Multiple Regression module</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="ParetoFront.html"
+                          title="next chapter">Pareto Front module</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/GalanovModel.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="ParetoFront.html" title="Pareto Front module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="MultipleRegression.html" title="Multiple Regression module"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Accelerated exploration of multinary systems 1.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Galanov Model module</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2022, Elise Garel, Jean-Luc Parouty.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+Plot Predictions
+================
+
+.. toctree::
+   :maxdepth: 4
+
+Principle
+----------
+
+These Matlab modules plot Machine Learning prediction. It can scatter composition point of plot alpha shape of compositions points. User can add color or point size to plot along the predicted properties of the composition points. 
+
+Modules
+--------
+
+.. mat:currentmodule:: PlotPredictions.modules_pp
+.. mat:autofunction:: plot_predictions
+
+.. mat:currentmodule:: PlotPredictions.modules_pp
+.. mat:autofunction:: select_interp_compo
+
+
+
+
+
+
+
+

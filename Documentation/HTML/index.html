@@ -14,6 +14,7 @@
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -29,9 +30,6 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="mat-modindex.html" title="MATLAB Module Index"
-             >matlab index</a> |</li>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
@@ -58,7 +56,7 @@
 <p><strong>PyTerK</strong></p>
 <p>These Python modules and notebooks perform iterative k-fold crossvalidation for Scikit-learn or Keras models, on any datasets, with parallelization of works. Settings are written in yml files, trainings are performed in “run” notebooks and results are visualized in “report” notebooks.</p>
 <dl class="simple">
-<dt><em>Requirements</em>:</dt><dd><ul class="simple">
+<dt><em>Requirements:</em></dt><dd><ul class="simple">
 <li><dl class="simple">
 <dt>Install following libraries, via pip or conda</dt><dd><ul>
 <li><p>tensorflow - keras</p></li>
@@ -70,8 +68,8 @@
 </li>
 <li><dl class="simple">
 <dt>Create environment variables:</dt><dd><ul>
-<li><p>path to folder that contains the datasets DATASETS_DIR : $ path/to/datasets/</p></li>
-<li><p>path to folder that will contain the training results : RUN_DIR : $ path/to/run/</p></li>
+<li><p>path to folder that contains the datasets DATASETS_DIR=$path/to/datasets/</p></li>
+<li><p>path to folder that will contain the training results : RUN_DIR=$path/to/run/</p></li>
 </ul>
 </dd>
 </dl>
@@ -82,7 +80,7 @@
 <p><strong>Multiple Regression</strong></p>
 <p>These Python modules and notebooks perform iterative k-fold crossvalidation for statsmodel multilinear regression, on any datasets. Training and report are performed in one notebook.</p>
 <dl class="simple">
-<dt><em>Requirements</em>:</dt><dd><ul class="simple">
+<dt><em>Requirements:</em></dt><dd><ul class="simple">
 <li><dl class="simple">
 <dt>Install following libraries, via pip or conda</dt><dd><ul>
 <li><p>statsmodels.formula.api</p></li>
@@ -94,8 +92,65 @@
 </li>
 <li><dl class="simple">
 <dt>Create environment variables in bash_profile:</dt><dd><ul>
-<li><p>path to folder that contains the datasets: export DATASETS_DIR = $path/to/datasets/</p></li>
-<li><p>path to folder that will contain the training results : export RUN_DIR= $path/to/run/</p></li>
+<li><p>path to folder that contains the datasets: export DATASETS_DIR=$path/to/datasets/</p></li>
+<li><p>path to folder that will contain the training results : export RUN_DIR=$path/to/run/</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+<p><strong>Galanov Model</strong></p>
+<p>This module allows to compute elastic-plastic zone <span class="math notranslate nohighlight">\(\\frac{b_s}{c}\)</span>, the constrain factor <span class="math notranslate nohighlight">\(C\)</span> and ductility characteristic <span class="math notranslate nohighlight">\(\\delta_H\)</span> by solving equations proposed by Galanov <em>et al</em> (Galanov, Ivanov, et Kartuzov, <em>Improved Core Model of the Indentation for the Experimental Determination of Mechanical Properties of Elastic-Plastic Materials and Its Application</em>.)</p>
+<dl class="simple">
+<dt><em>Requirements:</em></dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>Install following libraries, via pip or conda</dt><dd><ul>
+<li><p>pandas</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Create environment variables:</dt><dd><ul>
+<li><p>path to folder that will contain the training results : DATASETS_DIR=$path/to/datasets/</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+<p><strong>Pareto Front</strong></p>
+<p>This module allows to detect Pareto optimal composition, for two antagonistic criteria/properties.</p>
+<dl class="simple">
+<dt><em>Requirements:</em></dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>Install following libraries, via pip or conda</dt><dd><ul>
+<li><p>pandas</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Create environment variables:</dt><dd><ul>
+<li><p>path to folder that will contain the training results : DATASETS_DIR=$path/to/datasets/</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+<p><strong>Plot Predictions</strong></p>
+<p>These Matlab modules plot Machine Learning prediction. It can scatter composition point of plot alpha shape of compositions points. User can add color or point size to plot along the predicted properties of the composition points.</p>
+<dl class="simple">
+<dt><em>Requirements:</em></dt><dd><ul class="simple">
+<li><p>Matlab2019 or later</p></li>
+<li><dl class="simple">
+<dt>Create environment variables:</dt><dd><ul>
+<li><p>path to folder that will contain the training results : DATASETS_DIR=$path/to/datasets/</p></li>
 </ul>
 </dd>
 </dl>
@@ -108,10 +163,10 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="ExperimentsPlannification.html">Experiments Plannification</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="ExperimentsPlannification.html#principle">Principle</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ExperimentsPlannification.html#module-modules">Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ExperimentsPlannification.html#modules">Modules</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="PyTerK.html">pyterk package</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="PyTerK.html">PyTerK package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="PyTerK.html#module-pyterk">Module contents</a></li>
 <li class="toctree-l2"><a class="reference internal" href="PyTerK.html#submodules">Submodules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="PyTerK.html#module-pyterk.config">pyterk.config module</a></li>
@@ -121,9 +176,23 @@
 <li class="toctree-l2"><a class="reference internal" href="PyTerK.html#module-pyterk.worker">pyterk.worker module</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="MultipleRegression.html">MultipleRegression module</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="MultipleRegression.html">Multiple Regression module</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="MultipleRegression.html#description">Description</a></li>
 <li class="toctree-l2"><a class="reference internal" href="MultipleRegression.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="GalanovModel.html">Galanov Model module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="GalanovModel.html#galanov-model">Galanov model</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ParetoFront.html">Pareto Front module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ParetoFront.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ParetoFront.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="PlotPredictions.html">Plot Predictions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="PlotPredictions.html#principle">Principle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PlotPredictions.html#modules">Modules</a></li>
 </ul>
 </li>
 </ul>
@@ -185,9 +254,6 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              >index</a></li>
-        <li class="right" >
-          <a href="mat-modindex.html" title="MATLAB Module Index"
-             >matlab index</a> |</li>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>

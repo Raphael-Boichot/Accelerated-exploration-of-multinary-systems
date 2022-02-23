@@ -1,18 +1,18 @@
 function [selection_coord,compo_iso_list,coord_iso_list] = select_interp_compo(database,compo_indices, output_column, isovalue, mask, connexions_table, interpolation, x,y,z)
 % Select database lines thanks to a mask and return the associated coordinates. Can interpolate a property isolvalue and return the corresponding compositions.
 %
-% database: database as a table 
-% compo_indices : column indices that contains the compositions 
-% output_column: output one wants to represent for a certain value
-% isovalue : value of output one want to lpot in the simplexe
-% mask: database selection. If isovalue is interpolated from data then the
-% mask select a range of isovalue +/- delta. Else it select directly the
-% isovalue
-% connexions_table: indices of nearest neighbours
-% interpolation: boolean to indicate if isovalue is obtained from
-% interpolation or not
-% x,y,z : coordinates of vertices (pure elements)
-
+% :param table database: database as a table 
+% :param list(int) compo_indices : column indices that contains the compositions 
+% :param str output_column: output one wants to represent for a certain value
+% :param float isovalue : value of output one want to lpot in the simplexe
+% :param list mask: database selection. If isovalue is interpolated from data then the mask select a range of isovalue +/- delta. Else it select directly the isovalue
+% :param array connexions_table: array of indices of nearest neighbours
+% :param bool interpolation: boolean to indicate if isovalue is obtained from interpolation or not
+% :param float x,y,z : coordinates of vertices (pure elements)
+% :return: - selection_coord : coordinates of selected compositions
+           - compo_iso_list : list of composition corresponding to isovalue
+           - coord_iso_list : coordinates of compositions corresponding to isovalue
+% :rtype: arrays
 
 zone_selection=database(mask,:);
 selection_coord=table2array(zone_selection(:,compo_indices))*[x,y,z];

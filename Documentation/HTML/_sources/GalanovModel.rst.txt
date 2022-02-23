@@ -1,0 +1,7 @@
+Galanov Model module
+====================
+
+.. automodule:: GalanovModel
+   :members:
+   :undoc-members:
+   :show-inheritance:

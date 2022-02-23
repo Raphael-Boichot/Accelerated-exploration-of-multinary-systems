@@ -1,0 +1,193 @@
+
+
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pareto Front module &#8212; Accelerated exploration of multinary systems 1.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/bizstyle.css" />
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Plot Predictions" href="PlotPredictions.html" />
+    <link rel="prev" title="Galanov Model module" href="GalanovModel.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="PlotPredictions.html" title="Plot Predictions"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="GalanovModel.html" title="Galanov Model module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Accelerated exploration of multinary systems 1.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Pareto Front module</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="pareto-front-module">
+<h1>Pareto Front module<a class="headerlink" href="#pareto-front-module" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-ParetoFront"></span><div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>Module to train detect Pareto optimum points for two properties</p>
+<dl class="simple">
+<dt>Contains functions to :</dt><dd><ul class="simple">
+<li><p>define Pareto front with a certain acceptation width</p></li>
+<li><p>plot Pareto optimal points among all points</p></li>
+<li><p>save Pareto optimal points</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="ParetoFront.pareto_frontier">
+<span class="sig-prename descclassname"><span class="pre">ParetoFront.</span></span><span class="sig-name descname"><span class="pre">pareto_frontier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objective1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objective2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">acceptation_range_objective2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ParetoFront.pareto_frontier" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pareto frontier selection process</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataframe</strong> (<em>panda.DataFrame</em>) – datasets that contains the two antagonistic properties values</p></li>
+<li><p><strong>objective1</strong> (<em>str</em>) – column of the dataframe that contains the first objective/property to optimize</p></li>
+<li><p><strong>objective2</strong> (<em>str</em>) – column of the dataframe that contains the second objective/property to optimize</p></li>
+<li><p><strong>acceptation_range_objective2</strong> (<em>float</em>) – width of Pareto band, value is zero if we keep the strictly optimal values, higher than zero if we accept points close to the front.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>pareto_front: Pareto optimal points or near optimal points</p></li>
+<li><p>color: optimal points are associated to red, near optimal in orange.</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>panda.DataFrame,str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ParetoFront.plot_pareto">
+<span class="sig-prename descclassname"><span class="pre">ParetoFront.</span></span><span class="sig-name descname"><span class="pre">plot_pareto</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pareto_front</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objective1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objective2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">txt_objective1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">txt_objective2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ParetoFront.plot_pareto" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plotting Pareto frontier</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataframe</strong> (<em>panda.DataFrame</em>) – datasets that contains the two antagonistic properties values</p></li>
+<li><p><strong>pareto_front</strong> (<em>panda.DataFrame</em>) – Pareto optimal and near optimal points</p></li>
+<li><p><strong>objective1</strong> (<em>str</em>) – column of the dataframe that contains the first objective/property to optimize</p></li>
+<li><p><strong>objective2</strong> (<em>str</em>) – column of the dataframe that contains the second objective/property to optimize</p></li>
+<li><p><strong>txt_objective1</strong> (<em>str</em>) – axis name corresponding to objective1</p></li>
+<li><p><strong>txt_objective2</strong> (<em>str</em>) – axis name corresponding to objective2</p></li>
+<li><p><strong>colors</strong> (<em>str</em>) – color associated with optimal (red) and near optimal(orange) points</p></li>
+<li><p><strong>save</strong> (<em>str</em>) – path to save the Pareto front plot</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Nothing, just plot the Pareto front.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Pareto Front module</a><ul>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="GalanovModel.html"
+                          title="previous chapter">Galanov Model module</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="PlotPredictions.html"
+                          title="next chapter">Plot Predictions</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/ParetoFront.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="PlotPredictions.html" title="Plot Predictions"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="GalanovModel.html" title="Galanov Model module"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Accelerated exploration of multinary systems 1.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Pareto Front module</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2022, Elise Garel, Jean-Luc Parouty.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+    </div>
+  </body>
+</html>

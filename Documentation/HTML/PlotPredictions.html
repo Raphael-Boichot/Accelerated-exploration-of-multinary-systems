@@ -1,0 +1,166 @@
+
+
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Plot Predictions &#8212; Accelerated exploration of multinary systems 1.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/bizstyle.css" />
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Pareto Front module" href="ParetoFront.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="ParetoFront.html" title="Pareto Front module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Accelerated exploration of multinary systems 1.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Plot Predictions</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="plot-predictions">
+<h1>Plot Predictions<a class="headerlink" href="#plot-predictions" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<div class="section" id="principle">
+<h2>Principle<a class="headerlink" href="#principle" title="Permalink to this headline">¶</a></h2>
+<p>These Matlab modules plot Machine Learning prediction. It can scatter composition point of plot alpha shape of compositions points. User can add color or point size to plot along the predicted properties of the composition points.</p>
+</div>
+<div class="section" id="modules">
+<h2>Modules<a class="headerlink" href="#modules" title="Permalink to this headline">¶</a></h2>
+<dl class="mat function">
+<dt class="sig sig-object mat" id="PlotPredictions.modules_pp.plot_predictions">
+<span class="sig-prename descclassname"><span class="pre">PlotPredictions.modules_pp.</span></span><span class="sig-name descname"><span class="pre">plot_predictions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">DT</span></em>, <em class="sig-param"><span class="pre">TR</span></em>, <em class="sig-param"><span class="pre">name_elements</span></em>, <em class="sig-param"><span class="pre">cell_coordinates</span></em>, <em class="sig-param"><span class="pre">cell_type_plot</span></em>, <em class="sig-param"><span class="pre">cell_colors</span></em>, <em class="sig-param"><span class="pre">cell_size</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PlotPredictions.modules_pp.plot_predictions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function that plot predicted properties of chosen compositions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>DT,TR</strong> – Delaunay Traiangulation object for composition space plot</p></li>
+<li><p><strong>name_elements</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">str</span></code></span>) – contains the name of the alloy elements</p></li>
+<li><p><strong>cell_coordinates</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">cell(float)</span></code></span>) – contains the coordinates of the compositions to plot. Different groups can be plotted,  these groups are in different cells</p></li>
+<li><p><strong>cell_type_plot</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">cell(str)</span></code></span>) – type of plot for the different groups of points. Can be simple scattering, convex hull or alpha shape.</p></li>
+<li><p><strong>cell_colors</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">cell</span></code></span>) – contains colors of the poiunts or hull.</p></li>
+<li><p><strong>cell_size</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">cell(float)</span></code></span>) – contains the size of the point if type is scatter. If other type, juts wright 0 in the cell</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>show plot.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="PlotPredictions.modules_pp.select_interp_compo">
+<span class="sig-prename descclassname"><span class="pre">PlotPredictions.modules_pp.</span></span><span class="sig-name descname"><span class="pre">select_interp_compo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">database</span></em>, <em class="sig-param"><span class="pre">compo_indices</span></em>, <em class="sig-param"><span class="pre">output_column</span></em>, <em class="sig-param"><span class="pre">isovalue</span></em>, <em class="sig-param"><span class="pre">mask</span></em>, <em class="sig-param"><span class="pre">connexions_table</span></em>, <em class="sig-param"><span class="pre">interpolation</span></em>, <em class="sig-param"><span class="pre">x</span></em>, <em class="sig-param"><span class="pre">y</span></em>, <em class="sig-param"><span class="pre">z</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PlotPredictions.modules_pp.select_interp_compo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select database lines thanks to a mask and return the associated coordinates. Can interpolate a property isolvalue and return the corresponding compositions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>database</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">table</span></code></span>) – database as a table</p>
+</dd>
+</dl>
+<p>:param list(int) compo_indices : column indices that contains the compositions
+:param str output_column: output one wants to represent for a certain value
+:param float isovalue : value of output one want to lpot in the simplexe
+:param list mask: database selection. If isovalue is interpolated from data then the mask select a range of isovalue +/- delta. Else it select directly the isovalue
+:param array connexions_table: array of indices of nearest neighbours
+:param bool interpolation: boolean to indicate if isovalue is obtained from interpolation or not
+:param float x,y,z : coordinates of vertices (pure elements)
+:return: - selection_coord : coordinates of selected compositions</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Plot Predictions</a><ul>
+<li><a class="reference internal" href="#principle">Principle</a></li>
+<li><a class="reference internal" href="#modules">Modules</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="ParetoFront.html"
+                          title="previous chapter">Pareto Front module</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/PlotPredictions.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="ParetoFront.html" title="Pareto Front module"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Accelerated exploration of multinary systems 1.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Plot Predictions</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2022, Elise Garel, Jean-Luc Parouty.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+    </div>
+  </body>
+</html>

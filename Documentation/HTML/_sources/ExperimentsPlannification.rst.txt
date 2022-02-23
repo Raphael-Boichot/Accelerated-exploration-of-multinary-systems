@@ -24,67 +24,67 @@ A Matlab GUI interface was developed in order to automatically generate a set of
 Modules
 --------
 
-.. mat:automodule:: modules
+.. mat:currentmodule:: ExperimentsPlannification.modules_ep
 .. mat:autofunction:: check_do_not_align
 
-.. mat:automodule:: modules
+.. mat:currentmodule:: ExperimentsPlannification.modules_ep
 .. mat:autofunction:: check_not_repeat
 
-.. mat:automodule:: modules
+.. mat:currentmodule:: ExperimentsPlannification.modules_ep
 .. mat:autofunction:: check_repeat_only
 
-.. mat:automodule:: modules
+.. mat:currentmodule:: ExperimentsPlannification.modules_ep
 .. mat:autofunction:: compute_alignments
 
-.. mat:automodule:: modules
+.. mat:currentmodule:: ExperimentsPlannification.modules_ep
 .. mat:autofunction:: compute_planes
 
-.. mat:automodule:: modules
+.. mat:currentmodule:: ExperimentsPlannification.modules_ep
 .. mat:autofunction:: coordinates_name_centroid_points
 
-.. mat:automodule:: modules
+.. mat:currentmodule:: ExperimentsPlannification.modules_ep
 .. mat:autofunction:: count_occur
 
-.. mat:automodule:: modules
+.. mat:currentmodule:: ExperimentsPlannification.modules_ep
 .. mat:autofunction:: fix_nb_repetition
 
-.. mat:automodule:: modules
+.. mat:currentmodule:: ExperimentsPlannification.modules_ep
 .. mat:autofunction:: get_elements
 
-.. mat:automodule:: modules
+.. mat:currentmodule:: ExperimentsPlannification.modules_ep
 .. mat:autofunction:: gradients_set
 
-.. mat:automodule:: modules
+.. mat:currentmodule:: ExperimentsPlannification.modules_ep
 .. mat:autofunction:: index_alignments
 
-.. mat:automodule:: modules
+.. mat:currentmodule:: ExperimentsPlannification.modules_ep
 .. mat:autofunction:: kill_program
 
-.. mat:automodule:: modules
+.. mat:currentmodule:: ExperimentsPlannification.modules_ep
 .. mat:autofunction:: lineIntersect3D
 
-.. mat:automodule:: modules
+.. mat:currentmodule:: ExperimentsPlannification.modules_ep
 .. mat:autofunction:: listing_targets
 
-.. mat:automodule:: modules
+.. mat:currentmodule:: ExperimentsPlannification.modules_ep
 .. mat:autofunction:: listing_targets_3cath
 
-.. mat:automodule:: modules
+.. mat:currentmodule:: ExperimentsPlannification.modules_ep
 .. mat:autofunction:: plot_compo_space_gradients
 
-.. mat:automodule:: modules
+.. mat:currentmodule:: ExperimentsPlannification.modules_ep
 .. mat:autofunction:: plot_compo_space_planes
 
-.. mat:automodule:: modules
+.. mat:currentmodule:: ExperimentsPlannification.modules_ep
 .. mat:autofunction:: parameters_file
 
-.. mat:automodule:: modules
+.. mat:currentmodule:: ExperimentsPlannification.modules_ep
 .. mat:autofunction:: planes_set
    
-.. mat:automodule:: modules
+.. mat:currentmodule:: ExperimentsPlannification.modules_ep
 .. mat:autofunction:: price_calculation
 
-.. mat:automodule:: modules
+.. mat:currentmodule:: ExperimentsPlannification.modules_ep
 .. mat:autofunction:: vector_coeff
 
 

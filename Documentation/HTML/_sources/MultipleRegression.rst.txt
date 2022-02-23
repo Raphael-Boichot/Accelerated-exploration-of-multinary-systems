@@ -1,5 +1,5 @@
-MultipleRegression module
-=========================
+Multiple Regression module
+==========================
 
 .. automodule:: MultipleRegression
    :members:

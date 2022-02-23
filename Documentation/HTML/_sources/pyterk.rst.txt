@@ -1,4 +1,4 @@
-pyterk package
+PyTerK package
 ==============
 
 Module contents

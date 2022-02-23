@@ -18,32 +18,65 @@ This Matlab GUI interface allow to prepare the experimental work. It gives a set
 *Requirements*: Matlab2019 or more 
 
 
+      
 **PyTerK**
 
 These Python modules and notebooks perform iterative k-fold crossvalidation for Scikit-learn or Keras models, on any datasets, with parallelization of works. Settings are written in yml files, trainings are performed in "run" notebooks and results are visualized in "report" notebooks.  
 
-*Requirements*:
+*Requirements:*
    * Install following libraries, via pip or conda
       * tensorflow - keras
       * pandas 
       * scikit-learn
    * Create environment variables:
-      * path to folder that contains the datasets DATASETS_DIR : $ path/to/datasets/
-      * path to folder that will contain the training results : RUN_DIR : $ path/to/run/ 
+      * path to folder that contains the datasets DATASETS_DIR=$path/to/datasets/
+      * path to folder that will contain the training results : RUN_DIR=$path/to/run/ 
 
 
+     
 **Multiple Regression**
 
 These Python modules and notebooks perform iterative k-fold crossvalidation for statsmodel multilinear regression, on any datasets. Training and report are performed in one notebook. 
 
-*Requirements*: 
+*Requirements:* 
    * Install following libraries, via pip or conda
 	   * statsmodels.formula.api
 	   * pandas
 	   * scikit-learn
    * Create environment variables in bash_profile:
-      * path to folder that contains the datasets: export DATASETS_DIR = $path/to/datasets/
-      * path to folder that will contain the training results : export RUN_DIR= $path/to/run/
+      * path to folder that contains the datasets: export DATASETS_DIR=$path/to/datasets/
+      * path to folder that will contain the training results : export RUN_DIR=$path/to/run/
+
+**Galanov Model**
+
+This module allows to compute elastic-plastic zone :math:`\\frac{b_s}{c}`, the constrain factor :math:`C` and ductility characteristic :math:`\\delta_H` by solving equations proposed by Galanov *et al* (Galanov, Ivanov, et Kartuzov, *Improved Core Model of the Indentation for the Experimental Determination of Mechanical Properties of Elastic-Plastic Materials and Its Application*.)
+
+*Requirements:*
+   * Install following libraries, via pip or conda
+      * pandas 
+   * Create environment variables:
+      * path to folder that will contain the training results : DATASETS_DIR=$path/to/datasets/ 
+      
+**Pareto Front**
+
+This module allows to detect Pareto optimal composition, for two antagonistic criteria/properties. 
+
+*Requirements:*
+   * Install following libraries, via pip or conda
+      * pandas 
+   * Create environment variables:
+      * path to folder that will contain the training results : DATASETS_DIR=$path/to/datasets/ 
+      
+
+**Plot Predictions**
+
+These Matlab modules plot Machine Learning prediction. It can scatter composition point of plot alpha shape of compositions points. User can add color or point size to plot along the predicted properties of the composition points. 
+
+*Requirements:*
+   * Matlab2019 or later
+   * Create environment variables:
+      * path to folder that will contain the training results : DATASETS_DIR=$path/to/datasets/ 
+      
 
 
 .. toctree::
@@ -53,6 +86,11 @@ These Python modules and notebooks perform iterative k-fold crossvalidation for 
    ExperimentsPlannification
    PyTerK
    MultipleRegression
+   GalanovModel
+   ParetoFront
+   PlotPredictions
+   
+   
    
 
 Indices and tables

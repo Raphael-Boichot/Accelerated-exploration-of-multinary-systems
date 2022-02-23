@@ -1,0 +1,7 @@
+Pareto Front module
+==================
+
+.. automodule:: ParetoFront
+   :members:
+   :undoc-members:
+   :show-inheritance:
