@@ -50,7 +50,7 @@ __Requirement__: same as PyTerK
 
 This module allows to compute elastic-plastic zone $\frac{b_s}{c}$, the constrain factor $C$ and ductility characteristic $\delta_H$ by solving equations proposed by Galanov `et al` (Galanov, Ivanov, et Kartuzov, `Improved Core Model of the Indentation for the Experimental Determination of Mechanical Properties of Elastic-Plastic Materials and Its Application`.)
 
-## Requirements:
+# Requirements:
 * Install following libraries, via pip or conda
 	* pandas 
 * Create environment variables:
@@ -61,7 +61,7 @@ NB: for windows, see [this help](https://docs.oracle.com/en/database/oracle/mach
 
 This module allows to detect Pareto optimal composition, for two antagonistic criteria/properties. 
 
-## Requirements:
+# Requirements:
 * Install following libraries, via pip or conda
 	* pandas 
 * Create environment variables:
@@ -73,7 +73,7 @@ NB: for windows, see [this help](https://docs.oracle.com/en/database/oracle/mach
 
 These Matlab modules plot Machine Learning prediction. It can scatter composition point of plot alpha shape of compositions points. User can add color or point size to plot along the predicted properties of the composition points. 
 
-## Requirements
+# Requirements
 * Matlab2019 or later
 * Create environment variables:
 	* path to folder that will contain the training results : DATASETS_DIR=$path/to/datasets/ 
