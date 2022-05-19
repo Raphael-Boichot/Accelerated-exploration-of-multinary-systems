@@ -10,8 +10,8 @@ function [selection_coord,compo_iso_list,coord_iso_list] = select_interp_compo(d
 % :param bool interpolation: boolean to indicate if isovalue is obtained from interpolation or not
 % :param float x,y,z: coordinates of vertices (pure elements)
 % :return: - selection_coord : coordinates of selected compositions
-           - compo_iso_list : list of composition corresponding to isovalue
-           - coord_iso_list : coordinates of compositions corresponding to isovalue
+%           - compo_iso_list : list of composition corresponding to isovalue
+%           - coord_iso_list : coordinates of compositions corresponding to isovalue
 % :rtype: arrays
 
 zone_selection=database(mask,:);

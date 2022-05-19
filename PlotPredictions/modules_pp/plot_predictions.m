@@ -1,4 +1,4 @@
-function [] = plot_predictions(DT, TR, name_elements, cell_coordinates,cell_type_plot, cell_colors, cell_size)
+function [] = plot_predictions(DT, TR, name_elements, cell_coordinates,cell_type_plot, cell_colors, cell_size, cell_alpha)
 % Function that plot predicted properties of chosen compositions
 %
 %:param DT,TR: Delaunay Traiangulation object for composition space plot
@@ -10,7 +10,7 @@ function [] = plot_predictions(DT, TR, name_elements, cell_coordinates,cell_type
 %:return: show plot.
 
 figure()
-set(gca,'DefaultTextFontName','Bell MT','DefaultTextFontSize', 14)
+set(gca,'DefaultTextFontName','Helvetica ','DefaultTextFontSize', 18)
 set(gca,'color','w')
 hold on
 tetramesh(DT,'FaceAlpha',0);
@@ -29,14 +29,14 @@ for i = 1:size(cell_coordinates,2)
         Y=cell_coordinates{i}(:,2);
         Z=cell_coordinates{i}(:,3);
         [k3,av3] = convhull(X,Y,Z,'Simplify',true);
-        trisurf(k3,X,Y,Z,'FaceColor',cell_colors{i},'EdgeColor',cell_colors{i},'FaceAlpha',0.1)
+        trisurf(k3,X,Y,Z,'FaceColor',cell_colors{i},'EdgeColor',cell_colors{i},'FaceAlpha',cell_alpha{i})
     end
     if cell_type_plot{i}=="alphashape"
         X=cell_coordinates{i}(:,1);
         Y=cell_coordinates{i}(:,2);
         Z=cell_coordinates{i}(:,3);
         shape= alphaShape(X,Y,Z);
-        plot(shape,'FaceColor',cell_colors{i},'LineStyle','none','FaceAlpha',0.1)
+        plot(shape,'FaceColor',cell_colors{i},'LineStyle','none','FaceAlpha',cell_alpha{i})
         set(gca,'PlotBoxAspectRatio',[0.8 0.8 1])
     end
 end
