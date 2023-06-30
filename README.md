@@ -1,5 +1,7 @@
 # Accelerated exploration of multinary systems using high-throughput experiments and machine learning
 
+To cite this work: [Coupling mixture designs, high-throughput experiments and machine learning for accelerated exploration of multinary systems](https://www.sciencedirect.com/science/article/pii/S0264127523004707)
+
 Repository of codes for experiments scheduling and machine learning modeling of experimental data. 
 More details are given in README of each modules and in Documentation. The dataset used is stored in a separate dedicated cloud storage fitted for big data and can be consulted and downloaded from [here](https://zenodo.org/record/6104937#.YhOpROjMLct).
 
