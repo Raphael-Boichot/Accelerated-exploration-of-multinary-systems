@@ -1,5 +1,7 @@
 # Accelerated exploration of multinary systems using high-throughput experiments and machine learning
 
+**Supporting data for paper https://doi.org/10.1016/j.matdes.2023.112055**
+
 To cite this work: [Coupling mixture designs, high-throughput experiments and machine learning for accelerated exploration of multinary systems](https://www.sciencedirect.com/science/article/pii/S0264127523004707)
 
 Repository of codes for experiments scheduling and machine learning modeling of experimental data. 
