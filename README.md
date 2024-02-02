@@ -5,6 +5,8 @@ To cite this work: [Coupling mixture designs, high-throughput experiments and ma
 Repository of codes for experiments scheduling and machine learning modeling of experimental data. 
 More details are given in README of each modules and in Documentation. The dataset used is stored in a separate dedicated cloud storage fitted for big data and can be consulted and downloaded from [here](https://zenodo.org/record/6104937#.YhOpROjMLct).
 
+This repo contains the high-definition figures as they should have appeared in lossless png in the article before being butchered by the editor in jpg despite our claims.
+
 ## Contents 
 
 ### Experiments Planification
