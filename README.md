@@ -1,6 +1,7 @@
 # Accelerated exploration of multinary systems using high-throughput experiments and machine learning
 
 To cite this work: [Coupling mixture designs, high-throughput experiments and machine learning for accelerated exploration of multinary systems](https://www.sciencedirect.com/science/article/pii/S0264127523004707)
+This repo is my sandbox to play with data from the [Gitlab original repo](https://gricad-gitlab.univ-grenoble-alpes.fr/boichotr/accelerated-exploration-of-multinary) that will stay mainly unchanged because it is linked to a scientific paper.
 
 ![BOICHOT GAREL machine learning](https://github.com/Raphael-Boichot/Accelerated-exploration-of-multinary-systems/blob/main/Paper/Graphical_Abstract.png)
 
