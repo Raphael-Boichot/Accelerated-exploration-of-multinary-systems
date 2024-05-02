@@ -57,7 +57,7 @@ In this section, it is save in format .mat all the parameters of one neuralnetwo
 
 This section save the value of the composition to predict with the neuralnetwork.
 
-# input 
+## input 
 
 All necessary training data are saved in this section. 
 
@@ -70,7 +70,7 @@ The difference with "data_averaged" is that there is the fifth values of the fif
 ### Compo_E_wo_outlier
 This spreadsheet contains only the value of the Young modulus, as Raw_data it contains the fith values for each composition but without the outlier. It's the same for "Compo_H_wo_outlier" except that is for Hardness and not for the Young modul. 
 
-# Output 
+## Output 
 
 This section contains the values predicted by the neuralnetwork
 
