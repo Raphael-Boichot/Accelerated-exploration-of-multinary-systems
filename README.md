@@ -10,7 +10,9 @@ More details are given in README of each modules and in Documentation. The datas
 
 This repo contains the [high-definition figures](https://github.com/Raphael-Boichot/accelerated-exploration-of-multinary/tree/main/Paper) as they should have appeared in lossless png in the article before being butchered by the editor in jpg despite our claims.
 
-## Contents 
+# Part 1: Paper codes
+
+This part describes the exact codes and methods used for the paper.
 
 ### Experiments Planification
 
@@ -75,7 +77,6 @@ This module allows to detect Pareto optimal composition, for two antagonistic cr
 	* path to folder that will contain the training results : DATASETS_DIR=$path/to/datasets/ 
 NB: for windows, see [this help](https://docs.oracle.com/en/database/oracle/machine-learning/oml4r/1.5.1/oread/creating-and-modifying-environment-variables-on-windows.html)
 
-
 ### Plot Predictions
 
 These Matlab modules plot Machine Learning prediction. It can scatter composition point of plot alpha shape of compositions points. User can add color or point size to plot along the predicted properties of the composition points. 
@@ -85,3 +86,12 @@ These Matlab modules plot Machine Learning prediction. It can scatter compositio
 * Create environment variables:
 	* path to folder that will contain the training results : DATASETS_DIR=$path/to/datasets/ 
 NB: for windows, see [this help](https://docs.oracle.com/en/database/oracle/machine-learning/oml4r/1.5.1/oread/creating-and-modifying-environment-variables-on-windows.html)
+
+# Part 2: Full Matlab implementation
+
+This part describes a full Matlab implemenation using the [Statistics and Machine Learning Toolbox](https://fr.mathworks.com/products/statistics.html). 
+
+Just run [Main.m](Accelerated-exploration-of-multinary-systems/blob/main/matlab/main.m) and enjoy the full process in one click !
+
+**Requirements:**
+* Matlab2019 or later
