@@ -3,7 +3,7 @@ close all
 clear
 warning off
 %Préciser le chemin d'accès au répertoire
-path='C:\Users\adrig\Desktop\EPEE\S8\IA\marek1604\';
+path='.\';
 addpath('./fonction')
 %% Choix du jeu de données sur lequel entrainer le réseau de neurone
 
