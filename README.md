@@ -10,7 +10,7 @@ More details are given in README of each modules and in Documentation. The datas
 
 This repo contains the [high-definition figures](https://github.com/Raphael-Boichot/accelerated-exploration-of-multinary/tree/main/Paper) as they should have appeared in lossless png in the article before being butchered by the editor in jpg despite our claims.
 
-# Part 1: Paper codes
+# Part 1: Paper codes (Python and Matlab)
 
 This part describes the exact codes and methods used for the paper.
 
@@ -89,7 +89,7 @@ NB: for windows, see [this help](https://docs.oracle.com/en/database/oracle/mach
 
 # Part 2: Full Matlab implementation
 
-Authors: Adrien GUILLE and Marek BRAUN, Grenoble Institute of Technology, France
+**Authors: Adrien GUILLE and Marek BRAUN, Grenoble Institute of Technology, France**
 
 This part describes a full Matlab implemenation using the [Statistics and Machine Learning Toolbox](https://fr.mathworks.com/products/statistics.html). 
 
