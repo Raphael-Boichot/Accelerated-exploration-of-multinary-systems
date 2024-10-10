@@ -93,7 +93,7 @@ NB: for windows, see [this help](https://docs.oracle.com/en/database/oracle/mach
 
 This part describes a full Matlab implemenation using the [Statistics and Machine Learning Toolbox](https://fr.mathworks.com/products/statistics.html). 
 
-Just run [Main.m](Accelerated-exploration-of-multinary-systems/blob/main/matlab/main.m) and enjoy the full process in one click !
+Just run [Main.m](https://github.com/Raphael-Boichot/Accelerated-exploration-of-multinary-systems/blob/main/matlab/main.m) and enjoy the full process in one click !
 
 **Requirements:**
 * Matlab2019 or later
